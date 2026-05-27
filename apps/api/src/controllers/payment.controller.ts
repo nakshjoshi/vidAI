@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { Payment } from '@wedding/types/payment'
+import { Payment } from '@wedding/types'
 import { createPayment, findPaymentsByIntakeId } from '../repositories/payment.repository'
 import { asyncHandler, ApiResponse } from '../utils'
 

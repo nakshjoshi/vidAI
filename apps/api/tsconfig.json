@@ -1,15 +1,7 @@
 {
   "extends": "../../packages/config/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
-    "baseUrl": ".",
-    "paths": {
-      "@wedding/db": ["../../packages/db/src/client.ts"],
-      "@wedding/db/*": ["../../packages/db/src/*"],
-      "@wedding/types": ["../../packages/types/src/index.ts"],
-      "@wedding/types/*": ["../../packages/types/src/*.ts"]
-    }
+    "outDir": "dist"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

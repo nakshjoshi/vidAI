@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { Intake } from '@wedding/types/intake'
+import { Intake } from '@wedding/types'
 import { IntakeService } from '../services/intake.service'
 import { RecommendationService } from '../services/recommendation.service'
 import { asyncHandler, ApiResponse } from '../utils'

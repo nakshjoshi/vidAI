@@ -1,5 +1,5 @@
 import type { WeddingIntake } from '@wedding/db/generated/prisma'
-import { Intake, BUDGET_MIDPOINTS } from '@wedding/types/intake'
+import { Intake, BUDGET_MIDPOINTS } from '@wedding/types'
 import { createIntake, findIntakeById } from '../repositories/intake.repository'
 import { logger } from '../lib/logger'
 import { ApiError } from '../utils'

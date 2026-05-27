@@ -1,5 +1,5 @@
 import type { Recommendation } from '@wedding/db/generated/prisma'
-import { RecommendationResponseSchema } from '@wedding/types/recommendation'
+import { RecommendationResponseSchema } from '@wedding/types'
 import {
   buildRecommendationPrompt,
   buildStrictRetryPrompt,
