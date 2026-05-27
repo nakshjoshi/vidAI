@@ -1,0 +1,60 @@
+// Prisma schema for VidAI — Wedding Planner
+// Scaffolded via: pnpm --filter @wedding/db exec prisma init --datasource-provider postgresql
+// Prisma v7: url/directUrl moved to prisma.config.ts
+// Models map to 3 flat tables: wedding_intakes, recommendations, payments
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model WeddingIntake {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  weddingDate    DateTime @map("wedding_date") @db.Date
+  guestCount     Int      @map("guest_count")
+  city           String
+  venueType      String   @map("venue_type")
+  budgetBracket  String   @map("budget_bracket")
+  budgetMidpoint Int      @map("budget_midpoint")
+  priorities     String[]
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  recommendations Recommendation[]
+  payments        Payment[]
+
+  @@map("wedding_intakes")
+}
+
+model Recommendation {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  intakeId        String   @map("intake_id") @db.Uuid
+  vendorCategory  String   @map("vendor_category")
+  priorityRank    Int      @map("priority_rank")
+  allocatedBudget Int      @map("allocated_budget")
+  rationale       String
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  intake WeddingIntake @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+
+  @@index([intakeId], name: "idx_recommendations_intake_id")
+  @@map("recommendations")
+}
+
+model Payment {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  intakeId       String   @map("intake_id") @db.Uuid
+  vendorCategory String   @map("vendor_category")
+  vendorName     String   @map("vendor_name")
+  amountPaid     Int      @map("amount_paid")
+  paymentDate    DateTime @map("payment_date") @db.Date
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  intake WeddingIntake @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+
+  @@index([intakeId], name: "idx_payments_intake_id")
+  @@map("payments")
+}
