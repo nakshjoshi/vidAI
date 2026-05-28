@@ -2,13 +2,10 @@
   "name": "@wedding/db",
   "version": "0.0.1",
   "private": true,
-  "main": "./dist/client.js",
-  "types": "./dist/client.d.ts",
+  "main": "./src/client.ts",
+  "types": "./src/client.ts",
   "exports": {
-    ".": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
-    },
+    ".": "./src/client.ts",
     "./generated/prisma": {
       "types": "./generated/prisma/index.d.ts",
       "default": "./generated/prisma/index.js"

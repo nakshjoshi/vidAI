@@ -2,29 +2,14 @@
   "name": "@wedding/types",
   "version": "0.0.1",
   "private": true,
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./intake": {
-      "types": "./dist/intake.d.ts",
-      "default": "./dist/intake.js"
-    },
-    "./recommendation": {
-      "types": "./dist/recommendation.d.ts",
-      "default": "./dist/recommendation.js"
-    },
-    "./payment": {
-      "types": "./dist/payment.d.ts",
-      "default": "./dist/payment.js"
-    },
-    "./budget": {
-      "types": "./dist/budget.d.ts",
-      "default": "./dist/budget.js"
-    }
+    ".": "./src/index.ts",
+    "./intake": "./src/intake.ts",
+    "./recommendation": "./src/recommendation.ts",
+    "./payment": "./src/payment.ts",
+    "./budget": "./src/budget.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
