@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const RecommendationItemSchema = z.object({
   vendor_category: z.string().min(1),
-  priority_rank: z.number().int().min(1).max(16),
+  priority_rank: z.number().int().min(1).max(100),
   allocated_budget: z.number().int().positive(),
   rationale: z.string().min(1),
 })

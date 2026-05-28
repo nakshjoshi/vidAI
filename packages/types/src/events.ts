@@ -13,19 +13,19 @@ export interface WeddingEvent {
 
 export const WEDDING_EVENTS: WeddingEvent[] = [
   // Main events (always present)
-  { slug: 'engagement',        name: 'Engagement / Ring Ceremony', type: 'main', description: 'The couple exchanges rings and formally announces their upcoming wedding.',          displayOrder: 1 },
-  { slug: 'mehendi',           name: 'Mehendi',                    type: 'main', description: 'Intricate henna designs are applied to the bride and guests in a festive gathering.',  displayOrder: 2 },
-  { slug: 'haldi',             name: 'Haldi',                      type: 'main', description: 'Turmeric paste is applied to the couple for blessings and radiant skin.',               displayOrder: 3 },
-  { slug: 'sangeet',           name: 'Sangeet',                    type: 'main', description: 'A lively evening of music, dance performances, and celebration.',                       displayOrder: 4 },
-  { slug: 'wedding_ceremony',  name: 'Wedding Ceremony',           type: 'main', description: 'The sacred ceremony — pheras, vows, and the main wedding rituals.',                    displayOrder: 5 },
-  { slug: 'reception',         name: 'Reception',                  type: 'main', description: 'A grand celebration to welcome the newlyweds with dinner, music, and festivities.',     displayOrder: 6 },
+  { slug: 'engagement',        name: 'Engagement / Ring Ceremony', type: 'main', description: 'The couple exchanges rings and formally announces their upcoming wedding.',          displayOrder: 4 },
+  { slug: 'mehendi',           name: 'Mehendi',                    type: 'main', description: 'Intricate henna designs are applied to the bride and guests in a festive gathering.',  displayOrder: 6 },
+  { slug: 'haldi',             name: 'Haldi',                      type: 'main', description: 'Turmeric paste is applied to the couple for blessings and radiant skin.',               displayOrder: 8 },
+  { slug: 'sangeet',           name: 'Sangeet',                    type: 'main', description: 'A lively evening of music, dance performances, and celebration.',                       displayOrder: 7 },
+  { slug: 'wedding_ceremony',  name: 'Wedding Ceremony',           type: 'main', description: 'The sacred ceremony — pheras, vows, and the main wedding rituals.',                    displayOrder: 9 },
+  { slug: 'reception',         name: 'Reception',                  type: 'main', description: 'A grand celebration to welcome the newlyweds with dinner, music, and festivities.',     displayOrder: 11 },
 
   // Side events (common but optional)
-  { slug: 'cocktail_party',    name: 'Cocktail Party',             type: 'side', description: 'An elegant evening of cocktails, conversations, and light entertainment.',              displayOrder: 7 },
-  { slug: 'pre_wedding_shoot', name: 'Pre-Wedding Photoshoot',     type: 'side', description: 'A styled photo session capturing the couple before the wedding day.',                  displayOrder: 8 },
-  { slug: 'welcome_dinner',    name: 'Welcome Dinner',             type: 'side', description: 'A warm dinner to welcome out-of-town guests, especially at destination weddings.',      displayOrder: 9 },
+  { slug: 'cocktail_party',    name: 'Cocktail Party',             type: 'side', description: 'An elegant evening of cocktails, conversations, and light entertainment.',              displayOrder: 5 },
+  { slug: 'pre_wedding_shoot', name: 'Pre-Wedding Photoshoot',     type: 'side', description: 'A styled photo session capturing the couple before the wedding day.',                  displayOrder: 1 },
+  { slug: 'welcome_dinner',    name: 'Welcome Dinner',             type: 'side', description: 'A warm dinner to welcome out-of-town guests, especially at destination weddings.',      displayOrder: 3 },
   { slug: 'vidaai',            name: 'Vidaai',                     type: 'side', description: 'The emotional farewell ceremony as the bride leaves her parental home.',                displayOrder: 10 },
-  { slug: 'pooja',             name: 'Pooja / Religious Ceremony', type: 'side', description: 'Prayers and rituals performed at a temple or home before the wedding.',                displayOrder: 11 },
+  { slug: 'pooja',             name: 'Pooja / Religious Ceremony', type: 'side', description: 'Prayers and rituals performed at a temple or home before the wedding.',                displayOrder: 2 },
   { slug: 'after_party',       name: 'After Party',                type: 'side', description: 'A late-night celebration after the reception with music and dancing.',                  displayOrder: 12 },
 ]
 

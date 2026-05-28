@@ -73,8 +73,33 @@ export const streamRecommendations = asyncHandler(async (req: Request<{ id: stri
         // Send raw JSON chunks for typing effect
         res.write(`event: chunk\ndata: ${JSON.stringify(chunk)}\n\n`)
       } else if (chunk.type === 'done') {
+        // Build event list with their required vendor categories
+        const events = WEDDING_EVENTS.map((event) => ({
+          slug: event.slug,
+          name: event.name,
+          type: event.type,
+          description: event.description,
+          displayOrder: event.displayOrder,
+          vendorCategories: EVENT_VENDOR_MAP[event.slug] ?? [],
+        }))
+
+        const finalPayload = {
+          intake: {
+            weddingDate: intake.weddingDate.toISOString().split('T')[0],
+            guestCount: intake.guestCount,
+            city: intake.city,
+            venueType: intake.venueType,
+            budgetBracket: intake.budgetBracket,
+            budgetMidpoint: intake.budgetMidpoint,
+            priorities: intake.priorities,
+          },
+          recommendations: chunk.data.recommendations,
+          paymentSummary: chunk.data.paymentSummary,
+          events,
+        }
+
         // Send final enriched data and close stream
-        res.write(`event: done\ndata: ${JSON.stringify(chunk.data)}\n\n`)
+        res.write(`event: done\ndata: ${JSON.stringify(finalPayload)}\n\n`)
         res.end()
       }
     }
