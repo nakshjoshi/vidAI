@@ -3,7 +3,7 @@ import { validate } from '../middleware/validate'
 import { IntakeSchema } from '../validators'
 import { submitIntake } from '../controllers/intake.controller'
 
-const router = Router()
+const router: Router = Router()
 
 // POST /api/intake — validate → save intake → call AI → save recommendations → respond
 router.post('/', validate(IntakeSchema), submitIntake)

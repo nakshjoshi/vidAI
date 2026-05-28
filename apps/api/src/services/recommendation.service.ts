@@ -2,7 +2,6 @@ import type { Recommendation } from '@wedding/db/generated/prisma'
 import { RecommendationResponseSchema } from '@wedding/types'
 import {
   buildRecommendationPrompt,
-  buildStrictRetryPrompt,
   RecommendationPromptInput,
 } from '../prompts/recommendation.prompt'
 import {
@@ -29,52 +28,38 @@ function monthsUntil(dateStr: string): number {
 }
 
 export class RecommendationService {
-  private async callAIWithRetry(
+  /**
+   * Calls Gemini with a structured responseSchema — the model is guaranteed
+   * to return valid JSON matching our schema, so no retry loop is needed.
+   * We still parse + validate with Zod as a safety net.
+   */
+  private async callAI(
     input: RecommendationPromptInput
   ): Promise<ReturnType<typeof RecommendationResponseSchema.parse>> {
     const { systemPrompt, userPrompt } = buildRecommendationPrompt(input)
-    let rawResponse: string
 
+    let rawResponse: string
     try {
       rawResponse = await aiProvider.recommend(systemPrompt, userPrompt)
-    } catch {
-      throw new ApiError(504, 'AI provider timed out or failed')
+    } catch (err) {
+      logger.error({ err }, 'Gemini AI call failed')
+      throw new ApiError(504, 'AI provider failed to generate recommendations. Please try again.')
     }
 
     let parsed: ReturnType<typeof RecommendationResponseSchema.safeParse>
-
     try {
       parsed = RecommendationResponseSchema.safeParse(JSON.parse(rawResponse))
     } catch {
-      throw new ApiError(422, 'AI returned invalid JSON on first attempt')
+      logger.error({ rawResponse }, 'Gemini returned invalid JSON')
+      throw new ApiError(422, 'AI returned unexpected output. Please try again.')
     }
 
-    if (parsed.success) return parsed.data
-
-    logger.warn('First AI response failed validation — retrying with strict prompt')
-
-    const { systemPrompt: retrySystem, userPrompt: retryUser } =
-      buildStrictRetryPrompt(input)
-
-    try {
-      rawResponse = await aiProvider.recommend(retrySystem, retryUser)
-    } catch {
-      throw new ApiError(504, 'AI provider timed out on retry')
+    if (!parsed.success) {
+      logger.error({ issues: parsed.error.issues }, 'Gemini output failed Zod validation')
+      throw new ApiError(422, 'AI recommendations did not pass validation. Please try again.')
     }
 
-    let retryParsed: ReturnType<typeof RecommendationResponseSchema.safeParse>
-    try {
-      retryParsed = RecommendationResponseSchema.safeParse(JSON.parse(rawResponse))
-    } catch {
-      throw new ApiError(422, 'AI returned invalid JSON after retry')
-    }
-
-    if (!retryParsed.success) {
-      logger.error({ issues: retryParsed.error.issues }, 'AI response invalid after retry — returning 422')
-      throw new ApiError(422, 'AI failed to return valid recommendations. Please try again.')
-    }
-
-    return retryParsed.data
+    return parsed.data
   }
 
   public async generateAndSave(
@@ -97,11 +82,11 @@ export class RecommendationService {
       priority2: priorities[1] ?? '',
     }
 
-    const aiResult = await this.callAIWithRetry(promptInput)
+    const aiResult = await this.callAI(promptInput)
 
     logger.info(
       { intakeId, count: aiResult.recommendations.length },
-      'Saving AI recommendations to DB'
+      'Saving Gemini recommendations to DB'
     )
 
     return createManyRecommendations(
