@@ -96,6 +96,15 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.74.4
         version: 5.100.14(react@18.3.1)
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.15.3
+      '@types/react':
+        specifier: ^18.3.21
+        version: 18.3.29
+      '@types/react-dom':
+        specifier: ^18.3.5
+        version: 18.3.7(@types/react@18.3.29)
       '@wedding/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -138,22 +147,12 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.19(tsx@4.22.3)
-      zod:
-        specifier: ^3.23.8
-        version: 3.25.76
-    devDependencies:
-      '@types/node':
-        specifier: ^22.15.3
-        version: 22.15.3
-      '@types/react':
-        specifier: ^18.3.21
-        version: 18.3.29
-      '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.7(@types/react@18.3.29)
       typescript:
         specifier: 5.9.2
         version: 5.9.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
 
   packages/config: {}
 
