@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { ChatBox } from '../../../components/ChatBox'
 import Link from 'next/link'
 import {
   Camera,
@@ -364,53 +365,77 @@ export default function RecommendationsPage() {
           </div>
         )}
 
-        {/* Tab 2: Events */}
+        {/* Tab 2: Events Timeline */}
         {activeTab === 'events' && (
           <div className="space-y-6 animate-fade-in">
-             <div className="text-center max-w-2xl mx-auto mb-10">
-              <h2 className="font-display text-3xl font-bold text-gray-900 mb-2">
-                The Celebration Flow
-              </h2>
-              <p className="text-gray-500 text-sm">
-                A timeline of standard Indian wedding events and the vendors required for each.
-              </p>
+            <div className="flex items-end justify-between">
+              <div>
+                <h2 className="font-display text-2xl font-bold text-gray-900">
+                  Event Timeline
+                </h2>
+                <p className="text-gray-500 text-sm">
+                  Chronological flow of your wedding events.
+                </p>
+              </div>
             </div>
 
-            <div className="relative border-l-2 border-brand-200 ml-4 md:ml-8 space-y-12 pb-8">
-              {events.map((event, idx) => (
-                <div key={event.slug} className="relative pl-8 md:pl-12">
-                  <div className="absolute w-8 h-8 bg-brand-500 rounded-full flex items-center justify-center -left-[17px] top-0 shadow-lg shadow-brand-500/30 text-white text-sm font-bold">
-                    {idx + 1}
-                  </div>
-                  <div className="card">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-display text-xl font-bold text-gray-900">{event.name}</h3>
-                      <span className={`text-xs font-bold px-2 py-1 rounded-md uppercase tracking-wider ${
-                        event.type === 'main' ? 'bg-gold-100 text-gold-700' : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        {event.type}
-                      </span>
+            <div className="relative pl-6 sm:pl-8 py-4 before:absolute before:inset-0 before:left-[19px] sm:before:left-[27px] before:w-0.5 before:bg-brand-200">
+              {events
+                .sort((a, b) => a.displayOrder - b.displayOrder)
+                .map((event, idx) => (
+                  <div key={idx} className="relative mb-10 last:mb-0">
+                    <div className="absolute -left-[30px] sm:-left-[38px] top-1 w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center border-[3px] border-white shadow-sm z-10">
+                      <span className="text-[10px] font-bold text-white">{idx + 1}</span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-6">{event.description}</p>
-                    
-                    <div>
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-brand-500" /> Vendors Needed
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {event.vendorCategories.map(cat => (
-                          <span key={cat} className="text-xs font-medium text-brand-700 bg-brand-50 border border-brand-200 px-2 py-1 rounded-lg capitalize">
-                            {cat.replace('_', ' ')}
-                          </span>
-                        ))}
+
+                    <div className="card p-5 bg-white transition-shadow hover:shadow-lg">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-display font-bold text-lg text-gray-900">
+                          {event.name}
+                        </h3>
+                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${
+                          event.type === 'main' ? 'bg-brand-100 text-brand-600' : 'bg-gray-100 text-gray-500'
+                        }`}>
+                          {event.type}
+                        </span>
                       </div>
+                      <p className="text-sm text-gray-600 mb-4">{event.description}</p>
+
+                      {event.vendorCategories.length > 0 && (
+                        <div>
+                          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                            Required Services
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {event.vendorCategories.map((cat) => {
+                              const isPriority = intake.priorities.some(p => 
+                                p.toLowerCase() === cat.toLowerCase()
+                              )
+                              return (
+                                <span
+                                  key={cat}
+                                  className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${
+                                    isPriority
+                                      ? 'border-brand-200 bg-brand-50 text-brand-700'
+                                      : 'border-gray-200 bg-gray-50 text-gray-600'
+                                  }`}
+                                >
+                                  {cat.replace('_', ' ')}
+                                </span>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}
+
+        {/* AI ChatBox */}
+        <ChatBox data={data} />
       </main>
     </div>
   )

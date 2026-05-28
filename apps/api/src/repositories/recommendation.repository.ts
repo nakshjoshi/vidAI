@@ -12,7 +12,14 @@ export interface CreateRecommendationInput {
 export async function createManyRecommendations(
   items: CreateRecommendationInput[]
 ): Promise<Recommendation[]> {
-  await prisma.recommendation.createMany({ data: items })
+  if (items.length === 0) return []
+  
+  await prisma.$transaction([
+    prisma.recommendation.deleteMany({
+      where: { intakeId: items[0]?.intakeId },
+    }),
+    prisma.recommendation.createMany({ data: items }),
+  ])
   // createMany doesn't return rows on all providers — fetch them back
   return prisma.recommendation.findMany({
     where: { intakeId: items[0]?.intakeId },
