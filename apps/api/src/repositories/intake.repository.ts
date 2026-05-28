@@ -32,3 +32,14 @@ export async function findIntakeById(
 ): Promise<WeddingIntake | null> {
   return prisma.weddingIntake.findUnique({ where: { id } })
 }
+
+export async function updateIntakeChatHistory(
+  id: string,
+  chatHistory: any
+): Promise<WeddingIntake> {
+  return prisma.weddingIntake.update({
+    where: { id },
+    data: { chatHistory },
+  })
+}
+

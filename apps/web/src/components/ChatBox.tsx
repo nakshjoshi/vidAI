@@ -21,7 +21,16 @@ export function ChatBox({ data }: ChatBoxProps) {
   const { intake, recommendations } = data
   const [selectedContext, setSelectedContext] = useState<string>('')
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
+  
+  // Initialize from persisted chat history, generating IDs if they were saved without them
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const history = (intake.chatHistory as any[]) || []
+    return history.map(msg => ({
+      id: msg.id || crypto.randomUUID(),
+      role: msg.role,
+      content: msg.content
+    }))
+  })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -77,7 +86,7 @@ ${vendorsStr}`
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ messages: history, contextData, selectedContext }),
+        body: JSON.stringify({ intakeId: intake.id, messages: history, contextData, selectedContext }),
       })
 
       if (!response.ok || !response.body) {

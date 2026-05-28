@@ -1231,6 +1231,7 @@ export namespace Prisma {
     budgetBracket: number
     budgetMidpoint: number
     priorities: number
+    chatHistory: number
     createdAt: number
     _all: number
   }
@@ -1277,6 +1278,7 @@ export namespace Prisma {
     budgetBracket?: true
     budgetMidpoint?: true
     priorities?: true
+    chatHistory?: true
     createdAt?: true
     _all?: true
   }
@@ -1376,6 +1378,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities: string[]
+    chatHistory: JsonValue
     createdAt: Date
     _count: WeddingIntakeCountAggregateOutputType | null
     _avg: WeddingIntakeAvgAggregateOutputType | null
@@ -1407,6 +1410,7 @@ export namespace Prisma {
     budgetBracket?: boolean
     budgetMidpoint?: boolean
     priorities?: boolean
+    chatHistory?: boolean
     createdAt?: boolean
     recommendations?: boolean | WeddingIntake$recommendationsArgs<ExtArgs>
     payments?: boolean | WeddingIntake$paymentsArgs<ExtArgs>
@@ -1422,6 +1426,7 @@ export namespace Prisma {
     budgetBracket?: boolean
     budgetMidpoint?: boolean
     priorities?: boolean
+    chatHistory?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingIntake"]>
 
@@ -1434,6 +1439,7 @@ export namespace Prisma {
     budgetBracket?: boolean
     budgetMidpoint?: boolean
     priorities?: boolean
+    chatHistory?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingIntake"]>
 
@@ -1446,10 +1452,11 @@ export namespace Prisma {
     budgetBracket?: boolean
     budgetMidpoint?: boolean
     priorities?: boolean
+    chatHistory?: boolean
     createdAt?: boolean
   }
 
-  export type WeddingIntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingDate" | "guestCount" | "city" | "venueType" | "budgetBracket" | "budgetMidpoint" | "priorities" | "createdAt", ExtArgs["result"]["weddingIntake"]>
+  export type WeddingIntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingDate" | "guestCount" | "city" | "venueType" | "budgetBracket" | "budgetMidpoint" | "priorities" | "chatHistory" | "createdAt", ExtArgs["result"]["weddingIntake"]>
   export type WeddingIntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recommendations?: boolean | WeddingIntake$recommendationsArgs<ExtArgs>
     payments?: boolean | WeddingIntake$paymentsArgs<ExtArgs>
@@ -1473,6 +1480,7 @@ export namespace Prisma {
       budgetBracket: string
       budgetMidpoint: number
       priorities: string[]
+      chatHistory: Prisma.JsonValue
       createdAt: Date
     }, ExtArgs["result"]["weddingIntake"]>
     composites: {}
@@ -1907,6 +1915,7 @@ export namespace Prisma {
     readonly budgetBracket: FieldRef<"WeddingIntake", 'String'>
     readonly budgetMidpoint: FieldRef<"WeddingIntake", 'Int'>
     readonly priorities: FieldRef<"WeddingIntake", 'String[]'>
+    readonly chatHistory: FieldRef<"WeddingIntake", 'Json'>
     readonly createdAt: FieldRef<"WeddingIntake", 'DateTime'>
   }
     
@@ -5808,6 +5817,7 @@ export namespace Prisma {
     budgetBracket: 'budgetBracket',
     budgetMidpoint: 'budgetMidpoint',
     priorities: 'priorities',
+    chatHistory: 'chatHistory',
     createdAt: 'createdAt'
   };
 
@@ -5869,12 +5879,28 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -5933,6 +5959,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5961,6 +6001,7 @@ export namespace Prisma {
     budgetBracket?: StringFilter<"WeddingIntake"> | string
     budgetMidpoint?: IntFilter<"WeddingIntake"> | number
     priorities?: StringNullableListFilter<"WeddingIntake">
+    chatHistory?: JsonFilter<"WeddingIntake">
     createdAt?: DateTimeFilter<"WeddingIntake"> | Date | string
     recommendations?: RecommendationListRelationFilter
     payments?: PaymentListRelationFilter
@@ -5975,6 +6016,7 @@ export namespace Prisma {
     budgetBracket?: SortOrder
     budgetMidpoint?: SortOrder
     priorities?: SortOrder
+    chatHistory?: SortOrder
     createdAt?: SortOrder
     recommendations?: RecommendationOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
@@ -5992,6 +6034,7 @@ export namespace Prisma {
     budgetBracket?: StringFilter<"WeddingIntake"> | string
     budgetMidpoint?: IntFilter<"WeddingIntake"> | number
     priorities?: StringNullableListFilter<"WeddingIntake">
+    chatHistory?: JsonFilter<"WeddingIntake">
     createdAt?: DateTimeFilter<"WeddingIntake"> | Date | string
     recommendations?: RecommendationListRelationFilter
     payments?: PaymentListRelationFilter
@@ -6006,6 +6049,7 @@ export namespace Prisma {
     budgetBracket?: SortOrder
     budgetMidpoint?: SortOrder
     priorities?: SortOrder
+    chatHistory?: SortOrder
     createdAt?: SortOrder
     _count?: WeddingIntakeCountOrderByAggregateInput
     _avg?: WeddingIntakeAvgOrderByAggregateInput
@@ -6026,6 +6070,7 @@ export namespace Prisma {
     budgetBracket?: StringWithAggregatesFilter<"WeddingIntake"> | string
     budgetMidpoint?: IntWithAggregatesFilter<"WeddingIntake"> | number
     priorities?: StringNullableListFilter<"WeddingIntake">
+    chatHistory?: JsonWithAggregatesFilter<"WeddingIntake">
     createdAt?: DateTimeWithAggregatesFilter<"WeddingIntake"> | Date | string
   }
 
@@ -6276,6 +6321,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationCreateNestedManyWithoutIntakeInput
     payments?: PaymentCreateNestedManyWithoutIntakeInput
@@ -6290,6 +6336,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutIntakeInput
     payments?: PaymentUncheckedCreateNestedManyWithoutIntakeInput
@@ -6304,6 +6351,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUpdateManyWithoutIntakeNestedInput
     payments?: PaymentUpdateManyWithoutIntakeNestedInput
@@ -6318,6 +6366,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUncheckedUpdateManyWithoutIntakeNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutIntakeNestedInput
@@ -6332,6 +6381,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
   }
 
@@ -6344,6 +6394,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6356,6 +6407,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6679,6 +6731,29 @@ export namespace Prisma {
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type RecommendationListRelationFilter = {
     every?: RecommendationWhereInput
@@ -6709,6 +6784,7 @@ export namespace Prisma {
     budgetBracket?: SortOrder
     budgetMidpoint?: SortOrder
     priorities?: SortOrder
+    chatHistory?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6805,6 +6881,32 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type WeddingIntakeScalarRelationFilter = {
@@ -7295,6 +7397,29 @@ export namespace Prisma {
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
@@ -7477,6 +7602,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     payments?: PaymentCreateNestedManyWithoutIntakeInput
   }
@@ -7490,6 +7616,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     payments?: PaymentUncheckedCreateNestedManyWithoutIntakeInput
   }
@@ -7519,6 +7646,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payments?: PaymentUpdateManyWithoutIntakeNestedInput
   }
@@ -7532,6 +7660,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payments?: PaymentUncheckedUpdateManyWithoutIntakeNestedInput
   }
@@ -7545,6 +7674,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationCreateNestedManyWithoutIntakeInput
   }
@@ -7558,6 +7688,7 @@ export namespace Prisma {
     budgetBracket: string
     budgetMidpoint: number
     priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutIntakeInput
   }
@@ -7587,6 +7718,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUpdateManyWithoutIntakeNestedInput
   }
@@ -7600,6 +7732,7 @@ export namespace Prisma {
     budgetBracket?: StringFieldUpdateOperationsInput | string
     budgetMidpoint?: IntFieldUpdateOperationsInput | number
     priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUncheckedUpdateManyWithoutIntakeNestedInput
   }

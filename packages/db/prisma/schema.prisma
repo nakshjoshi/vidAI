@@ -21,6 +21,7 @@ model WeddingIntake {
   budgetBracket  String   @map("budget_bracket")
   budgetMidpoint Int      @map("budget_midpoint")
   priorities     String[]
+  chatHistory    Json     @default("[]") @map("chat_history")
   createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   recommendations Recommendation[]

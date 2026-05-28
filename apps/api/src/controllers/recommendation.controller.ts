@@ -33,6 +33,8 @@ export const getRecommendations = asyncHandler(async (req: Request<{ id: string 
   res.json(
     new ApiResponse(200, {
       intake: {
+        id: intake.id,
+        chatHistory: intake.chatHistory,
         weddingDate: intake.weddingDate.toISOString().split('T')[0],
         guestCount: intake.guestCount,
         city: intake.city,
@@ -85,6 +87,8 @@ export const streamRecommendations = asyncHandler(async (req: Request<{ id: stri
 
         const finalPayload = {
           intake: {
+            id: intake.id,
+            chatHistory: intake.chatHistory,
             weddingDate: intake.weddingDate.toISOString().split('T')[0],
             guestCount: intake.guestCount,
             city: intake.city,

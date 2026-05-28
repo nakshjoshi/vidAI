@@ -16,9 +16,10 @@ export const RecommendationResponseSchema = z.object({
 export type RecommendationItem = z.infer<typeof RecommendationItemSchema>
 export type RecommendationResponse = z.infer<typeof RecommendationResponseSchema>
 
-// Shape returned by GET /api/recommendations/:id
 export const RecommendationsGetResponseSchema = z.object({
   intake: z.object({
+    id: z.string(),
+    chatHistory: z.any().optional(),
     weddingDate: z.string(),
     guestCount: z.number(),
     city: z.string(),
