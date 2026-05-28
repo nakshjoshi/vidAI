@@ -47,3 +47,41 @@ export const getRecommendations = asyncHandler(async (req: Request<{ id: string 
     })
   )
 })
+
+export const streamRecommendations = asyncHandler(async (req: Request<{ id: string }>, res: Response) => {
+  const { id } = req.params
+  const intake = await intakeService.getIntake(id)
+
+  // Set up Server-Sent Events headers
+  res.setHeader('Content-Type', 'text/event-stream')
+  res.setHeader('Cache-Control', 'no-cache')
+  res.setHeader('Connection', 'keep-alive')
+
+  try {
+    const stream = recommendationService.streamAndSave(
+      intake.id,
+      intake.weddingDate.toISOString().split('T')[0]!,
+      intake.guestCount,
+      intake.city,
+      intake.venueType,
+      intake.budgetMidpoint,
+      intake.priorities
+    )
+
+    for await (const chunk of stream) {
+      if (typeof chunk === 'string') {
+        // Send raw JSON chunks for typing effect
+        res.write(`event: chunk\ndata: ${JSON.stringify(chunk)}\n\n`)
+      } else if (chunk.type === 'done') {
+        // Send final enriched data and close stream
+        res.write(`event: done\ndata: ${JSON.stringify(chunk.data)}\n\n`)
+        res.end()
+      }
+    }
+  } catch (error) {
+    // If an error occurs during streaming, send an error event
+    const message = error instanceof Error ? error.message : 'Unknown error during streaming'
+    res.write(`event: error\ndata: ${JSON.stringify({ message })}\n\n`)
+    res.end()
+  }
+})

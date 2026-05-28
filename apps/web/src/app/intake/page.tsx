@@ -146,6 +146,7 @@ export default function IntakePage() {
 
       const result = await res.json() as { intakeId: string }
       localStorage.removeItem(STORAGE_KEY)
+      // Redirect immediately, streaming happens on the next page
       router.push(`/recommendations/${result.intakeId}`)
     } catch (err) {
       setIsSubmitting(false)
@@ -154,28 +155,6 @@ export default function IntakePage() {
   }
 
   const values = getValues()
-  const city = watch('city')
-
-  if (isSubmitting) {
-    return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
-        <div className="text-center animate-fade-in max-w-md">
-          <div className="w-20 h-20 rounded-full bg-brand-100 flex items-center justify-center mx-auto mb-8 animate-pulse-slow">
-            <Heart className="w-10 h-10 text-brand-500 fill-brand-200" />
-          </div>
-          <h2 className="font-display text-2xl font-bold text-gray-900 mb-3">
-            Planning your wedding…
-          </h2>
-          <p className="text-gray-500 mb-8 h-6 transition-all duration-500 animate-fade-in" key={loadingMsg}>
-            {LOADING_MESSAGES[loadingMsg]?.replace('{city}', city ?? 'your city')}
-          </p>
-          <div className="flex justify-center">
-            <Loader2 className="w-8 h-8 text-brand-500 animate-spin" />
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen gradient-bg">

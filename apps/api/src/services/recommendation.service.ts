@@ -128,6 +128,74 @@ export class RecommendationService {
   }
 
   /**
+   * Streams raw JSON chunks from Gemini, accumulates them, and once finished,
+   * validates the JSON, saves to DB, performs vendor matching, and yields the final result.
+   */
+  public async *streamAndSave(
+    intakeId: string,
+    weddingDate: string,
+    guestCount: number,
+    city: string,
+    venueType: string,
+    budgetMidpoint: number,
+    priorities: string[]
+  ): AsyncGenerator<string | { type: 'done'; data: any }> {
+    const promptInput: RecommendationPromptInput = {
+      weddingDate,
+      monthsAway: monthsUntil(weddingDate),
+      guestCount,
+      city,
+      venueType,
+      budgetMidpoint,
+      priority1: priorities[0] ?? '',
+      priority2: priorities[1] ?? '',
+    }
+
+    const { systemPrompt, userPrompt } = buildRecommendationPrompt(promptInput)
+    let fullRawText = ''
+
+    // 1. Stream raw chunks to the client
+    const stream = aiProvider.recommendStream(systemPrompt, userPrompt)
+    for await (const chunk of stream) {
+      fullRawText += chunk
+      yield chunk
+    }
+
+    // 2. Parse and Validate
+    let parsed: ReturnType<typeof RecommendationResponseSchema.safeParse>
+    try {
+      parsed = RecommendationResponseSchema.safeParse(JSON.parse(fullRawText))
+    } catch {
+      logger.error({ rawResponse: fullRawText }, 'Gemini streaming returned invalid JSON')
+      throw new ApiError(422, 'AI returned unexpected output.')
+    }
+
+    if (!parsed.success) {
+      logger.error({ issues: parsed.error.issues }, 'Gemini streamed output failed Zod validation')
+      throw new ApiError(422, 'AI recommendations did not pass validation.')
+    }
+
+    // 3. Save to DB
+    logger.info({ intakeId, count: parsed.data.recommendations.length }, 'Saving streamed Gemini recommendations to DB')
+    await createManyRecommendations(
+      parsed.data.recommendations.map((r) => ({
+        intakeId,
+        vendorCategory: r.vendor_category,
+        priorityRank: r.priority_rank,
+        allocatedBudget: r.allocated_budget,
+        rationale: r.rationale,
+      }))
+    )
+
+    // 4. Run Vendor Matching & Enrichment
+    const finalData = await this.getWithSummary(intakeId, city, priorities)
+
+    // 5. Yield final structured payload
+    yield { type: 'done', data: finalData }
+  }
+
+
+  /**
    * Get recommendations with payment summary and matched vendors.
    * This powers the GET /api/recommendations/:id response.
    */
