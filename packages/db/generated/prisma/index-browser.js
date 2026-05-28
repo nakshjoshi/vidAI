@@ -152,6 +152,24 @@ exports.Prisma.PaymentScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.VendorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  city: 'city',
+  description: 'description',
+  priceMin: 'priceMin',
+  priceMax: 'priceMax',
+  rating: 'rating',
+  tier: 'tier',
+  phone: 'phone',
+  email: 'email',
+  website: 'website',
+  coverImageUrl: 'coverImageUrl',
+  tags: 'tags',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -162,11 +180,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   WeddingIntake: 'WeddingIntake',
   Recommendation: 'Recommendation',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  Vendor: 'Vendor'
 };
 
 /**

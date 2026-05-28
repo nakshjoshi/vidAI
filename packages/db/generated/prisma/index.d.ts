@@ -28,6 +28,11 @@ export type Recommendation = $Result.DefaultSelection<Prisma.$RecommendationPayl
  * 
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+/**
+ * Model Vendor
+ * 
+ */
+export type Vendor = $Result.DefaultSelection<Prisma.$VendorPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -179,6 +184,16 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.vendor`: Exposes CRUD operations for the **Vendor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Vendors
+    * const vendors = await prisma.vendor.findMany()
+    * ```
+    */
+  get vendor(): Prisma.VendorDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -615,7 +630,8 @@ export namespace Prisma {
   export const ModelName: {
     WeddingIntake: 'WeddingIntake',
     Recommendation: 'Recommendation',
-    Payment: 'Payment'
+    Payment: 'Payment',
+    Vendor: 'Vendor'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -631,7 +647,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "weddingIntake" | "recommendation" | "payment"
+      modelProps: "weddingIntake" | "recommendation" | "payment" | "vendor"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -857,6 +873,80 @@ export namespace Prisma {
           }
         }
       }
+      Vendor: {
+        payload: Prisma.$VendorPayload<ExtArgs>
+        fields: Prisma.VendorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VendorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VendorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          findFirst: {
+            args: Prisma.VendorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VendorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          findMany: {
+            args: Prisma.VendorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>[]
+          }
+          create: {
+            args: Prisma.VendorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          createMany: {
+            args: Prisma.VendorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VendorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>[]
+          }
+          delete: {
+            args: Prisma.VendorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          update: {
+            args: Prisma.VendorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          deleteMany: {
+            args: Prisma.VendorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VendorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VendorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>[]
+          }
+          upsert: {
+            args: Prisma.VendorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendorPayload>
+          }
+          aggregate: {
+            args: Prisma.VendorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVendor>
+          }
+          groupBy: {
+            args: Prisma.VendorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VendorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VendorCountArgs<ExtArgs>
+            result: $Utils.Optional<VendorCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -968,6 +1058,7 @@ export namespace Prisma {
     weddingIntake?: WeddingIntakeOmit
     recommendation?: RecommendationOmit
     payment?: PaymentOmit
+    vendor?: VendorOmit
   }
 
   /* Types for Logging */
@@ -4527,6 +4618,1174 @@ export namespace Prisma {
 
 
   /**
+   * Model Vendor
+   */
+
+  export type AggregateVendor = {
+    _count: VendorCountAggregateOutputType | null
+    _avg: VendorAvgAggregateOutputType | null
+    _sum: VendorSumAggregateOutputType | null
+    _min: VendorMinAggregateOutputType | null
+    _max: VendorMaxAggregateOutputType | null
+  }
+
+  export type VendorAvgAggregateOutputType = {
+    priceMin: number | null
+    priceMax: number | null
+    rating: number | null
+  }
+
+  export type VendorSumAggregateOutputType = {
+    priceMin: number | null
+    priceMax: number | null
+    rating: number | null
+  }
+
+  export type VendorMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    category: string | null
+    city: string | null
+    description: string | null
+    priceMin: number | null
+    priceMax: number | null
+    rating: number | null
+    tier: string | null
+    phone: string | null
+    email: string | null
+    website: string | null
+    coverImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type VendorMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    category: string | null
+    city: string | null
+    description: string | null
+    priceMin: number | null
+    priceMax: number | null
+    rating: number | null
+    tier: string | null
+    phone: string | null
+    email: string | null
+    website: string | null
+    coverImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type VendorCountAggregateOutputType = {
+    id: number
+    name: number
+    category: number
+    city: number
+    description: number
+    priceMin: number
+    priceMax: number
+    rating: number
+    tier: number
+    phone: number
+    email: number
+    website: number
+    coverImageUrl: number
+    tags: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type VendorAvgAggregateInputType = {
+    priceMin?: true
+    priceMax?: true
+    rating?: true
+  }
+
+  export type VendorSumAggregateInputType = {
+    priceMin?: true
+    priceMax?: true
+    rating?: true
+  }
+
+  export type VendorMinAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    city?: true
+    description?: true
+    priceMin?: true
+    priceMax?: true
+    rating?: true
+    tier?: true
+    phone?: true
+    email?: true
+    website?: true
+    coverImageUrl?: true
+    createdAt?: true
+  }
+
+  export type VendorMaxAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    city?: true
+    description?: true
+    priceMin?: true
+    priceMax?: true
+    rating?: true
+    tier?: true
+    phone?: true
+    email?: true
+    website?: true
+    coverImageUrl?: true
+    createdAt?: true
+  }
+
+  export type VendorCountAggregateInputType = {
+    id?: true
+    name?: true
+    category?: true
+    city?: true
+    description?: true
+    priceMin?: true
+    priceMax?: true
+    rating?: true
+    tier?: true
+    phone?: true
+    email?: true
+    website?: true
+    coverImageUrl?: true
+    tags?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type VendorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vendor to aggregate.
+     */
+    where?: VendorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendors to fetch.
+     */
+    orderBy?: VendorOrderByWithRelationInput | VendorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VendorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Vendors
+    **/
+    _count?: true | VendorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VendorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VendorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VendorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VendorMaxAggregateInputType
+  }
+
+  export type GetVendorAggregateType<T extends VendorAggregateArgs> = {
+        [P in keyof T & keyof AggregateVendor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVendor[P]>
+      : GetScalarType<T[P], AggregateVendor[P]>
+  }
+
+
+
+
+  export type VendorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VendorWhereInput
+    orderBy?: VendorOrderByWithAggregationInput | VendorOrderByWithAggregationInput[]
+    by: VendorScalarFieldEnum[] | VendorScalarFieldEnum
+    having?: VendorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VendorCountAggregateInputType | true
+    _avg?: VendorAvgAggregateInputType
+    _sum?: VendorSumAggregateInputType
+    _min?: VendorMinAggregateInputType
+    _max?: VendorMaxAggregateInputType
+  }
+
+  export type VendorGroupByOutputType = {
+    id: string
+    name: string
+    category: string
+    city: string
+    description: string
+    priceMin: number
+    priceMax: number
+    rating: number
+    tier: string
+    phone: string | null
+    email: string | null
+    website: string | null
+    coverImageUrl: string | null
+    tags: string[]
+    createdAt: Date
+    _count: VendorCountAggregateOutputType | null
+    _avg: VendorAvgAggregateOutputType | null
+    _sum: VendorSumAggregateOutputType | null
+    _min: VendorMinAggregateOutputType | null
+    _max: VendorMaxAggregateOutputType | null
+  }
+
+  type GetVendorGroupByPayload<T extends VendorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VendorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VendorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VendorGroupByOutputType[P]>
+            : GetScalarType<T[P], VendorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VendorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    city?: boolean
+    description?: boolean
+    priceMin?: boolean
+    priceMax?: boolean
+    rating?: boolean
+    tier?: boolean
+    phone?: boolean
+    email?: boolean
+    website?: boolean
+    coverImageUrl?: boolean
+    tags?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["vendor"]>
+
+  export type VendorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    city?: boolean
+    description?: boolean
+    priceMin?: boolean
+    priceMax?: boolean
+    rating?: boolean
+    tier?: boolean
+    phone?: boolean
+    email?: boolean
+    website?: boolean
+    coverImageUrl?: boolean
+    tags?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["vendor"]>
+
+  export type VendorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    city?: boolean
+    description?: boolean
+    priceMin?: boolean
+    priceMax?: boolean
+    rating?: boolean
+    tier?: boolean
+    phone?: boolean
+    email?: boolean
+    website?: boolean
+    coverImageUrl?: boolean
+    tags?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["vendor"]>
+
+  export type VendorSelectScalar = {
+    id?: boolean
+    name?: boolean
+    category?: boolean
+    city?: boolean
+    description?: boolean
+    priceMin?: boolean
+    priceMax?: boolean
+    rating?: boolean
+    tier?: boolean
+    phone?: boolean
+    email?: boolean
+    website?: boolean
+    coverImageUrl?: boolean
+    tags?: boolean
+    createdAt?: boolean
+  }
+
+  export type VendorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "category" | "city" | "description" | "priceMin" | "priceMax" | "rating" | "tier" | "phone" | "email" | "website" | "coverImageUrl" | "tags" | "createdAt", ExtArgs["result"]["vendor"]>
+
+  export type $VendorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Vendor"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      category: string
+      city: string
+      description: string
+      priceMin: number
+      priceMax: number
+      rating: number
+      tier: string
+      phone: string | null
+      email: string | null
+      website: string | null
+      coverImageUrl: string | null
+      tags: string[]
+      createdAt: Date
+    }, ExtArgs["result"]["vendor"]>
+    composites: {}
+  }
+
+  type VendorGetPayload<S extends boolean | null | undefined | VendorDefaultArgs> = $Result.GetResult<Prisma.$VendorPayload, S>
+
+  type VendorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VendorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VendorCountAggregateInputType | true
+    }
+
+  export interface VendorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vendor'], meta: { name: 'Vendor' } }
+    /**
+     * Find zero or one Vendor that matches the filter.
+     * @param {VendorFindUniqueArgs} args - Arguments to find a Vendor
+     * @example
+     * // Get one Vendor
+     * const vendor = await prisma.vendor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VendorFindUniqueArgs>(args: SelectSubset<T, VendorFindUniqueArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Vendor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VendorFindUniqueOrThrowArgs} args - Arguments to find a Vendor
+     * @example
+     * // Get one Vendor
+     * const vendor = await prisma.vendor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VendorFindUniqueOrThrowArgs>(args: SelectSubset<T, VendorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Vendor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorFindFirstArgs} args - Arguments to find a Vendor
+     * @example
+     * // Get one Vendor
+     * const vendor = await prisma.vendor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VendorFindFirstArgs>(args?: SelectSubset<T, VendorFindFirstArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Vendor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorFindFirstOrThrowArgs} args - Arguments to find a Vendor
+     * @example
+     * // Get one Vendor
+     * const vendor = await prisma.vendor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VendorFindFirstOrThrowArgs>(args?: SelectSubset<T, VendorFindFirstOrThrowArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Vendors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Vendors
+     * const vendors = await prisma.vendor.findMany()
+     * 
+     * // Get first 10 Vendors
+     * const vendors = await prisma.vendor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const vendorWithIdOnly = await prisma.vendor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VendorFindManyArgs>(args?: SelectSubset<T, VendorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Vendor.
+     * @param {VendorCreateArgs} args - Arguments to create a Vendor.
+     * @example
+     * // Create one Vendor
+     * const Vendor = await prisma.vendor.create({
+     *   data: {
+     *     // ... data to create a Vendor
+     *   }
+     * })
+     * 
+     */
+    create<T extends VendorCreateArgs>(args: SelectSubset<T, VendorCreateArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Vendors.
+     * @param {VendorCreateManyArgs} args - Arguments to create many Vendors.
+     * @example
+     * // Create many Vendors
+     * const vendor = await prisma.vendor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VendorCreateManyArgs>(args?: SelectSubset<T, VendorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Vendors and returns the data saved in the database.
+     * @param {VendorCreateManyAndReturnArgs} args - Arguments to create many Vendors.
+     * @example
+     * // Create many Vendors
+     * const vendor = await prisma.vendor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Vendors and only return the `id`
+     * const vendorWithIdOnly = await prisma.vendor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VendorCreateManyAndReturnArgs>(args?: SelectSubset<T, VendorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Vendor.
+     * @param {VendorDeleteArgs} args - Arguments to delete one Vendor.
+     * @example
+     * // Delete one Vendor
+     * const Vendor = await prisma.vendor.delete({
+     *   where: {
+     *     // ... filter to delete one Vendor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VendorDeleteArgs>(args: SelectSubset<T, VendorDeleteArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Vendor.
+     * @param {VendorUpdateArgs} args - Arguments to update one Vendor.
+     * @example
+     * // Update one Vendor
+     * const vendor = await prisma.vendor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VendorUpdateArgs>(args: SelectSubset<T, VendorUpdateArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Vendors.
+     * @param {VendorDeleteManyArgs} args - Arguments to filter Vendors to delete.
+     * @example
+     * // Delete a few Vendors
+     * const { count } = await prisma.vendor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VendorDeleteManyArgs>(args?: SelectSubset<T, VendorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Vendors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Vendors
+     * const vendor = await prisma.vendor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VendorUpdateManyArgs>(args: SelectSubset<T, VendorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Vendors and returns the data updated in the database.
+     * @param {VendorUpdateManyAndReturnArgs} args - Arguments to update many Vendors.
+     * @example
+     * // Update many Vendors
+     * const vendor = await prisma.vendor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Vendors and only return the `id`
+     * const vendorWithIdOnly = await prisma.vendor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VendorUpdateManyAndReturnArgs>(args: SelectSubset<T, VendorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Vendor.
+     * @param {VendorUpsertArgs} args - Arguments to update or create a Vendor.
+     * @example
+     * // Update or create a Vendor
+     * const vendor = await prisma.vendor.upsert({
+     *   create: {
+     *     // ... data to create a Vendor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Vendor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VendorUpsertArgs>(args: SelectSubset<T, VendorUpsertArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Vendors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorCountArgs} args - Arguments to filter Vendors to count.
+     * @example
+     * // Count the number of Vendors
+     * const count = await prisma.vendor.count({
+     *   where: {
+     *     // ... the filter for the Vendors we want to count
+     *   }
+     * })
+    **/
+    count<T extends VendorCountArgs>(
+      args?: Subset<T, VendorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VendorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Vendor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VendorAggregateArgs>(args: Subset<T, VendorAggregateArgs>): Prisma.PrismaPromise<GetVendorAggregateType<T>>
+
+    /**
+     * Group by Vendor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VendorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VendorGroupByArgs['orderBy'] }
+        : { orderBy?: VendorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VendorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVendorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Vendor model
+   */
+  readonly fields: VendorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Vendor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VendorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Vendor model
+   */
+  interface VendorFieldRefs {
+    readonly id: FieldRef<"Vendor", 'String'>
+    readonly name: FieldRef<"Vendor", 'String'>
+    readonly category: FieldRef<"Vendor", 'String'>
+    readonly city: FieldRef<"Vendor", 'String'>
+    readonly description: FieldRef<"Vendor", 'String'>
+    readonly priceMin: FieldRef<"Vendor", 'Int'>
+    readonly priceMax: FieldRef<"Vendor", 'Int'>
+    readonly rating: FieldRef<"Vendor", 'Float'>
+    readonly tier: FieldRef<"Vendor", 'String'>
+    readonly phone: FieldRef<"Vendor", 'String'>
+    readonly email: FieldRef<"Vendor", 'String'>
+    readonly website: FieldRef<"Vendor", 'String'>
+    readonly coverImageUrl: FieldRef<"Vendor", 'String'>
+    readonly tags: FieldRef<"Vendor", 'String[]'>
+    readonly createdAt: FieldRef<"Vendor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Vendor findUnique
+   */
+  export type VendorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter, which Vendor to fetch.
+     */
+    where: VendorWhereUniqueInput
+  }
+
+  /**
+   * Vendor findUniqueOrThrow
+   */
+  export type VendorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter, which Vendor to fetch.
+     */
+    where: VendorWhereUniqueInput
+  }
+
+  /**
+   * Vendor findFirst
+   */
+  export type VendorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter, which Vendor to fetch.
+     */
+    where?: VendorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendors to fetch.
+     */
+    orderBy?: VendorOrderByWithRelationInput | VendorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vendors.
+     */
+    cursor?: VendorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vendors.
+     */
+    distinct?: VendorScalarFieldEnum | VendorScalarFieldEnum[]
+  }
+
+  /**
+   * Vendor findFirstOrThrow
+   */
+  export type VendorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter, which Vendor to fetch.
+     */
+    where?: VendorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendors to fetch.
+     */
+    orderBy?: VendorOrderByWithRelationInput | VendorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vendors.
+     */
+    cursor?: VendorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vendors.
+     */
+    distinct?: VendorScalarFieldEnum | VendorScalarFieldEnum[]
+  }
+
+  /**
+   * Vendor findMany
+   */
+  export type VendorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter, which Vendors to fetch.
+     */
+    where?: VendorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendors to fetch.
+     */
+    orderBy?: VendorOrderByWithRelationInput | VendorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Vendors.
+     */
+    cursor?: VendorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vendors.
+     */
+    distinct?: VendorScalarFieldEnum | VendorScalarFieldEnum[]
+  }
+
+  /**
+   * Vendor create
+   */
+  export type VendorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Vendor.
+     */
+    data: XOR<VendorCreateInput, VendorUncheckedCreateInput>
+  }
+
+  /**
+   * Vendor createMany
+   */
+  export type VendorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Vendors.
+     */
+    data: VendorCreateManyInput | VendorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Vendor createManyAndReturn
+   */
+  export type VendorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Vendors.
+     */
+    data: VendorCreateManyInput | VendorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Vendor update
+   */
+  export type VendorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Vendor.
+     */
+    data: XOR<VendorUpdateInput, VendorUncheckedUpdateInput>
+    /**
+     * Choose, which Vendor to update.
+     */
+    where: VendorWhereUniqueInput
+  }
+
+  /**
+   * Vendor updateMany
+   */
+  export type VendorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Vendors.
+     */
+    data: XOR<VendorUpdateManyMutationInput, VendorUncheckedUpdateManyInput>
+    /**
+     * Filter which Vendors to update
+     */
+    where?: VendorWhereInput
+    /**
+     * Limit how many Vendors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Vendor updateManyAndReturn
+   */
+  export type VendorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * The data used to update Vendors.
+     */
+    data: XOR<VendorUpdateManyMutationInput, VendorUncheckedUpdateManyInput>
+    /**
+     * Filter which Vendors to update
+     */
+    where?: VendorWhereInput
+    /**
+     * Limit how many Vendors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Vendor upsert
+   */
+  export type VendorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Vendor to update in case it exists.
+     */
+    where: VendorWhereUniqueInput
+    /**
+     * In case the Vendor found by the `where` argument doesn't exist, create a new Vendor with this data.
+     */
+    create: XOR<VendorCreateInput, VendorUncheckedCreateInput>
+    /**
+     * In case the Vendor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VendorUpdateInput, VendorUncheckedUpdateInput>
+  }
+
+  /**
+   * Vendor delete
+   */
+  export type VendorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+    /**
+     * Filter which Vendor to delete.
+     */
+    where: VendorWhereUniqueInput
+  }
+
+  /**
+   * Vendor deleteMany
+   */
+  export type VendorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vendors to delete
+     */
+    where?: VendorWhereInput
+    /**
+     * Limit how many Vendors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Vendor without action
+   */
+  export type VendorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vendor
+     */
+    select?: VendorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vendor
+     */
+    omit?: VendorOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4581,6 +5840,27 @@ export namespace Prisma {
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
+  export const VendorScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    category: 'category',
+    city: 'city',
+    description: 'description',
+    priceMin: 'priceMin',
+    priceMax: 'priceMax',
+    rating: 'rating',
+    tier: 'tier',
+    phone: 'phone',
+    email: 'email',
+    website: 'website',
+    coverImageUrl: 'coverImageUrl',
+    tags: 'tags',
+    createdAt: 'createdAt'
+  };
+
+  export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -4595,6 +5875,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -4875,6 +6163,110 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
+  export type VendorWhereInput = {
+    AND?: VendorWhereInput | VendorWhereInput[]
+    OR?: VendorWhereInput[]
+    NOT?: VendorWhereInput | VendorWhereInput[]
+    id?: UuidFilter<"Vendor"> | string
+    name?: StringFilter<"Vendor"> | string
+    category?: StringFilter<"Vendor"> | string
+    city?: StringFilter<"Vendor"> | string
+    description?: StringFilter<"Vendor"> | string
+    priceMin?: IntFilter<"Vendor"> | number
+    priceMax?: IntFilter<"Vendor"> | number
+    rating?: FloatFilter<"Vendor"> | number
+    tier?: StringFilter<"Vendor"> | string
+    phone?: StringNullableFilter<"Vendor"> | string | null
+    email?: StringNullableFilter<"Vendor"> | string | null
+    website?: StringNullableFilter<"Vendor"> | string | null
+    coverImageUrl?: StringNullableFilter<"Vendor"> | string | null
+    tags?: StringNullableListFilter<"Vendor">
+    createdAt?: DateTimeFilter<"Vendor"> | Date | string
+  }
+
+  export type VendorOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    city?: SortOrder
+    description?: SortOrder
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+    tier?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    coverImageUrl?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VendorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VendorWhereInput | VendorWhereInput[]
+    OR?: VendorWhereInput[]
+    NOT?: VendorWhereInput | VendorWhereInput[]
+    name?: StringFilter<"Vendor"> | string
+    category?: StringFilter<"Vendor"> | string
+    city?: StringFilter<"Vendor"> | string
+    description?: StringFilter<"Vendor"> | string
+    priceMin?: IntFilter<"Vendor"> | number
+    priceMax?: IntFilter<"Vendor"> | number
+    rating?: FloatFilter<"Vendor"> | number
+    tier?: StringFilter<"Vendor"> | string
+    phone?: StringNullableFilter<"Vendor"> | string | null
+    email?: StringNullableFilter<"Vendor"> | string | null
+    website?: StringNullableFilter<"Vendor"> | string | null
+    coverImageUrl?: StringNullableFilter<"Vendor"> | string | null
+    tags?: StringNullableListFilter<"Vendor">
+    createdAt?: DateTimeFilter<"Vendor"> | Date | string
+  }, "id">
+
+  export type VendorOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    city?: SortOrder
+    description?: SortOrder
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+    tier?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    coverImageUrl?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+    _count?: VendorCountOrderByAggregateInput
+    _avg?: VendorAvgOrderByAggregateInput
+    _max?: VendorMaxOrderByAggregateInput
+    _min?: VendorMinOrderByAggregateInput
+    _sum?: VendorSumOrderByAggregateInput
+  }
+
+  export type VendorScalarWhereWithAggregatesInput = {
+    AND?: VendorScalarWhereWithAggregatesInput | VendorScalarWhereWithAggregatesInput[]
+    OR?: VendorScalarWhereWithAggregatesInput[]
+    NOT?: VendorScalarWhereWithAggregatesInput | VendorScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Vendor"> | string
+    name?: StringWithAggregatesFilter<"Vendor"> | string
+    category?: StringWithAggregatesFilter<"Vendor"> | string
+    city?: StringWithAggregatesFilter<"Vendor"> | string
+    description?: StringWithAggregatesFilter<"Vendor"> | string
+    priceMin?: IntWithAggregatesFilter<"Vendor"> | number
+    priceMax?: IntWithAggregatesFilter<"Vendor"> | number
+    rating?: FloatWithAggregatesFilter<"Vendor"> | number
+    tier?: StringWithAggregatesFilter<"Vendor"> | string
+    phone?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    website?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    coverImageUrl?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    tags?: StringNullableListFilter<"Vendor">
+    createdAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
+  }
+
   export type WeddingIntakeCreateInput = {
     id?: string
     weddingDate: Date | string
@@ -5102,6 +6494,132 @@ export namespace Prisma {
     vendorName?: StringFieldUpdateOperationsInput | string
     amountPaid?: IntFieldUpdateOperationsInput | number
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendorCreateInput = {
+    id?: string
+    name: string
+    category: string
+    city: string
+    description: string
+    priceMin: number
+    priceMax: number
+    rating?: number
+    tier: string
+    phone?: string | null
+    email?: string | null
+    website?: string | null
+    coverImageUrl?: string | null
+    tags?: VendorCreatetagsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type VendorUncheckedCreateInput = {
+    id?: string
+    name: string
+    category: string
+    city: string
+    description: string
+    priceMin: number
+    priceMax: number
+    rating?: number
+    tier: string
+    phone?: string | null
+    email?: string | null
+    website?: string | null
+    coverImageUrl?: string | null
+    tags?: VendorCreatetagsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type VendorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceMin?: IntFieldUpdateOperationsInput | number
+    priceMax?: IntFieldUpdateOperationsInput | number
+    rating?: FloatFieldUpdateOperationsInput | number
+    tier?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: VendorUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceMin?: IntFieldUpdateOperationsInput | number
+    priceMax?: IntFieldUpdateOperationsInput | number
+    rating?: FloatFieldUpdateOperationsInput | number
+    tier?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: VendorUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendorCreateManyInput = {
+    id?: string
+    name: string
+    category: string
+    city: string
+    description: string
+    priceMin: number
+    priceMax: number
+    rating?: number
+    tier: string
+    phone?: string | null
+    email?: string | null
+    website?: string | null
+    coverImageUrl?: string | null
+    tags?: VendorCreatetagsInput | string[]
+    createdAt?: Date | string
+  }
+
+  export type VendorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceMin?: IntFieldUpdateOperationsInput | number
+    priceMax?: IntFieldUpdateOperationsInput | number
+    rating?: FloatFieldUpdateOperationsInput | number
+    tier?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: VendorUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceMin?: IntFieldUpdateOperationsInput | number
+    priceMax?: IntFieldUpdateOperationsInput | number
+    rating?: FloatFieldUpdateOperationsInput | number
+    tier?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: VendorUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5372,6 +6890,135 @@ export namespace Prisma {
     amountPaid?: SortOrder
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type VendorCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    city?: SortOrder
+    description?: SortOrder
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+    tier?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    website?: SortOrder
+    coverImageUrl?: SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VendorAvgOrderByAggregateInput = {
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type VendorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    city?: SortOrder
+    description?: SortOrder
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+    tier?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    website?: SortOrder
+    coverImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VendorMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    category?: SortOrder
+    city?: SortOrder
+    description?: SortOrder
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+    tier?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    website?: SortOrder
+    coverImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VendorSumOrderByAggregateInput = {
+    priceMin?: SortOrder
+    priceMax?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type WeddingIntakeCreateprioritiesInput = {
     set: string[]
   }
@@ -5509,6 +7156,27 @@ export namespace Prisma {
     update?: XOR<XOR<WeddingIntakeUpdateToOneWithWhereWithoutPaymentsInput, WeddingIntakeUpdateWithoutPaymentsInput>, WeddingIntakeUncheckedUpdateWithoutPaymentsInput>
   }
 
+  export type VendorCreatetagsInput = {
+    set: string[]
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type VendorUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type NestedUuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5626,6 +7294,64 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type RecommendationCreateWithoutIntakeInput = {

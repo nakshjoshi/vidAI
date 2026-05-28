@@ -1,7 +1,7 @@
 // Prisma schema for VidAI — Wedding Planner
 // Scaffolded via: pnpm --filter @wedding/db exec prisma init --datasource-provider postgresql
 // Prisma v7: url/directUrl moved to prisma.config.ts
-// Models map to 3 flat tables: wedding_intakes, recommendations, payments
+// Models map to 4 tables: wedding_intakes, recommendations, payments, vendors
 
 generator client {
   provider = "prisma-client-js"
@@ -57,4 +57,25 @@ model Payment {
 
   @@index([intakeId], name: "idx_payments_intake_id")
   @@map("payments")
+}
+
+model Vendor {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  category      String                            // matches vendor category slug from @wedding/types
+  city          String
+  description   String
+  priceMin      Int      @map("price_min")
+  priceMax      Int      @map("price_max")
+  rating        Float    @default(4.0)            // 1.0 – 5.0
+  tier          String                            // 'budget' | 'mid' | 'premium'
+  phone         String?
+  email         String?
+  website       String?
+  coverImageUrl String?  @map("cover_image_url")
+  tags          String[]
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([city, category], name: "idx_vendors_city_category")
+  @@map("vendors")
 }

@@ -1,3 +1,5 @@
 export * from './intake'
 export * from './recommendation'
 export * from './payment'
+export * from './events'
+export * from './vendor'
