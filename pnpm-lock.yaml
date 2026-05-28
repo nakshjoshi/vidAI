@@ -102,6 +102,9 @@ importers:
       ai:
         specifier: ^6.0.191
         version: 6.0.191(zod@3.25.76)
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.5.0(postcss@8.5.15)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -114,6 +117,9 @@ importers:
       next:
         specifier: 14.2.29
         version: 14.2.29(@opentelemetry/api@1.9.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.15
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -129,6 +135,9 @@ importers:
       tailwind-merge:
         specifier: ^3.3.0
         version: 3.6.0
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.19(tsx@4.22.3)
       zod:
         specifier: ^3.23.8
         version: 3.25.76
@@ -142,15 +151,6 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.5
         version: 18.3.7(@types/react@18.3.29)
-      autoprefixer:
-        specifier: ^10.4.21
-        version: 10.5.0(postcss@8.5.15)
-      postcss:
-        specifier: ^8.5.3
-        version: 8.5.15
-      tailwindcss:
-        specifier: ^3.4.17
-        version: 3.4.19(tsx@4.22.3)
       typescript:
         specifier: 5.9.2
         version: 5.9.2
