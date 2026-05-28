@@ -1,0 +1,66 @@
+name: vidai
+region: blr # Bangalore — closest to India; change to nyc if preferred
+
+services:
+  # ─── Express API ─────────────────────────────────────────────────────────
+  - name: vidai-api
+    source_dir: /
+    github:
+      repo: nakshjoshi/vidai
+      branch: main
+      deploy_on_push: true
+    # Build from monorepo root so pnpm has access to pnpm-lock.yaml
+    build_command: |
+      npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm --filter @wedding/db exec prisma generate
+      pnpm --filter @wedding/api build
+    run_command: node apps/api/dist/index.js
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    http_port: 4000
+    health_check:
+      http_path: /health
+      initial_delay_seconds: 10
+      period_seconds: 30
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4000"
+      - key: DATABASE_URL
+        type: SECRET
+        value: EV[1:...]   # replace with actual secret ref in DO dashboard
+      - key: DIRECT_URL
+        type: SECRET
+        value: EV[1:...]   # replace with actual secret ref in DO dashboard
+      - key: GEMINI_API_KEY
+        type: SECRET
+        value: EV[1:...]   # replace with actual secret ref in DO dashboard
+      - key: CORS_ORIGIN
+        value: ${vidai-web.PUBLIC_URL}
+
+  # ─── Next.js Web Frontend ────────────────────────────────────────────────
+  - name: vidai-web
+    source_dir: /
+    github:
+      repo: nakshjoshi/vidai
+      branch: main
+      deploy_on_push: true
+    build_command: |
+      npm install -g pnpm
+      pnpm install --frozen-lockfile
+      pnpm --filter @wedding/web build
+    run_command: node apps/web/.next/standalone/apps/web/server.js
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    http_port: 3000
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: ${vidai-api.PUBLIC_URL}
+      - key: HOSTNAME
+        value: "0.0.0.0"
+      - key: PORT
+        value: "3000"
