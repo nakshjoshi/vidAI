@@ -6,6 +6,7 @@ import { errorHandler } from './middleware/errorHandler'
 import intakeRoutes from './routes/intake.routes'
 import recommendationRoutes from './routes/recommendation.routes'
 import paymentRoutes from './routes/payment.routes'
+import chatRoutes from './routes/chat.routes'
 import { logger } from './lib/logger'
 
 const app: express.Express = express()
@@ -30,6 +31,7 @@ app.get('/health', (_req, res) => {
 app.use('/api/intake', intakeRoutes)
 app.use('/api/recommendations', recommendationRoutes)
 app.use('/api/payments', paymentRoutes)
+app.use('/api/chat', chatRoutes)
 
 // Error handler — must be last
 app.use(errorHandler)

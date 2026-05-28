@@ -78,6 +78,25 @@ export class GeminiProvider implements AIProvider {
       if (text) yield text
     }
   }
+  // Chat stream — streams conversational reply tokens for the follow-up chat feature
+  async *chatStream(
+    systemPrompt: string,
+    history: { role: 'user' | 'model'; parts: { text: string }[] }[]
+  ): AsyncIterable<string> {
+    const stream = await this.ai.models.generateContentStream({
+      model: MODEL,
+      contents: history,
+      config: {
+        systemInstruction: systemPrompt,
+        temperature: 0.7,
+      },
+    })
+
+    for await (const chunk of stream) {
+      const text = chunk.text
+      if (text) yield text
+    }
+  }
 }
 
 export const geminiProvider = new GeminiProvider()

@@ -1,44 +1,122 @@
 'use client'
 
-import React, { useState } from 'react'
-import { useChat } from '@ai-sdk/react'
+import React, { useState, useRef, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Send, Bot, User, Loader2, Sparkles, MessageSquare } from 'lucide-react'
 import { RecommendationsGetResponse } from '@wedding/types'
+
+interface Message {
+  id: string
+  role: 'user' | 'assistant'
+  content: string
+}
 
 interface ChatBoxProps {
   data: RecommendationsGetResponse
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'
+
 export function ChatBox({ data }: ChatBoxProps) {
   const { intake, recommendations } = data
   const [selectedContext, setSelectedContext] = useState<string>('')
   const [input, setInput] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const bottomRef = useRef<HTMLDivElement>(null)
 
-  // Build a concise context string for the AI
-  const contextData = `
-Wedding: ${intake.city}, ${intake.venueType}, ${intake.guestCount} guests.
+  // Auto-scroll to latest message
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  // Build the wedding plan context from the live data on screen, including matched vendors
+  const contextData = `Wedding: ${intake.city}, ${intake.venueType}, ${intake.guestCount} guests.
 Budget: ${intake.budgetBracket}.
 Priorities: ${intake.priorities.join(', ')}.
-Vendor Allocations:
-${recommendations.map(r => `- ${r.vendorCategory}: ${r.allocatedBudget} (${r.rationale})`).join('\n')}
-`
+Vendor Allocations and Matched Vendors:
+${recommendations.map(r => {
+  const vendorsStr = r.vendors && r.vendors.length > 0 
+    ? r.vendors.map(v => `    * ${v.name} (Price: ₹${v.priceMin}-₹${v.priceMax}, Rating: ${v.rating}) - ${v.description}`).join('\n')
+    : '    * No specific vendors matched.'
+  return `- ${r.vendorCategory.replace('_', ' ').toUpperCase()}: ₹${r.allocatedBudget}
+  Rationale: ${r.rationale}
+  Matched Vendors:
+${vendorsStr}`
+}).join('\n')}`
 
-  const { messages, sendMessage, status, error } = useChat({
-    // @ts-ignore - The alpha typings of ai sdk omit api but the runtime requires it
-    api: '/api/chat',
-    body: {
-      contextData,
-      selectedContext,
-    },
-  })
-
-  const isLoading = status === 'submitted' || status === 'streaming'
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || isLoading) return
-    sendMessage({ role: 'user', parts: [{ type: 'text', text: input }] })
+
+    const userMessage: Message = {
+      id: crypto.randomUUID(),
+      role: 'user',
+      content: input.trim(),
+    }
+
+    // Append the user message and clear input
+    setMessages((prev) => [...prev, userMessage])
     setInput('')
+    setIsLoading(true)
+    setError(null)
+
+    // Create a placeholder assistant message that we'll stream into
+    const assistantId = crypto.randomUUID()
+    setMessages((prev) => [...prev, { id: assistantId, role: 'assistant', content: '' }])
+
+    try {
+      // Build conversation history in the format the backend expects
+      const history = [...messages, userMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      }))
+
+      const response = await fetch(`${API_URL}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ messages: history, contextData, selectedContext }),
+      })
+
+      if (!response.ok || !response.body) {
+        throw new Error(`Request failed: ${response.status}`)
+      }
+
+      // Read the SSE stream and append chunks to the assistant message
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const raw = decoder.decode(value, { stream: true })
+        // Each line is: "data: <json>\n\n"
+        const lines = raw.split('\n').filter((l) => l.startsWith('data: '))
+        for (const line of lines) {
+          const jsonStr = line.slice(6).trim()
+          if (jsonStr === '[DONE]') break
+          try {
+            const chunk = JSON.parse(jsonStr) as string
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantId ? { ...m, content: m.content + chunk } : m
+              )
+            )
+          } catch {
+            // Silently skip unparseable chunks
+          }
+        }
+      }
+    } catch (err) {
+      setError('An error occurred while generating the response.')
+      // Remove the empty assistant placeholder
+      setMessages((prev) => prev.filter((m) => m.id !== assistantId))
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -55,8 +133,8 @@ ${recommendations.map(r => `- ${r.vendorCategory}: ${r.allocatedBudget} (${r.rat
               <p className="text-xs text-gray-500">Ask questions about your wedding plan</p>
             </div>
           </div>
-          
-          {/* Context Selector */}
+
+          {/* Context Selector — desktop */}
           <div className="hidden sm:block">
             <select
               value={selectedContext}
@@ -73,7 +151,7 @@ ${recommendations.map(r => `- ${r.vendorCategory}: ${r.allocatedBudget} (${r.rat
           </div>
         </div>
 
-        {/* Mobile Context Selector */}
+        {/* Context Selector — mobile */}
         <div className="sm:hidden p-2 border-b border-brand-100 bg-brand-50/30">
           <select
             value={selectedContext}
@@ -100,44 +178,55 @@ ${recommendations.map(r => `- ${r.vendorCategory}: ${r.allocatedBudget} (${r.rat
             </div>
           )}
 
-          {messages.map((message) => {
-            const contentText = message.parts
-              .filter((p: any) => p.type === 'text')
-              .map((p: any) => p.text)
-              .join('')
-            
-            return (
+          {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex items-start gap-3 ${
-                message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
-              }`}
+              className={`flex items-start gap-3 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
-                  message.role === 'user'
-                    ? 'bg-gray-800 text-white'
-                    : 'bg-brand-100 text-brand-600'
+                  message.role === 'user' ? 'bg-gray-800 text-white' : 'bg-brand-100 text-brand-600'
                 }`}
               >
                 {message.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
               </div>
               <div
-                className={`px-4 py-3 rounded-2xl max-w-[80%] text-sm whitespace-pre-wrap ${
+                className={`px-4 py-3 rounded-2xl max-w-[80%] text-sm ${
                   message.role === 'user'
-                    ? 'bg-gray-800 text-white rounded-tr-sm'
+                    ? 'bg-gray-800 text-white rounded-tr-sm whitespace-pre-wrap'
                     : 'bg-white border border-gray-100 text-gray-800 rounded-tl-sm shadow-sm'
                 }`}
               >
-                {contentText}
+                {message.role === 'user' ? (
+                  message.content
+                ) : (
+                  <ReactMarkdown
+                    components={{
+                      p: ({ node, ...props }) => <p className="mb-2 last:mb-0 leading-relaxed" {...props} />,
+                      ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2 space-y-1" {...props} />,
+                      ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-2 space-y-1" {...props} />,
+                      li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                      strong: ({ node, ...props }) => <strong className="font-semibold text-gray-900" {...props} />,
+                    }}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
+                )}
+                
+                {/* Show blinking cursor while this message is being streamed */}
+                {isLoading && message.role === 'assistant' && message.content === '' && (
+                  <span className="inline-block w-2 h-4 bg-brand-400 animate-pulse ml-0.5" />
+                )}
               </div>
             </div>
-          )})}
+          ))}
+
           {error && (
             <div className="p-3 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 text-center">
-              An error occurred while generating the response.
+              {error}
             </div>
           )}
+          <div ref={bottomRef} />
         </div>
 
         {/* Input Area */}
@@ -159,11 +248,7 @@ ${recommendations.map(r => `- ${r.vendorCategory}: ${r.allocatedBudget} (${r.rat
               disabled={isLoading || !input.trim()}
               className="w-10 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors"
             >
-              {isLoading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <Send className="w-4 h-4" />
-              )}
+              {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
             </button>
           </form>
         </div>
