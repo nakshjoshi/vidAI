@@ -27,7 +27,7 @@ const recommendationSchema = {
   required: ['recommendations'],
 }
 
-const MODEL = 'gemini-3.1-flash-lite'
+const MODEL = 'gemini-2.5-flash-lite'
 
 export class GeminiProvider implements AIProvider {
   private readonly ai: GoogleGenAI
