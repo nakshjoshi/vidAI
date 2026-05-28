@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import {
   IntakeSchema,
   Intake,
@@ -161,10 +162,10 @@ export default function IntakePage() {
       {/* Header */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/40">
         <div className="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Heart className="w-5 h-5 text-brand-500 fill-brand-500" />
             <span className="font-display font-bold text-brand-700">VidAI</span>
-          </div>
+          </Link>
           <span className="text-sm text-gray-500">Step {step} of 5</span>
         </div>
       </nav>
