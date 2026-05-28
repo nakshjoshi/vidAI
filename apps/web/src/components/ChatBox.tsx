@@ -90,7 +90,8 @@ ${vendorsStr}`
       })
 
       if (!response.ok || !response.body) {
-        throw new Error(`Request failed: ${response.status}`)
+        const errData = await response.json().catch(() => ({}))
+        throw new Error(errData.message || `Request failed: ${response.status}`)
       }
 
       // Read the SSE stream and append chunks to the assistant message
@@ -119,8 +120,8 @@ ${vendorsStr}`
           }
         }
       }
-    } catch (err) {
-      setError('An error occurred while generating the response.')
+    } catch (err: any) {
+      setError(err.message || 'An error occurred while generating the response.')
       // Remove the empty assistant placeholder
       setMessages((prev) => prev.filter((m) => m.id !== assistantId))
     } finally {
