@@ -20,3 +20,12 @@ export const submitIntake = asyncHandler(async (req: Request<object, object, Int
   )
 })
 
+export const getIntakesHistory = asyncHandler(async (req: Request, res: Response) => {
+  const page = Math.max(1, parseInt(req.query.page as string) || 1)
+  const limit = Math.max(1, Math.min(50, parseInt(req.query.limit as string) || 10))
+  
+  const history = await intakeService.getHistory(page, limit)
+  
+  res.json(new ApiResponse(200, history, 'History retrieved'))
+})
+

@@ -42,4 +42,18 @@ export async function updateIntakeChatHistory(
     data: { chatHistory },
   })
 }
-
+export async function findIntakesPaginated(
+  page: number,
+  limit: number
+): Promise<{ data: WeddingIntake[]; total: number }> {
+  const skip = (page - 1) * limit
+  const [data, total] = await Promise.all([
+    prisma.weddingIntake.findMany({
+      skip,
+      take: limit,
+      orderBy: { createdAt: 'desc' },
+    }),
+    prisma.weddingIntake.count(),
+  ])
+  return { data, total }
+}

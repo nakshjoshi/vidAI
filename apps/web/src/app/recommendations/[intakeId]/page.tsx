@@ -175,10 +175,10 @@ export default function RecommendationsPage() {
       {/* Header */}
       <nav className="sticky top-0 z-50 glass border-b border-white/40">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Heart className="w-5 h-5 text-brand-500 fill-brand-500" />
             <span className="font-display font-bold text-brand-700">VidAI</span>
-          </div>
+          </Link>
           <Link href={`/budget/${intakeId}`} className="btn-primary py-2 px-4 text-xs">
             Budget Tracker <ChevronRight className="w-3 h-3" />
           </Link>

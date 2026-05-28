@@ -9,6 +9,7 @@ import {
   Music,
   ChevronRight,
 } from 'lucide-react'
+import { HistorySection } from '../components/HistorySection'
 
 const features = [
   {
@@ -129,6 +130,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <HistorySection />
 
       {/* Features Section */}
       <section className="py-24 px-4">

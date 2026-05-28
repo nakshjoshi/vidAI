@@ -1,6 +1,6 @@
 import type { WeddingIntake } from '@wedding/db/generated/prisma'
 import { Intake, BUDGET_MIDPOINTS } from '@wedding/types'
-import { createIntake, findIntakeById } from '../repositories/intake.repository'
+import { createIntake, findIntakeById, findIntakesPaginated } from '../repositories/intake.repository'
 import { logger } from '../lib/logger'
 import { ApiError } from '../utils'
 
@@ -30,5 +30,9 @@ export class IntakeService {
       throw new ApiError(404, `Intake not found: ${id}`)
     }
     return intake
+  }
+
+  public async getHistory(page: number, limit: number): Promise<{ data: WeddingIntake[]; total: number }> {
+    return findIntakesPaginated(page, limit)
   }
 }
