@@ -144,10 +144,10 @@ export default function IntakePage() {
         throw new Error(body.error ?? 'Something went wrong')
       }
 
-      const result = await res.json() as { intakeId: string }
+      const result = await res.json() as { data: { intakeId: string } }
       localStorage.removeItem(STORAGE_KEY)
       // Redirect immediately, streaming happens on the next page
-      router.push(`/recommendations/${result.intakeId}`)
+      router.push(`/recommendations/${result.data.intakeId}`)
     } catch (err) {
       setIsSubmitting(false)
       setError(err instanceof Error ? err.message : 'Unknown error. Please try again.')

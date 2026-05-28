@@ -86,7 +86,7 @@ export default function RecommendationsPage() {
         if (res.ok) {
           // Data already exists, skip streaming
           const json = await res.json()
-          setData(json)
+          setData(json.data)
           setIsStreaming(false)
         } else if (res.status === 404) {
           // Data doesn't exist, start streaming
