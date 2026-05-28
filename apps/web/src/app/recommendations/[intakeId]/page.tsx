@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ChatBox } from '../../../components/ChatBox'
 import Link from 'next/link'
@@ -23,9 +23,15 @@ import {
   Trophy,
   Palette,
   CheckCircle,
+  Lock,
+  X,
+  ChevronLeft,
+  History,
 } from 'lucide-react'
 import { RecommendationsGetResponse } from '@wedding/types/recommendation'
 import { VENUE_TYPE_LABELS, BUDGET_BRACKET_LABELS } from '@wedding/types/intake'
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'
 
 const VENDOR_ICONS: Record<string, React.ElementType> = {
   photography: Camera,
@@ -76,7 +82,24 @@ export default function RecommendationsPage() {
   const [streamText, setStreamText] = useState<string>('')
   const [isStreaming, setIsStreaming] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'vendors' | 'events'>('vendors')
+  const [activeTab, setActiveTab] = useState<'vendors' | 'events' | 'finalize'>('vendors')
+  const [latestBudgetId, setLatestBudgetId] = useState<string | null>(null)
+
+  // Per-category selection: 'vendor' | 'ai_default' | 'drop'
+  type SelectionType = 'vendor' | 'ai_default' | 'drop'
+  interface Selection {
+    selectionType: SelectionType
+    vendorId?: string
+    vendorName?: string
+    finalBudget: number
+  }
+  const [selections, setSelections] = useState<Record<string, Selection>>({})
+  const [isLocking, setIsLocking] = useState(false)
+  const [lockError, setLockError] = useState<string | null>(null)
+
+  // Pagination for past budgets in finalize tab
+  const [historyPage, setHistoryPage] = useState(1)
+  const [historyData, setHistoryData] = useState<{ data: {id:string;totalBudget:number;createdAt:string}[]; total: number } | null>(null)
 
   useEffect(() => {
     if (!intakeId) return
@@ -85,12 +108,10 @@ export default function RecommendationsPage() {
     fetch(`/api/recommendations/${intakeId}`)
       .then(async (res) => {
         if (res.ok) {
-          // Data already exists, skip streaming
           const json = await res.json()
           setData(json.data)
           setIsStreaming(false)
         } else if (res.status === 404) {
-          // Data doesn't exist, start streaming
           startStream()
         } else {
           throw new Error('Failed to load recommendations.')
@@ -101,21 +122,24 @@ export default function RecommendationsPage() {
         setIsStreaming(false)
       })
 
+    // 2. Fetch latest finalized budget id for nav
+    fetch(`${API_URL}/api/budget/latest/${intakeId}`)
+      .then((r) => r.json())
+      .then((j) => setLatestBudgetId(j.data?.budgetId ?? null))
+      .catch(() => {})
+
     function startStream() {
       const eventSource = new EventSource(`/api/recommendations/${intakeId}/stream`)
-
       eventSource.addEventListener('chunk', (e) => {
         const text = JSON.parse(e.data)
         setStreamText((prev) => prev + text)
       })
-
       eventSource.addEventListener('done', (e) => {
         const finalData = JSON.parse(e.data)
         setData(finalData)
         setIsStreaming(false)
         eventSource.close()
       })
-
       eventSource.addEventListener('error', (e: any) => {
         const message = e.data ? JSON.parse(e.data).message : 'Streaming failed.'
         setError(message)
@@ -124,6 +148,63 @@ export default function RecommendationsPage() {
       })
     }
   }, [intakeId])
+
+  // Fetch budget history when finalize tab is opened
+  const fetchHistory = useCallback((page: number) => {
+    fetch(`${API_URL}/api/budget/history/${intakeId}?page=${page}&limit=3`)
+      .then((r) => r.json())
+      .then((j) => setHistoryData(j.data ?? null))
+      .catch(() => {})
+  }, [intakeId])
+
+  useEffect(() => {
+    if (activeTab === 'finalize' && intakeId) fetchHistory(historyPage)
+  }, [activeTab, historyPage, intakeId, fetchHistory])
+
+  // Initialize selections when data loads
+  useEffect(() => {
+    if (!data) return
+    const initial: Record<string, Selection> = {}
+    for (const rec of data.recommendations) {
+      initial[rec.vendorCategory] = {
+        selectionType: 'ai_default',
+        finalBudget: rec.allocatedBudget,
+      }
+    }
+    setSelections(initial)
+  }, [data])
+
+  const handleLockBudget = async () => {
+    if (!data) return
+    setIsLocking(true)
+    setLockError(null)
+    try {
+      const selectionPayload = data.recommendations.map((rec) => {
+        const sel = selections[rec.vendorCategory] ?? { selectionType: 'ai_default', finalBudget: rec.allocatedBudget }
+        return {
+          vendorCategory: rec.vendorCategory,
+          selectionType: sel.selectionType,
+          vendorId: sel.vendorId,
+          vendorName: sel.vendorName,
+          finalBudget: sel.finalBudget,
+        }
+      })
+      const res = await fetch(`${API_URL}/api/budget`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ intakeId, selections: selectionPayload }),
+      })
+      if (!res.ok) throw new Error('Failed to finalize budget')
+      const json = await res.json()
+      const newBudgetId = json.data?.id
+      setLatestBudgetId(newBudgetId)
+      router.push(`/track-budget/${newBudgetId}`)
+    } catch (err: any) {
+      setLockError(err.message)
+    } finally {
+      setIsLocking(false)
+    }
+  }
 
   if (error) {
     return (
@@ -179,9 +260,15 @@ export default function RecommendationsPage() {
             <Heart className="w-5 h-5 text-brand-500 fill-brand-500" />
             <span className="font-display font-bold text-brand-700">VidAI</span>
           </Link>
-          <Link href={`/budget/${intakeId}`} className="btn-primary py-2 px-4 text-xs">
-            Budget Tracker <ChevronRight className="w-3 h-3" />
-          </Link>
+          {latestBudgetId ? (
+            <Link href={`/track-budget/${latestBudgetId}`} className="btn-primary py-2 px-4 text-xs">
+              Budget Tracker <ChevronRight className="w-3 h-3" />
+            </Link>
+          ) : (
+            <button onClick={() => setActiveTab('finalize')} className="btn-primary py-2 px-4 text-xs">
+              Finalize Budget <ChevronRight className="w-3 h-3" />
+            </button>
+          )}
         </div>
       </nav>
 
@@ -255,6 +342,14 @@ export default function RecommendationsPage() {
             }`}
           >
             Event Timeline
+          </button>
+          <button
+            onClick={() => setActiveTab('finalize')}
+            className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 ${
+              activeTab === 'finalize' ? 'bg-white text-brand-600 shadow-sm' : 'text-gray-500 hover:text-gray-900 hover:bg-white/30'
+            }`}
+          >
+            <Lock className="w-3.5 h-3.5" /> Finalize
           </button>
         </div>
 
@@ -430,6 +525,157 @@ export default function RecommendationsPage() {
                     </div>
                   </div>
                 ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Finalize Budget */}
+        {activeTab === 'finalize' && (
+          <div className="space-y-8 animate-fade-in">
+            <div>
+              <h2 className="font-display text-2xl font-bold text-gray-900">Finalize Your Budget</h2>
+              <p className="text-gray-500 text-sm mt-1">Select one vendor per category — or use the AI allocation, or drop the category.</p>
+            </div>
+
+            {/* Past Budgets */}
+            {historyData && historyData.data.length > 0 && (
+              <div className="card p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <History className="w-4 h-4 text-brand-500" />
+                    <h3 className="font-semibold text-gray-900">Past Finalized Budgets</h3>
+                  </div>
+                  {historyData.total > 3 && (
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => setHistoryPage(p => Math.max(1, p - 1))} disabled={historyPage === 1} className="p-1 rounded-full border disabled:opacity-40">
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <span className="text-xs text-gray-500">{historyPage} / {Math.ceil(historyData.total / 3)}</span>
+                      <button onClick={() => setHistoryPage(p => Math.min(Math.ceil(historyData.total / 3), p + 1))} disabled={historyPage >= Math.ceil(historyData.total / 3)} className="p-1 rounded-full border disabled:opacity-40">
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {historyData.data.map((b) => (
+                    <Link key={b.id} href={`/track-budget/${b.id}`}
+                      className="p-4 rounded-xl border border-brand-100 bg-brand-50/30 hover:bg-brand-50 transition-colors block">
+                      <p className="font-bold text-brand-700">{formatINR(b.totalBudget)}</p>
+                      <p className="text-xs text-gray-400 mt-1">{new Date(b.createdAt).toLocaleDateString()}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Category Selections */}
+            <div className="space-y-4">
+              {recommendations.sort((a, b) => a.priorityRank - b.priorityRank).map((rec) => {
+                const sel = selections[rec.vendorCategory] ?? { selectionType: 'ai_default', finalBudget: rec.allocatedBudget }
+                const Icon = getVendorIcon(rec.vendorCategory)
+                return (
+                  <div key={rec.vendorCategory} className={`card p-0 overflow-hidden ${
+                    sel.selectionType === 'drop' ? 'opacity-60' : ''
+                  }`}>
+                    {/* Category header */}
+                    <div className="p-5 flex items-start justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                          rec.isPriority ? 'bg-brand-500 text-white' : 'bg-gray-100 text-gray-500'
+                        }`}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-gray-900 capitalize">{rec.vendorCategory.replace(/_/g, ' ')}</p>
+                          <p className="text-xs text-gray-400">AI Allocation: {formatINR(rec.allocatedBudget)}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {/* AI Default button */}
+                        <button
+                          onClick={() => setSelections(prev => ({ ...prev, [rec.vendorCategory]: { selectionType: 'ai_default', finalBudget: rec.allocatedBudget } }))}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                            sel.selectionType === 'ai_default' ? 'bg-brand-500 text-white border-brand-500' : 'bg-white text-gray-600 border-gray-200 hover:border-brand-300'
+                          }`}>
+                          AI Default
+                        </button>
+                        {/* Drop button */}
+                        <button
+                          onClick={() => setSelections(prev => ({ ...prev, [rec.vendorCategory]: { selectionType: 'drop', finalBudget: 0 } }))}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                            sel.selectionType === 'drop' ? 'bg-red-500 text-white border-red-500' : 'bg-white text-gray-600 border-gray-200 hover:border-red-300'
+                          }`}>
+                          <X className="w-3 h-3 inline mr-1" />Drop
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Vendor Cards */}
+                    {rec.vendors.length > 0 && sel.selectionType !== 'drop' && (
+                      <div className="px-5 pb-5 border-t border-gray-50 pt-4">
+                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Pick a vendor</p>
+                        <div className="flex gap-3 overflow-x-auto pb-1 snap-x">
+                          {rec.vendors.map((v) => {
+                            const isSelected = sel.selectionType === 'vendor' && sel.vendorId === v.id
+                            return (
+                              <button
+                                key={v.id}
+                                onClick={() => setSelections(prev => ({
+                                  ...prev,
+                                  [rec.vendorCategory]: { selectionType: 'vendor', vendorId: v.id, vendorName: v.name, finalBudget: v.priceMin }
+                                }))}
+                                className={`snap-start flex-none w-60 text-left rounded-xl border-2 p-4 transition-all duration-200 ${
+                                  isSelected ? 'border-brand-500 bg-brand-50 shadow-md shadow-brand-500/10' : 'border-gray-200 bg-white hover:border-brand-300'
+                                }`}>
+                                <div className="flex items-start justify-between mb-1">
+                                  <p className="font-bold text-sm text-gray-900 truncate pr-2">{v.name}</p>
+                                  {isSelected && <CheckCircle className="w-4 h-4 text-brand-500 flex-shrink-0" />}
+                                </div>
+                                <p className="text-xs text-gray-500 line-clamp-2 mb-2">{v.description}</p>
+                                <p className="text-sm font-bold text-brand-700">{formatINR(v.priceMin)} <span className="text-xs font-normal text-gray-400">onwards</span></p>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Selected summary */}
+                    <div className={`px-5 py-3 border-t text-sm flex items-center justify-between ${
+                      sel.selectionType === 'drop' ? 'bg-red-50 border-red-100' : sel.selectionType === 'vendor' ? 'bg-green-50 border-green-100' : 'bg-gray-50 border-gray-100'
+                    }`}>
+                      <span className="text-gray-600">
+                        {sel.selectionType === 'drop' ? '🚫 Category dropped'
+                          : sel.selectionType === 'vendor' ? `✅ ${sel.vendorName}`
+                          : '📊 Using AI allocation'}
+                      </span>
+                      <span className="font-bold text-gray-900">{formatINR(sel.finalBudget)}</span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Sticky Lock Button */}
+            <div className="sticky bottom-6 flex justify-center">
+              <div className="card p-4 flex items-center gap-6 shadow-2xl shadow-brand-500/20 border-brand-200">
+                <div>
+                  <p className="text-xs text-gray-400">Total Final Budget</p>
+                  <p className="font-display text-xl font-bold text-brand-700">
+                    {formatINR(Object.values(selections).reduce((s, sel) => s + sel.finalBudget, 0))}
+                  </p>
+                </div>
+                {lockError && <p className="text-red-500 text-xs">{lockError}</p>}
+                <button
+                  onClick={handleLockBudget}
+                  disabled={isLocking}
+                  className="btn-primary px-6 py-3 flex items-center gap-2"
+                >
+                  {isLocking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+                  Lock In Budget
+                </button>
+              </div>
             </div>
           </div>
         )}

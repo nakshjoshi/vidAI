@@ -33,6 +33,21 @@ export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
  * 
  */
 export type Vendor = $Result.DefaultSelection<Prisma.$VendorPayload>
+/**
+ * Model FinalizedBudget
+ * 
+ */
+export type FinalizedBudget = $Result.DefaultSelection<Prisma.$FinalizedBudgetPayload>
+/**
+ * Model FinalizedBudgetItem
+ * 
+ */
+export type FinalizedBudgetItem = $Result.DefaultSelection<Prisma.$FinalizedBudgetItemPayload>
+/**
+ * Model ActualExpense
+ * 
+ */
+export type ActualExpense = $Result.DefaultSelection<Prisma.$ActualExpensePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -194,6 +209,36 @@ export class PrismaClient<
     * ```
     */
   get vendor(): Prisma.VendorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.finalizedBudget`: Exposes CRUD operations for the **FinalizedBudget** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FinalizedBudgets
+    * const finalizedBudgets = await prisma.finalizedBudget.findMany()
+    * ```
+    */
+  get finalizedBudget(): Prisma.FinalizedBudgetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.finalizedBudgetItem`: Exposes CRUD operations for the **FinalizedBudgetItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FinalizedBudgetItems
+    * const finalizedBudgetItems = await prisma.finalizedBudgetItem.findMany()
+    * ```
+    */
+  get finalizedBudgetItem(): Prisma.FinalizedBudgetItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.actualExpense`: Exposes CRUD operations for the **ActualExpense** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActualExpenses
+    * const actualExpenses = await prisma.actualExpense.findMany()
+    * ```
+    */
+  get actualExpense(): Prisma.ActualExpenseDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -631,7 +676,10 @@ export namespace Prisma {
     WeddingIntake: 'WeddingIntake',
     Recommendation: 'Recommendation',
     Payment: 'Payment',
-    Vendor: 'Vendor'
+    Vendor: 'Vendor',
+    FinalizedBudget: 'FinalizedBudget',
+    FinalizedBudgetItem: 'FinalizedBudgetItem',
+    ActualExpense: 'ActualExpense'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -647,7 +695,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "weddingIntake" | "recommendation" | "payment" | "vendor"
+      modelProps: "weddingIntake" | "recommendation" | "payment" | "vendor" | "finalizedBudget" | "finalizedBudgetItem" | "actualExpense"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -947,6 +995,228 @@ export namespace Prisma {
           }
         }
       }
+      FinalizedBudget: {
+        payload: Prisma.$FinalizedBudgetPayload<ExtArgs>
+        fields: Prisma.FinalizedBudgetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FinalizedBudgetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FinalizedBudgetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          findFirst: {
+            args: Prisma.FinalizedBudgetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FinalizedBudgetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          findMany: {
+            args: Prisma.FinalizedBudgetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>[]
+          }
+          create: {
+            args: Prisma.FinalizedBudgetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          createMany: {
+            args: Prisma.FinalizedBudgetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FinalizedBudgetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>[]
+          }
+          delete: {
+            args: Prisma.FinalizedBudgetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          update: {
+            args: Prisma.FinalizedBudgetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          deleteMany: {
+            args: Prisma.FinalizedBudgetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FinalizedBudgetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FinalizedBudgetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>[]
+          }
+          upsert: {
+            args: Prisma.FinalizedBudgetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetPayload>
+          }
+          aggregate: {
+            args: Prisma.FinalizedBudgetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFinalizedBudget>
+          }
+          groupBy: {
+            args: Prisma.FinalizedBudgetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FinalizedBudgetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FinalizedBudgetCountArgs<ExtArgs>
+            result: $Utils.Optional<FinalizedBudgetCountAggregateOutputType> | number
+          }
+        }
+      }
+      FinalizedBudgetItem: {
+        payload: Prisma.$FinalizedBudgetItemPayload<ExtArgs>
+        fields: Prisma.FinalizedBudgetItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FinalizedBudgetItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FinalizedBudgetItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          findFirst: {
+            args: Prisma.FinalizedBudgetItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FinalizedBudgetItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          findMany: {
+            args: Prisma.FinalizedBudgetItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>[]
+          }
+          create: {
+            args: Prisma.FinalizedBudgetItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          createMany: {
+            args: Prisma.FinalizedBudgetItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FinalizedBudgetItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>[]
+          }
+          delete: {
+            args: Prisma.FinalizedBudgetItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          update: {
+            args: Prisma.FinalizedBudgetItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.FinalizedBudgetItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FinalizedBudgetItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FinalizedBudgetItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.FinalizedBudgetItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinalizedBudgetItemPayload>
+          }
+          aggregate: {
+            args: Prisma.FinalizedBudgetItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFinalizedBudgetItem>
+          }
+          groupBy: {
+            args: Prisma.FinalizedBudgetItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FinalizedBudgetItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FinalizedBudgetItemCountArgs<ExtArgs>
+            result: $Utils.Optional<FinalizedBudgetItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActualExpense: {
+        payload: Prisma.$ActualExpensePayload<ExtArgs>
+        fields: Prisma.ActualExpenseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActualExpenseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActualExpenseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          findFirst: {
+            args: Prisma.ActualExpenseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActualExpenseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          findMany: {
+            args: Prisma.ActualExpenseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>[]
+          }
+          create: {
+            args: Prisma.ActualExpenseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          createMany: {
+            args: Prisma.ActualExpenseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActualExpenseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>[]
+          }
+          delete: {
+            args: Prisma.ActualExpenseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          update: {
+            args: Prisma.ActualExpenseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          deleteMany: {
+            args: Prisma.ActualExpenseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActualExpenseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActualExpenseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>[]
+          }
+          upsert: {
+            args: Prisma.ActualExpenseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActualExpensePayload>
+          }
+          aggregate: {
+            args: Prisma.ActualExpenseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActualExpense>
+          }
+          groupBy: {
+            args: Prisma.ActualExpenseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActualExpenseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActualExpenseCountArgs<ExtArgs>
+            result: $Utils.Optional<ActualExpenseCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1059,6 +1329,9 @@ export namespace Prisma {
     recommendation?: RecommendationOmit
     payment?: PaymentOmit
     vendor?: VendorOmit
+    finalizedBudget?: FinalizedBudgetOmit
+    finalizedBudgetItem?: FinalizedBudgetItemOmit
+    actualExpense?: ActualExpenseOmit
   }
 
   /* Types for Logging */
@@ -1141,11 +1414,13 @@ export namespace Prisma {
   export type WeddingIntakeCountOutputType = {
     recommendations: number
     payments: number
+    finalizedBudgets: number
   }
 
   export type WeddingIntakeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recommendations?: boolean | WeddingIntakeCountOutputTypeCountRecommendationsArgs
     payments?: boolean | WeddingIntakeCountOutputTypeCountPaymentsArgs
+    finalizedBudgets?: boolean | WeddingIntakeCountOutputTypeCountFinalizedBudgetsArgs
   }
 
   // Custom InputTypes
@@ -1171,6 +1446,44 @@ export namespace Prisma {
    */
   export type WeddingIntakeCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentWhereInput
+  }
+
+  /**
+   * WeddingIntakeCountOutputType without action
+   */
+  export type WeddingIntakeCountOutputTypeCountFinalizedBudgetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinalizedBudgetWhereInput
+  }
+
+
+  /**
+   * Count Type FinalizedBudgetCountOutputType
+   */
+
+  export type FinalizedBudgetCountOutputType = {
+    items: number
+  }
+
+  export type FinalizedBudgetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | FinalizedBudgetCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FinalizedBudgetCountOutputType without action
+   */
+  export type FinalizedBudgetCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetCountOutputType
+     */
+    select?: FinalizedBudgetCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FinalizedBudgetCountOutputType without action
+   */
+  export type FinalizedBudgetCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinalizedBudgetItemWhereInput
   }
 
 
@@ -1414,6 +1727,7 @@ export namespace Prisma {
     createdAt?: boolean
     recommendations?: boolean | WeddingIntake$recommendationsArgs<ExtArgs>
     payments?: boolean | WeddingIntake$paymentsArgs<ExtArgs>
+    finalizedBudgets?: boolean | WeddingIntake$finalizedBudgetsArgs<ExtArgs>
     _count?: boolean | WeddingIntakeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["weddingIntake"]>
 
@@ -1460,6 +1774,7 @@ export namespace Prisma {
   export type WeddingIntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recommendations?: boolean | WeddingIntake$recommendationsArgs<ExtArgs>
     payments?: boolean | WeddingIntake$paymentsArgs<ExtArgs>
+    finalizedBudgets?: boolean | WeddingIntake$finalizedBudgetsArgs<ExtArgs>
     _count?: boolean | WeddingIntakeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WeddingIntakeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1470,6 +1785,7 @@ export namespace Prisma {
     objects: {
       recommendations: Prisma.$RecommendationPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
+      finalizedBudgets: Prisma.$FinalizedBudgetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1878,6 +2194,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     recommendations<T extends WeddingIntake$recommendationsArgs<ExtArgs> = {}>(args?: Subset<T, WeddingIntake$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends WeddingIntake$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, WeddingIntake$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    finalizedBudgets<T extends WeddingIntake$finalizedBudgetsArgs<ExtArgs> = {}>(args?: Subset<T, WeddingIntake$finalizedBudgetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2355,6 +2672,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingIntake.finalizedBudgets
+   */
+  export type WeddingIntake$finalizedBudgetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    where?: FinalizedBudgetWhereInput
+    orderBy?: FinalizedBudgetOrderByWithRelationInput | FinalizedBudgetOrderByWithRelationInput[]
+    cursor?: FinalizedBudgetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FinalizedBudgetScalarFieldEnum | FinalizedBudgetScalarFieldEnum[]
   }
 
   /**
@@ -5795,6 +6136,3286 @@ export namespace Prisma {
 
 
   /**
+   * Model FinalizedBudget
+   */
+
+  export type AggregateFinalizedBudget = {
+    _count: FinalizedBudgetCountAggregateOutputType | null
+    _avg: FinalizedBudgetAvgAggregateOutputType | null
+    _sum: FinalizedBudgetSumAggregateOutputType | null
+    _min: FinalizedBudgetMinAggregateOutputType | null
+    _max: FinalizedBudgetMaxAggregateOutputType | null
+  }
+
+  export type FinalizedBudgetAvgAggregateOutputType = {
+    totalBudget: number | null
+  }
+
+  export type FinalizedBudgetSumAggregateOutputType = {
+    totalBudget: number | null
+  }
+
+  export type FinalizedBudgetMinAggregateOutputType = {
+    id: string | null
+    intakeId: string | null
+    totalBudget: number | null
+    createdAt: Date | null
+  }
+
+  export type FinalizedBudgetMaxAggregateOutputType = {
+    id: string | null
+    intakeId: string | null
+    totalBudget: number | null
+    createdAt: Date | null
+  }
+
+  export type FinalizedBudgetCountAggregateOutputType = {
+    id: number
+    intakeId: number
+    totalBudget: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FinalizedBudgetAvgAggregateInputType = {
+    totalBudget?: true
+  }
+
+  export type FinalizedBudgetSumAggregateInputType = {
+    totalBudget?: true
+  }
+
+  export type FinalizedBudgetMinAggregateInputType = {
+    id?: true
+    intakeId?: true
+    totalBudget?: true
+    createdAt?: true
+  }
+
+  export type FinalizedBudgetMaxAggregateInputType = {
+    id?: true
+    intakeId?: true
+    totalBudget?: true
+    createdAt?: true
+  }
+
+  export type FinalizedBudgetCountAggregateInputType = {
+    id?: true
+    intakeId?: true
+    totalBudget?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FinalizedBudgetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinalizedBudget to aggregate.
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgets to fetch.
+     */
+    orderBy?: FinalizedBudgetOrderByWithRelationInput | FinalizedBudgetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FinalizedBudgetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FinalizedBudgets
+    **/
+    _count?: true | FinalizedBudgetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FinalizedBudgetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FinalizedBudgetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FinalizedBudgetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FinalizedBudgetMaxAggregateInputType
+  }
+
+  export type GetFinalizedBudgetAggregateType<T extends FinalizedBudgetAggregateArgs> = {
+        [P in keyof T & keyof AggregateFinalizedBudget]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFinalizedBudget[P]>
+      : GetScalarType<T[P], AggregateFinalizedBudget[P]>
+  }
+
+
+
+
+  export type FinalizedBudgetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinalizedBudgetWhereInput
+    orderBy?: FinalizedBudgetOrderByWithAggregationInput | FinalizedBudgetOrderByWithAggregationInput[]
+    by: FinalizedBudgetScalarFieldEnum[] | FinalizedBudgetScalarFieldEnum
+    having?: FinalizedBudgetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FinalizedBudgetCountAggregateInputType | true
+    _avg?: FinalizedBudgetAvgAggregateInputType
+    _sum?: FinalizedBudgetSumAggregateInputType
+    _min?: FinalizedBudgetMinAggregateInputType
+    _max?: FinalizedBudgetMaxAggregateInputType
+  }
+
+  export type FinalizedBudgetGroupByOutputType = {
+    id: string
+    intakeId: string
+    totalBudget: number
+    createdAt: Date
+    _count: FinalizedBudgetCountAggregateOutputType | null
+    _avg: FinalizedBudgetAvgAggregateOutputType | null
+    _sum: FinalizedBudgetSumAggregateOutputType | null
+    _min: FinalizedBudgetMinAggregateOutputType | null
+    _max: FinalizedBudgetMaxAggregateOutputType | null
+  }
+
+  type GetFinalizedBudgetGroupByPayload<T extends FinalizedBudgetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FinalizedBudgetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FinalizedBudgetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FinalizedBudgetGroupByOutputType[P]>
+            : GetScalarType<T[P], FinalizedBudgetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FinalizedBudgetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intakeId?: boolean
+    totalBudget?: boolean
+    createdAt?: boolean
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+    items?: boolean | FinalizedBudget$itemsArgs<ExtArgs>
+    actualExpense?: boolean | FinalizedBudget$actualExpenseArgs<ExtArgs>
+    _count?: boolean | FinalizedBudgetCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudget"]>
+
+  export type FinalizedBudgetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intakeId?: boolean
+    totalBudget?: boolean
+    createdAt?: boolean
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudget"]>
+
+  export type FinalizedBudgetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intakeId?: boolean
+    totalBudget?: boolean
+    createdAt?: boolean
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudget"]>
+
+  export type FinalizedBudgetSelectScalar = {
+    id?: boolean
+    intakeId?: boolean
+    totalBudget?: boolean
+    createdAt?: boolean
+  }
+
+  export type FinalizedBudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intakeId" | "totalBudget" | "createdAt", ExtArgs["result"]["finalizedBudget"]>
+  export type FinalizedBudgetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+    items?: boolean | FinalizedBudget$itemsArgs<ExtArgs>
+    actualExpense?: boolean | FinalizedBudget$actualExpenseArgs<ExtArgs>
+    _count?: boolean | FinalizedBudgetCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FinalizedBudgetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+  }
+  export type FinalizedBudgetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intake?: boolean | WeddingIntakeDefaultArgs<ExtArgs>
+  }
+
+  export type $FinalizedBudgetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FinalizedBudget"
+    objects: {
+      intake: Prisma.$WeddingIntakePayload<ExtArgs>
+      items: Prisma.$FinalizedBudgetItemPayload<ExtArgs>[]
+      actualExpense: Prisma.$ActualExpensePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      intakeId: string
+      totalBudget: number
+      createdAt: Date
+    }, ExtArgs["result"]["finalizedBudget"]>
+    composites: {}
+  }
+
+  type FinalizedBudgetGetPayload<S extends boolean | null | undefined | FinalizedBudgetDefaultArgs> = $Result.GetResult<Prisma.$FinalizedBudgetPayload, S>
+
+  type FinalizedBudgetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FinalizedBudgetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FinalizedBudgetCountAggregateInputType | true
+    }
+
+  export interface FinalizedBudgetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FinalizedBudget'], meta: { name: 'FinalizedBudget' } }
+    /**
+     * Find zero or one FinalizedBudget that matches the filter.
+     * @param {FinalizedBudgetFindUniqueArgs} args - Arguments to find a FinalizedBudget
+     * @example
+     * // Get one FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FinalizedBudgetFindUniqueArgs>(args: SelectSubset<T, FinalizedBudgetFindUniqueArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FinalizedBudget that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FinalizedBudgetFindUniqueOrThrowArgs} args - Arguments to find a FinalizedBudget
+     * @example
+     * // Get one FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FinalizedBudgetFindUniqueOrThrowArgs>(args: SelectSubset<T, FinalizedBudgetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinalizedBudget that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetFindFirstArgs} args - Arguments to find a FinalizedBudget
+     * @example
+     * // Get one FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FinalizedBudgetFindFirstArgs>(args?: SelectSubset<T, FinalizedBudgetFindFirstArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinalizedBudget that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetFindFirstOrThrowArgs} args - Arguments to find a FinalizedBudget
+     * @example
+     * // Get one FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FinalizedBudgetFindFirstOrThrowArgs>(args?: SelectSubset<T, FinalizedBudgetFindFirstOrThrowArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FinalizedBudgets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FinalizedBudgets
+     * const finalizedBudgets = await prisma.finalizedBudget.findMany()
+     * 
+     * // Get first 10 FinalizedBudgets
+     * const finalizedBudgets = await prisma.finalizedBudget.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const finalizedBudgetWithIdOnly = await prisma.finalizedBudget.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FinalizedBudgetFindManyArgs>(args?: SelectSubset<T, FinalizedBudgetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FinalizedBudget.
+     * @param {FinalizedBudgetCreateArgs} args - Arguments to create a FinalizedBudget.
+     * @example
+     * // Create one FinalizedBudget
+     * const FinalizedBudget = await prisma.finalizedBudget.create({
+     *   data: {
+     *     // ... data to create a FinalizedBudget
+     *   }
+     * })
+     * 
+     */
+    create<T extends FinalizedBudgetCreateArgs>(args: SelectSubset<T, FinalizedBudgetCreateArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FinalizedBudgets.
+     * @param {FinalizedBudgetCreateManyArgs} args - Arguments to create many FinalizedBudgets.
+     * @example
+     * // Create many FinalizedBudgets
+     * const finalizedBudget = await prisma.finalizedBudget.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FinalizedBudgetCreateManyArgs>(args?: SelectSubset<T, FinalizedBudgetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FinalizedBudgets and returns the data saved in the database.
+     * @param {FinalizedBudgetCreateManyAndReturnArgs} args - Arguments to create many FinalizedBudgets.
+     * @example
+     * // Create many FinalizedBudgets
+     * const finalizedBudget = await prisma.finalizedBudget.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FinalizedBudgets and only return the `id`
+     * const finalizedBudgetWithIdOnly = await prisma.finalizedBudget.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FinalizedBudgetCreateManyAndReturnArgs>(args?: SelectSubset<T, FinalizedBudgetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FinalizedBudget.
+     * @param {FinalizedBudgetDeleteArgs} args - Arguments to delete one FinalizedBudget.
+     * @example
+     * // Delete one FinalizedBudget
+     * const FinalizedBudget = await prisma.finalizedBudget.delete({
+     *   where: {
+     *     // ... filter to delete one FinalizedBudget
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FinalizedBudgetDeleteArgs>(args: SelectSubset<T, FinalizedBudgetDeleteArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FinalizedBudget.
+     * @param {FinalizedBudgetUpdateArgs} args - Arguments to update one FinalizedBudget.
+     * @example
+     * // Update one FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FinalizedBudgetUpdateArgs>(args: SelectSubset<T, FinalizedBudgetUpdateArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FinalizedBudgets.
+     * @param {FinalizedBudgetDeleteManyArgs} args - Arguments to filter FinalizedBudgets to delete.
+     * @example
+     * // Delete a few FinalizedBudgets
+     * const { count } = await prisma.finalizedBudget.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FinalizedBudgetDeleteManyArgs>(args?: SelectSubset<T, FinalizedBudgetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinalizedBudgets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FinalizedBudgets
+     * const finalizedBudget = await prisma.finalizedBudget.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FinalizedBudgetUpdateManyArgs>(args: SelectSubset<T, FinalizedBudgetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinalizedBudgets and returns the data updated in the database.
+     * @param {FinalizedBudgetUpdateManyAndReturnArgs} args - Arguments to update many FinalizedBudgets.
+     * @example
+     * // Update many FinalizedBudgets
+     * const finalizedBudget = await prisma.finalizedBudget.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FinalizedBudgets and only return the `id`
+     * const finalizedBudgetWithIdOnly = await prisma.finalizedBudget.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FinalizedBudgetUpdateManyAndReturnArgs>(args: SelectSubset<T, FinalizedBudgetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FinalizedBudget.
+     * @param {FinalizedBudgetUpsertArgs} args - Arguments to update or create a FinalizedBudget.
+     * @example
+     * // Update or create a FinalizedBudget
+     * const finalizedBudget = await prisma.finalizedBudget.upsert({
+     *   create: {
+     *     // ... data to create a FinalizedBudget
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FinalizedBudget we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FinalizedBudgetUpsertArgs>(args: SelectSubset<T, FinalizedBudgetUpsertArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FinalizedBudgets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetCountArgs} args - Arguments to filter FinalizedBudgets to count.
+     * @example
+     * // Count the number of FinalizedBudgets
+     * const count = await prisma.finalizedBudget.count({
+     *   where: {
+     *     // ... the filter for the FinalizedBudgets we want to count
+     *   }
+     * })
+    **/
+    count<T extends FinalizedBudgetCountArgs>(
+      args?: Subset<T, FinalizedBudgetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FinalizedBudgetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FinalizedBudget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FinalizedBudgetAggregateArgs>(args: Subset<T, FinalizedBudgetAggregateArgs>): Prisma.PrismaPromise<GetFinalizedBudgetAggregateType<T>>
+
+    /**
+     * Group by FinalizedBudget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FinalizedBudgetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FinalizedBudgetGroupByArgs['orderBy'] }
+        : { orderBy?: FinalizedBudgetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FinalizedBudgetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFinalizedBudgetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FinalizedBudget model
+   */
+  readonly fields: FinalizedBudgetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FinalizedBudget.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FinalizedBudgetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    intake<T extends WeddingIntakeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WeddingIntakeDefaultArgs<ExtArgs>>): Prisma__WeddingIntakeClient<$Result.GetResult<Prisma.$WeddingIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends FinalizedBudget$itemsArgs<ExtArgs> = {}>(args?: Subset<T, FinalizedBudget$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    actualExpense<T extends FinalizedBudget$actualExpenseArgs<ExtArgs> = {}>(args?: Subset<T, FinalizedBudget$actualExpenseArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FinalizedBudget model
+   */
+  interface FinalizedBudgetFieldRefs {
+    readonly id: FieldRef<"FinalizedBudget", 'String'>
+    readonly intakeId: FieldRef<"FinalizedBudget", 'String'>
+    readonly totalBudget: FieldRef<"FinalizedBudget", 'Int'>
+    readonly createdAt: FieldRef<"FinalizedBudget", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FinalizedBudget findUnique
+   */
+  export type FinalizedBudgetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudget to fetch.
+     */
+    where: FinalizedBudgetWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudget findUniqueOrThrow
+   */
+  export type FinalizedBudgetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudget to fetch.
+     */
+    where: FinalizedBudgetWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudget findFirst
+   */
+  export type FinalizedBudgetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudget to fetch.
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgets to fetch.
+     */
+    orderBy?: FinalizedBudgetOrderByWithRelationInput | FinalizedBudgetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinalizedBudgets.
+     */
+    cursor?: FinalizedBudgetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgets.
+     */
+    distinct?: FinalizedBudgetScalarFieldEnum | FinalizedBudgetScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudget findFirstOrThrow
+   */
+  export type FinalizedBudgetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudget to fetch.
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgets to fetch.
+     */
+    orderBy?: FinalizedBudgetOrderByWithRelationInput | FinalizedBudgetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinalizedBudgets.
+     */
+    cursor?: FinalizedBudgetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgets.
+     */
+    distinct?: FinalizedBudgetScalarFieldEnum | FinalizedBudgetScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudget findMany
+   */
+  export type FinalizedBudgetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgets to fetch.
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgets to fetch.
+     */
+    orderBy?: FinalizedBudgetOrderByWithRelationInput | FinalizedBudgetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FinalizedBudgets.
+     */
+    cursor?: FinalizedBudgetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgets.
+     */
+    distinct?: FinalizedBudgetScalarFieldEnum | FinalizedBudgetScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudget create
+   */
+  export type FinalizedBudgetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FinalizedBudget.
+     */
+    data: XOR<FinalizedBudgetCreateInput, FinalizedBudgetUncheckedCreateInput>
+  }
+
+  /**
+   * FinalizedBudget createMany
+   */
+  export type FinalizedBudgetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FinalizedBudgets.
+     */
+    data: FinalizedBudgetCreateManyInput | FinalizedBudgetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FinalizedBudget createManyAndReturn
+   */
+  export type FinalizedBudgetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * The data used to create many FinalizedBudgets.
+     */
+    data: FinalizedBudgetCreateManyInput | FinalizedBudgetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinalizedBudget update
+   */
+  export type FinalizedBudgetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FinalizedBudget.
+     */
+    data: XOR<FinalizedBudgetUpdateInput, FinalizedBudgetUncheckedUpdateInput>
+    /**
+     * Choose, which FinalizedBudget to update.
+     */
+    where: FinalizedBudgetWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudget updateMany
+   */
+  export type FinalizedBudgetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FinalizedBudgets.
+     */
+    data: XOR<FinalizedBudgetUpdateManyMutationInput, FinalizedBudgetUncheckedUpdateManyInput>
+    /**
+     * Filter which FinalizedBudgets to update
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * Limit how many FinalizedBudgets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinalizedBudget updateManyAndReturn
+   */
+  export type FinalizedBudgetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * The data used to update FinalizedBudgets.
+     */
+    data: XOR<FinalizedBudgetUpdateManyMutationInput, FinalizedBudgetUncheckedUpdateManyInput>
+    /**
+     * Filter which FinalizedBudgets to update
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * Limit how many FinalizedBudgets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinalizedBudget upsert
+   */
+  export type FinalizedBudgetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FinalizedBudget to update in case it exists.
+     */
+    where: FinalizedBudgetWhereUniqueInput
+    /**
+     * In case the FinalizedBudget found by the `where` argument doesn't exist, create a new FinalizedBudget with this data.
+     */
+    create: XOR<FinalizedBudgetCreateInput, FinalizedBudgetUncheckedCreateInput>
+    /**
+     * In case the FinalizedBudget was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FinalizedBudgetUpdateInput, FinalizedBudgetUncheckedUpdateInput>
+  }
+
+  /**
+   * FinalizedBudget delete
+   */
+  export type FinalizedBudgetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+    /**
+     * Filter which FinalizedBudget to delete.
+     */
+    where: FinalizedBudgetWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudget deleteMany
+   */
+  export type FinalizedBudgetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinalizedBudgets to delete
+     */
+    where?: FinalizedBudgetWhereInput
+    /**
+     * Limit how many FinalizedBudgets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinalizedBudget.items
+   */
+  export type FinalizedBudget$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    where?: FinalizedBudgetItemWhereInput
+    orderBy?: FinalizedBudgetItemOrderByWithRelationInput | FinalizedBudgetItemOrderByWithRelationInput[]
+    cursor?: FinalizedBudgetItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FinalizedBudgetItemScalarFieldEnum | FinalizedBudgetItemScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudget.actualExpense
+   */
+  export type FinalizedBudget$actualExpenseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    where?: ActualExpenseWhereInput
+  }
+
+  /**
+   * FinalizedBudget without action
+   */
+  export type FinalizedBudgetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudget
+     */
+    select?: FinalizedBudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudget
+     */
+    omit?: FinalizedBudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FinalizedBudgetItem
+   */
+
+  export type AggregateFinalizedBudgetItem = {
+    _count: FinalizedBudgetItemCountAggregateOutputType | null
+    _avg: FinalizedBudgetItemAvgAggregateOutputType | null
+    _sum: FinalizedBudgetItemSumAggregateOutputType | null
+    _min: FinalizedBudgetItemMinAggregateOutputType | null
+    _max: FinalizedBudgetItemMaxAggregateOutputType | null
+  }
+
+  export type FinalizedBudgetItemAvgAggregateOutputType = {
+    finalBudget: number | null
+  }
+
+  export type FinalizedBudgetItemSumAggregateOutputType = {
+    finalBudget: number | null
+  }
+
+  export type FinalizedBudgetItemMinAggregateOutputType = {
+    id: string | null
+    budgetId: string | null
+    vendorCategory: string | null
+    vendorId: string | null
+    vendorName: string | null
+    finalBudget: number | null
+  }
+
+  export type FinalizedBudgetItemMaxAggregateOutputType = {
+    id: string | null
+    budgetId: string | null
+    vendorCategory: string | null
+    vendorId: string | null
+    vendorName: string | null
+    finalBudget: number | null
+  }
+
+  export type FinalizedBudgetItemCountAggregateOutputType = {
+    id: number
+    budgetId: number
+    vendorCategory: number
+    vendorId: number
+    vendorName: number
+    finalBudget: number
+    _all: number
+  }
+
+
+  export type FinalizedBudgetItemAvgAggregateInputType = {
+    finalBudget?: true
+  }
+
+  export type FinalizedBudgetItemSumAggregateInputType = {
+    finalBudget?: true
+  }
+
+  export type FinalizedBudgetItemMinAggregateInputType = {
+    id?: true
+    budgetId?: true
+    vendorCategory?: true
+    vendorId?: true
+    vendorName?: true
+    finalBudget?: true
+  }
+
+  export type FinalizedBudgetItemMaxAggregateInputType = {
+    id?: true
+    budgetId?: true
+    vendorCategory?: true
+    vendorId?: true
+    vendorName?: true
+    finalBudget?: true
+  }
+
+  export type FinalizedBudgetItemCountAggregateInputType = {
+    id?: true
+    budgetId?: true
+    vendorCategory?: true
+    vendorId?: true
+    vendorName?: true
+    finalBudget?: true
+    _all?: true
+  }
+
+  export type FinalizedBudgetItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinalizedBudgetItem to aggregate.
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgetItems to fetch.
+     */
+    orderBy?: FinalizedBudgetItemOrderByWithRelationInput | FinalizedBudgetItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FinalizedBudgetItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgetItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgetItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FinalizedBudgetItems
+    **/
+    _count?: true | FinalizedBudgetItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FinalizedBudgetItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FinalizedBudgetItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FinalizedBudgetItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FinalizedBudgetItemMaxAggregateInputType
+  }
+
+  export type GetFinalizedBudgetItemAggregateType<T extends FinalizedBudgetItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateFinalizedBudgetItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFinalizedBudgetItem[P]>
+      : GetScalarType<T[P], AggregateFinalizedBudgetItem[P]>
+  }
+
+
+
+
+  export type FinalizedBudgetItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinalizedBudgetItemWhereInput
+    orderBy?: FinalizedBudgetItemOrderByWithAggregationInput | FinalizedBudgetItemOrderByWithAggregationInput[]
+    by: FinalizedBudgetItemScalarFieldEnum[] | FinalizedBudgetItemScalarFieldEnum
+    having?: FinalizedBudgetItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FinalizedBudgetItemCountAggregateInputType | true
+    _avg?: FinalizedBudgetItemAvgAggregateInputType
+    _sum?: FinalizedBudgetItemSumAggregateInputType
+    _min?: FinalizedBudgetItemMinAggregateInputType
+    _max?: FinalizedBudgetItemMaxAggregateInputType
+  }
+
+  export type FinalizedBudgetItemGroupByOutputType = {
+    id: string
+    budgetId: string
+    vendorCategory: string
+    vendorId: string | null
+    vendorName: string | null
+    finalBudget: number
+    _count: FinalizedBudgetItemCountAggregateOutputType | null
+    _avg: FinalizedBudgetItemAvgAggregateOutputType | null
+    _sum: FinalizedBudgetItemSumAggregateOutputType | null
+    _min: FinalizedBudgetItemMinAggregateOutputType | null
+    _max: FinalizedBudgetItemMaxAggregateOutputType | null
+  }
+
+  type GetFinalizedBudgetItemGroupByPayload<T extends FinalizedBudgetItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FinalizedBudgetItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FinalizedBudgetItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FinalizedBudgetItemGroupByOutputType[P]>
+            : GetScalarType<T[P], FinalizedBudgetItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FinalizedBudgetItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    vendorCategory?: boolean
+    vendorId?: boolean
+    vendorName?: boolean
+    finalBudget?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudgetItem"]>
+
+  export type FinalizedBudgetItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    vendorCategory?: boolean
+    vendorId?: boolean
+    vendorName?: boolean
+    finalBudget?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudgetItem"]>
+
+  export type FinalizedBudgetItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    vendorCategory?: boolean
+    vendorId?: boolean
+    vendorName?: boolean
+    finalBudget?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["finalizedBudgetItem"]>
+
+  export type FinalizedBudgetItemSelectScalar = {
+    id?: boolean
+    budgetId?: boolean
+    vendorCategory?: boolean
+    vendorId?: boolean
+    vendorName?: boolean
+    finalBudget?: boolean
+  }
+
+  export type FinalizedBudgetItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "budgetId" | "vendorCategory" | "vendorId" | "vendorName" | "finalBudget", ExtArgs["result"]["finalizedBudgetItem"]>
+  export type FinalizedBudgetItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+  export type FinalizedBudgetItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+  export type FinalizedBudgetItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+
+  export type $FinalizedBudgetItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FinalizedBudgetItem"
+    objects: {
+      budget: Prisma.$FinalizedBudgetPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      budgetId: string
+      vendorCategory: string
+      vendorId: string | null
+      vendorName: string | null
+      finalBudget: number
+    }, ExtArgs["result"]["finalizedBudgetItem"]>
+    composites: {}
+  }
+
+  type FinalizedBudgetItemGetPayload<S extends boolean | null | undefined | FinalizedBudgetItemDefaultArgs> = $Result.GetResult<Prisma.$FinalizedBudgetItemPayload, S>
+
+  type FinalizedBudgetItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FinalizedBudgetItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FinalizedBudgetItemCountAggregateInputType | true
+    }
+
+  export interface FinalizedBudgetItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FinalizedBudgetItem'], meta: { name: 'FinalizedBudgetItem' } }
+    /**
+     * Find zero or one FinalizedBudgetItem that matches the filter.
+     * @param {FinalizedBudgetItemFindUniqueArgs} args - Arguments to find a FinalizedBudgetItem
+     * @example
+     * // Get one FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FinalizedBudgetItemFindUniqueArgs>(args: SelectSubset<T, FinalizedBudgetItemFindUniqueArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FinalizedBudgetItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FinalizedBudgetItemFindUniqueOrThrowArgs} args - Arguments to find a FinalizedBudgetItem
+     * @example
+     * // Get one FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FinalizedBudgetItemFindUniqueOrThrowArgs>(args: SelectSubset<T, FinalizedBudgetItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinalizedBudgetItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemFindFirstArgs} args - Arguments to find a FinalizedBudgetItem
+     * @example
+     * // Get one FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FinalizedBudgetItemFindFirstArgs>(args?: SelectSubset<T, FinalizedBudgetItemFindFirstArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinalizedBudgetItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemFindFirstOrThrowArgs} args - Arguments to find a FinalizedBudgetItem
+     * @example
+     * // Get one FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FinalizedBudgetItemFindFirstOrThrowArgs>(args?: SelectSubset<T, FinalizedBudgetItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FinalizedBudgetItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FinalizedBudgetItems
+     * const finalizedBudgetItems = await prisma.finalizedBudgetItem.findMany()
+     * 
+     * // Get first 10 FinalizedBudgetItems
+     * const finalizedBudgetItems = await prisma.finalizedBudgetItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const finalizedBudgetItemWithIdOnly = await prisma.finalizedBudgetItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FinalizedBudgetItemFindManyArgs>(args?: SelectSubset<T, FinalizedBudgetItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FinalizedBudgetItem.
+     * @param {FinalizedBudgetItemCreateArgs} args - Arguments to create a FinalizedBudgetItem.
+     * @example
+     * // Create one FinalizedBudgetItem
+     * const FinalizedBudgetItem = await prisma.finalizedBudgetItem.create({
+     *   data: {
+     *     // ... data to create a FinalizedBudgetItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends FinalizedBudgetItemCreateArgs>(args: SelectSubset<T, FinalizedBudgetItemCreateArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FinalizedBudgetItems.
+     * @param {FinalizedBudgetItemCreateManyArgs} args - Arguments to create many FinalizedBudgetItems.
+     * @example
+     * // Create many FinalizedBudgetItems
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FinalizedBudgetItemCreateManyArgs>(args?: SelectSubset<T, FinalizedBudgetItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FinalizedBudgetItems and returns the data saved in the database.
+     * @param {FinalizedBudgetItemCreateManyAndReturnArgs} args - Arguments to create many FinalizedBudgetItems.
+     * @example
+     * // Create many FinalizedBudgetItems
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FinalizedBudgetItems and only return the `id`
+     * const finalizedBudgetItemWithIdOnly = await prisma.finalizedBudgetItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FinalizedBudgetItemCreateManyAndReturnArgs>(args?: SelectSubset<T, FinalizedBudgetItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FinalizedBudgetItem.
+     * @param {FinalizedBudgetItemDeleteArgs} args - Arguments to delete one FinalizedBudgetItem.
+     * @example
+     * // Delete one FinalizedBudgetItem
+     * const FinalizedBudgetItem = await prisma.finalizedBudgetItem.delete({
+     *   where: {
+     *     // ... filter to delete one FinalizedBudgetItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FinalizedBudgetItemDeleteArgs>(args: SelectSubset<T, FinalizedBudgetItemDeleteArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FinalizedBudgetItem.
+     * @param {FinalizedBudgetItemUpdateArgs} args - Arguments to update one FinalizedBudgetItem.
+     * @example
+     * // Update one FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FinalizedBudgetItemUpdateArgs>(args: SelectSubset<T, FinalizedBudgetItemUpdateArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FinalizedBudgetItems.
+     * @param {FinalizedBudgetItemDeleteManyArgs} args - Arguments to filter FinalizedBudgetItems to delete.
+     * @example
+     * // Delete a few FinalizedBudgetItems
+     * const { count } = await prisma.finalizedBudgetItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FinalizedBudgetItemDeleteManyArgs>(args?: SelectSubset<T, FinalizedBudgetItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinalizedBudgetItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FinalizedBudgetItems
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FinalizedBudgetItemUpdateManyArgs>(args: SelectSubset<T, FinalizedBudgetItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinalizedBudgetItems and returns the data updated in the database.
+     * @param {FinalizedBudgetItemUpdateManyAndReturnArgs} args - Arguments to update many FinalizedBudgetItems.
+     * @example
+     * // Update many FinalizedBudgetItems
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FinalizedBudgetItems and only return the `id`
+     * const finalizedBudgetItemWithIdOnly = await prisma.finalizedBudgetItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FinalizedBudgetItemUpdateManyAndReturnArgs>(args: SelectSubset<T, FinalizedBudgetItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FinalizedBudgetItem.
+     * @param {FinalizedBudgetItemUpsertArgs} args - Arguments to update or create a FinalizedBudgetItem.
+     * @example
+     * // Update or create a FinalizedBudgetItem
+     * const finalizedBudgetItem = await prisma.finalizedBudgetItem.upsert({
+     *   create: {
+     *     // ... data to create a FinalizedBudgetItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FinalizedBudgetItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FinalizedBudgetItemUpsertArgs>(args: SelectSubset<T, FinalizedBudgetItemUpsertArgs<ExtArgs>>): Prisma__FinalizedBudgetItemClient<$Result.GetResult<Prisma.$FinalizedBudgetItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FinalizedBudgetItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemCountArgs} args - Arguments to filter FinalizedBudgetItems to count.
+     * @example
+     * // Count the number of FinalizedBudgetItems
+     * const count = await prisma.finalizedBudgetItem.count({
+     *   where: {
+     *     // ... the filter for the FinalizedBudgetItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends FinalizedBudgetItemCountArgs>(
+      args?: Subset<T, FinalizedBudgetItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FinalizedBudgetItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FinalizedBudgetItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FinalizedBudgetItemAggregateArgs>(args: Subset<T, FinalizedBudgetItemAggregateArgs>): Prisma.PrismaPromise<GetFinalizedBudgetItemAggregateType<T>>
+
+    /**
+     * Group by FinalizedBudgetItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinalizedBudgetItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FinalizedBudgetItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FinalizedBudgetItemGroupByArgs['orderBy'] }
+        : { orderBy?: FinalizedBudgetItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FinalizedBudgetItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFinalizedBudgetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FinalizedBudgetItem model
+   */
+  readonly fields: FinalizedBudgetItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FinalizedBudgetItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FinalizedBudgetItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    budget<T extends FinalizedBudgetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FinalizedBudgetDefaultArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FinalizedBudgetItem model
+   */
+  interface FinalizedBudgetItemFieldRefs {
+    readonly id: FieldRef<"FinalizedBudgetItem", 'String'>
+    readonly budgetId: FieldRef<"FinalizedBudgetItem", 'String'>
+    readonly vendorCategory: FieldRef<"FinalizedBudgetItem", 'String'>
+    readonly vendorId: FieldRef<"FinalizedBudgetItem", 'String'>
+    readonly vendorName: FieldRef<"FinalizedBudgetItem", 'String'>
+    readonly finalBudget: FieldRef<"FinalizedBudgetItem", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FinalizedBudgetItem findUnique
+   */
+  export type FinalizedBudgetItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgetItem to fetch.
+     */
+    where: FinalizedBudgetItemWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudgetItem findUniqueOrThrow
+   */
+  export type FinalizedBudgetItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgetItem to fetch.
+     */
+    where: FinalizedBudgetItemWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudgetItem findFirst
+   */
+  export type FinalizedBudgetItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgetItem to fetch.
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgetItems to fetch.
+     */
+    orderBy?: FinalizedBudgetItemOrderByWithRelationInput | FinalizedBudgetItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinalizedBudgetItems.
+     */
+    cursor?: FinalizedBudgetItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgetItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgetItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgetItems.
+     */
+    distinct?: FinalizedBudgetItemScalarFieldEnum | FinalizedBudgetItemScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudgetItem findFirstOrThrow
+   */
+  export type FinalizedBudgetItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgetItem to fetch.
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgetItems to fetch.
+     */
+    orderBy?: FinalizedBudgetItemOrderByWithRelationInput | FinalizedBudgetItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinalizedBudgetItems.
+     */
+    cursor?: FinalizedBudgetItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgetItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgetItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgetItems.
+     */
+    distinct?: FinalizedBudgetItemScalarFieldEnum | FinalizedBudgetItemScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudgetItem findMany
+   */
+  export type FinalizedBudgetItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter, which FinalizedBudgetItems to fetch.
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinalizedBudgetItems to fetch.
+     */
+    orderBy?: FinalizedBudgetItemOrderByWithRelationInput | FinalizedBudgetItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FinalizedBudgetItems.
+     */
+    cursor?: FinalizedBudgetItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinalizedBudgetItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinalizedBudgetItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinalizedBudgetItems.
+     */
+    distinct?: FinalizedBudgetItemScalarFieldEnum | FinalizedBudgetItemScalarFieldEnum[]
+  }
+
+  /**
+   * FinalizedBudgetItem create
+   */
+  export type FinalizedBudgetItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FinalizedBudgetItem.
+     */
+    data: XOR<FinalizedBudgetItemCreateInput, FinalizedBudgetItemUncheckedCreateInput>
+  }
+
+  /**
+   * FinalizedBudgetItem createMany
+   */
+  export type FinalizedBudgetItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FinalizedBudgetItems.
+     */
+    data: FinalizedBudgetItemCreateManyInput | FinalizedBudgetItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FinalizedBudgetItem createManyAndReturn
+   */
+  export type FinalizedBudgetItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many FinalizedBudgetItems.
+     */
+    data: FinalizedBudgetItemCreateManyInput | FinalizedBudgetItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinalizedBudgetItem update
+   */
+  export type FinalizedBudgetItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FinalizedBudgetItem.
+     */
+    data: XOR<FinalizedBudgetItemUpdateInput, FinalizedBudgetItemUncheckedUpdateInput>
+    /**
+     * Choose, which FinalizedBudgetItem to update.
+     */
+    where: FinalizedBudgetItemWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudgetItem updateMany
+   */
+  export type FinalizedBudgetItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FinalizedBudgetItems.
+     */
+    data: XOR<FinalizedBudgetItemUpdateManyMutationInput, FinalizedBudgetItemUncheckedUpdateManyInput>
+    /**
+     * Filter which FinalizedBudgetItems to update
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * Limit how many FinalizedBudgetItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinalizedBudgetItem updateManyAndReturn
+   */
+  export type FinalizedBudgetItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * The data used to update FinalizedBudgetItems.
+     */
+    data: XOR<FinalizedBudgetItemUpdateManyMutationInput, FinalizedBudgetItemUncheckedUpdateManyInput>
+    /**
+     * Filter which FinalizedBudgetItems to update
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * Limit how many FinalizedBudgetItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FinalizedBudgetItem upsert
+   */
+  export type FinalizedBudgetItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FinalizedBudgetItem to update in case it exists.
+     */
+    where: FinalizedBudgetItemWhereUniqueInput
+    /**
+     * In case the FinalizedBudgetItem found by the `where` argument doesn't exist, create a new FinalizedBudgetItem with this data.
+     */
+    create: XOR<FinalizedBudgetItemCreateInput, FinalizedBudgetItemUncheckedCreateInput>
+    /**
+     * In case the FinalizedBudgetItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FinalizedBudgetItemUpdateInput, FinalizedBudgetItemUncheckedUpdateInput>
+  }
+
+  /**
+   * FinalizedBudgetItem delete
+   */
+  export type FinalizedBudgetItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+    /**
+     * Filter which FinalizedBudgetItem to delete.
+     */
+    where: FinalizedBudgetItemWhereUniqueInput
+  }
+
+  /**
+   * FinalizedBudgetItem deleteMany
+   */
+  export type FinalizedBudgetItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinalizedBudgetItems to delete
+     */
+    where?: FinalizedBudgetItemWhereInput
+    /**
+     * Limit how many FinalizedBudgetItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinalizedBudgetItem without action
+   */
+  export type FinalizedBudgetItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinalizedBudgetItem
+     */
+    select?: FinalizedBudgetItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinalizedBudgetItem
+     */
+    omit?: FinalizedBudgetItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinalizedBudgetItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActualExpense
+   */
+
+  export type AggregateActualExpense = {
+    _count: ActualExpenseCountAggregateOutputType | null
+    _min: ActualExpenseMinAggregateOutputType | null
+    _max: ActualExpenseMaxAggregateOutputType | null
+  }
+
+  export type ActualExpenseMinAggregateOutputType = {
+    id: string | null
+    budgetId: string | null
+  }
+
+  export type ActualExpenseMaxAggregateOutputType = {
+    id: string | null
+    budgetId: string | null
+  }
+
+  export type ActualExpenseCountAggregateOutputType = {
+    id: number
+    budgetId: number
+    items: number
+    _all: number
+  }
+
+
+  export type ActualExpenseMinAggregateInputType = {
+    id?: true
+    budgetId?: true
+  }
+
+  export type ActualExpenseMaxAggregateInputType = {
+    id?: true
+    budgetId?: true
+  }
+
+  export type ActualExpenseCountAggregateInputType = {
+    id?: true
+    budgetId?: true
+    items?: true
+    _all?: true
+  }
+
+  export type ActualExpenseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActualExpense to aggregate.
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActualExpenses to fetch.
+     */
+    orderBy?: ActualExpenseOrderByWithRelationInput | ActualExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActualExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActualExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActualExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActualExpenses
+    **/
+    _count?: true | ActualExpenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActualExpenseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActualExpenseMaxAggregateInputType
+  }
+
+  export type GetActualExpenseAggregateType<T extends ActualExpenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateActualExpense]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActualExpense[P]>
+      : GetScalarType<T[P], AggregateActualExpense[P]>
+  }
+
+
+
+
+  export type ActualExpenseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActualExpenseWhereInput
+    orderBy?: ActualExpenseOrderByWithAggregationInput | ActualExpenseOrderByWithAggregationInput[]
+    by: ActualExpenseScalarFieldEnum[] | ActualExpenseScalarFieldEnum
+    having?: ActualExpenseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActualExpenseCountAggregateInputType | true
+    _min?: ActualExpenseMinAggregateInputType
+    _max?: ActualExpenseMaxAggregateInputType
+  }
+
+  export type ActualExpenseGroupByOutputType = {
+    id: string
+    budgetId: string
+    items: JsonValue
+    _count: ActualExpenseCountAggregateOutputType | null
+    _min: ActualExpenseMinAggregateOutputType | null
+    _max: ActualExpenseMaxAggregateOutputType | null
+  }
+
+  type GetActualExpenseGroupByPayload<T extends ActualExpenseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActualExpenseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActualExpenseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActualExpenseGroupByOutputType[P]>
+            : GetScalarType<T[P], ActualExpenseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActualExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    items?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["actualExpense"]>
+
+  export type ActualExpenseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    items?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["actualExpense"]>
+
+  export type ActualExpenseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    budgetId?: boolean
+    items?: boolean
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["actualExpense"]>
+
+  export type ActualExpenseSelectScalar = {
+    id?: boolean
+    budgetId?: boolean
+    items?: boolean
+  }
+
+  export type ActualExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "budgetId" | "items", ExtArgs["result"]["actualExpense"]>
+  export type ActualExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+  export type ActualExpenseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+  export type ActualExpenseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    budget?: boolean | FinalizedBudgetDefaultArgs<ExtArgs>
+  }
+
+  export type $ActualExpensePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActualExpense"
+    objects: {
+      budget: Prisma.$FinalizedBudgetPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      budgetId: string
+      items: Prisma.JsonValue
+    }, ExtArgs["result"]["actualExpense"]>
+    composites: {}
+  }
+
+  type ActualExpenseGetPayload<S extends boolean | null | undefined | ActualExpenseDefaultArgs> = $Result.GetResult<Prisma.$ActualExpensePayload, S>
+
+  type ActualExpenseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActualExpenseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActualExpenseCountAggregateInputType | true
+    }
+
+  export interface ActualExpenseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActualExpense'], meta: { name: 'ActualExpense' } }
+    /**
+     * Find zero or one ActualExpense that matches the filter.
+     * @param {ActualExpenseFindUniqueArgs} args - Arguments to find a ActualExpense
+     * @example
+     * // Get one ActualExpense
+     * const actualExpense = await prisma.actualExpense.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActualExpenseFindUniqueArgs>(args: SelectSubset<T, ActualExpenseFindUniqueArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActualExpense that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActualExpenseFindUniqueOrThrowArgs} args - Arguments to find a ActualExpense
+     * @example
+     * // Get one ActualExpense
+     * const actualExpense = await prisma.actualExpense.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActualExpenseFindUniqueOrThrowArgs>(args: SelectSubset<T, ActualExpenseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActualExpense that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseFindFirstArgs} args - Arguments to find a ActualExpense
+     * @example
+     * // Get one ActualExpense
+     * const actualExpense = await prisma.actualExpense.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActualExpenseFindFirstArgs>(args?: SelectSubset<T, ActualExpenseFindFirstArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActualExpense that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseFindFirstOrThrowArgs} args - Arguments to find a ActualExpense
+     * @example
+     * // Get one ActualExpense
+     * const actualExpense = await prisma.actualExpense.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActualExpenseFindFirstOrThrowArgs>(args?: SelectSubset<T, ActualExpenseFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActualExpenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActualExpenses
+     * const actualExpenses = await prisma.actualExpense.findMany()
+     * 
+     * // Get first 10 ActualExpenses
+     * const actualExpenses = await prisma.actualExpense.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const actualExpenseWithIdOnly = await prisma.actualExpense.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActualExpenseFindManyArgs>(args?: SelectSubset<T, ActualExpenseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActualExpense.
+     * @param {ActualExpenseCreateArgs} args - Arguments to create a ActualExpense.
+     * @example
+     * // Create one ActualExpense
+     * const ActualExpense = await prisma.actualExpense.create({
+     *   data: {
+     *     // ... data to create a ActualExpense
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActualExpenseCreateArgs>(args: SelectSubset<T, ActualExpenseCreateArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActualExpenses.
+     * @param {ActualExpenseCreateManyArgs} args - Arguments to create many ActualExpenses.
+     * @example
+     * // Create many ActualExpenses
+     * const actualExpense = await prisma.actualExpense.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActualExpenseCreateManyArgs>(args?: SelectSubset<T, ActualExpenseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActualExpenses and returns the data saved in the database.
+     * @param {ActualExpenseCreateManyAndReturnArgs} args - Arguments to create many ActualExpenses.
+     * @example
+     * // Create many ActualExpenses
+     * const actualExpense = await prisma.actualExpense.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActualExpenses and only return the `id`
+     * const actualExpenseWithIdOnly = await prisma.actualExpense.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActualExpenseCreateManyAndReturnArgs>(args?: SelectSubset<T, ActualExpenseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActualExpense.
+     * @param {ActualExpenseDeleteArgs} args - Arguments to delete one ActualExpense.
+     * @example
+     * // Delete one ActualExpense
+     * const ActualExpense = await prisma.actualExpense.delete({
+     *   where: {
+     *     // ... filter to delete one ActualExpense
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActualExpenseDeleteArgs>(args: SelectSubset<T, ActualExpenseDeleteArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActualExpense.
+     * @param {ActualExpenseUpdateArgs} args - Arguments to update one ActualExpense.
+     * @example
+     * // Update one ActualExpense
+     * const actualExpense = await prisma.actualExpense.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActualExpenseUpdateArgs>(args: SelectSubset<T, ActualExpenseUpdateArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActualExpenses.
+     * @param {ActualExpenseDeleteManyArgs} args - Arguments to filter ActualExpenses to delete.
+     * @example
+     * // Delete a few ActualExpenses
+     * const { count } = await prisma.actualExpense.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActualExpenseDeleteManyArgs>(args?: SelectSubset<T, ActualExpenseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActualExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActualExpenses
+     * const actualExpense = await prisma.actualExpense.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActualExpenseUpdateManyArgs>(args: SelectSubset<T, ActualExpenseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActualExpenses and returns the data updated in the database.
+     * @param {ActualExpenseUpdateManyAndReturnArgs} args - Arguments to update many ActualExpenses.
+     * @example
+     * // Update many ActualExpenses
+     * const actualExpense = await prisma.actualExpense.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActualExpenses and only return the `id`
+     * const actualExpenseWithIdOnly = await prisma.actualExpense.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActualExpenseUpdateManyAndReturnArgs>(args: SelectSubset<T, ActualExpenseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActualExpense.
+     * @param {ActualExpenseUpsertArgs} args - Arguments to update or create a ActualExpense.
+     * @example
+     * // Update or create a ActualExpense
+     * const actualExpense = await prisma.actualExpense.upsert({
+     *   create: {
+     *     // ... data to create a ActualExpense
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActualExpense we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActualExpenseUpsertArgs>(args: SelectSubset<T, ActualExpenseUpsertArgs<ExtArgs>>): Prisma__ActualExpenseClient<$Result.GetResult<Prisma.$ActualExpensePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActualExpenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseCountArgs} args - Arguments to filter ActualExpenses to count.
+     * @example
+     * // Count the number of ActualExpenses
+     * const count = await prisma.actualExpense.count({
+     *   where: {
+     *     // ... the filter for the ActualExpenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActualExpenseCountArgs>(
+      args?: Subset<T, ActualExpenseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActualExpenseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActualExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActualExpenseAggregateArgs>(args: Subset<T, ActualExpenseAggregateArgs>): Prisma.PrismaPromise<GetActualExpenseAggregateType<T>>
+
+    /**
+     * Group by ActualExpense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActualExpenseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActualExpenseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActualExpenseGroupByArgs['orderBy'] }
+        : { orderBy?: ActualExpenseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActualExpenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActualExpenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActualExpense model
+   */
+  readonly fields: ActualExpenseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActualExpense.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActualExpenseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    budget<T extends FinalizedBudgetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FinalizedBudgetDefaultArgs<ExtArgs>>): Prisma__FinalizedBudgetClient<$Result.GetResult<Prisma.$FinalizedBudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActualExpense model
+   */
+  interface ActualExpenseFieldRefs {
+    readonly id: FieldRef<"ActualExpense", 'String'>
+    readonly budgetId: FieldRef<"ActualExpense", 'String'>
+    readonly items: FieldRef<"ActualExpense", 'Json'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActualExpense findUnique
+   */
+  export type ActualExpenseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ActualExpense to fetch.
+     */
+    where: ActualExpenseWhereUniqueInput
+  }
+
+  /**
+   * ActualExpense findUniqueOrThrow
+   */
+  export type ActualExpenseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ActualExpense to fetch.
+     */
+    where: ActualExpenseWhereUniqueInput
+  }
+
+  /**
+   * ActualExpense findFirst
+   */
+  export type ActualExpenseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ActualExpense to fetch.
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActualExpenses to fetch.
+     */
+    orderBy?: ActualExpenseOrderByWithRelationInput | ActualExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActualExpenses.
+     */
+    cursor?: ActualExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActualExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActualExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActualExpenses.
+     */
+    distinct?: ActualExpenseScalarFieldEnum | ActualExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ActualExpense findFirstOrThrow
+   */
+  export type ActualExpenseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ActualExpense to fetch.
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActualExpenses to fetch.
+     */
+    orderBy?: ActualExpenseOrderByWithRelationInput | ActualExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActualExpenses.
+     */
+    cursor?: ActualExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActualExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActualExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActualExpenses.
+     */
+    distinct?: ActualExpenseScalarFieldEnum | ActualExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ActualExpense findMany
+   */
+  export type ActualExpenseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which ActualExpenses to fetch.
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActualExpenses to fetch.
+     */
+    orderBy?: ActualExpenseOrderByWithRelationInput | ActualExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActualExpenses.
+     */
+    cursor?: ActualExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActualExpenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActualExpenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActualExpenses.
+     */
+    distinct?: ActualExpenseScalarFieldEnum | ActualExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * ActualExpense create
+   */
+  export type ActualExpenseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActualExpense.
+     */
+    data: XOR<ActualExpenseCreateInput, ActualExpenseUncheckedCreateInput>
+  }
+
+  /**
+   * ActualExpense createMany
+   */
+  export type ActualExpenseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActualExpenses.
+     */
+    data: ActualExpenseCreateManyInput | ActualExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActualExpense createManyAndReturn
+   */
+  export type ActualExpenseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActualExpenses.
+     */
+    data: ActualExpenseCreateManyInput | ActualExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActualExpense update
+   */
+  export type ActualExpenseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActualExpense.
+     */
+    data: XOR<ActualExpenseUpdateInput, ActualExpenseUncheckedUpdateInput>
+    /**
+     * Choose, which ActualExpense to update.
+     */
+    where: ActualExpenseWhereUniqueInput
+  }
+
+  /**
+   * ActualExpense updateMany
+   */
+  export type ActualExpenseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActualExpenses.
+     */
+    data: XOR<ActualExpenseUpdateManyMutationInput, ActualExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which ActualExpenses to update
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * Limit how many ActualExpenses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActualExpense updateManyAndReturn
+   */
+  export type ActualExpenseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to update ActualExpenses.
+     */
+    data: XOR<ActualExpenseUpdateManyMutationInput, ActualExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which ActualExpenses to update
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * Limit how many ActualExpenses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActualExpense upsert
+   */
+  export type ActualExpenseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActualExpense to update in case it exists.
+     */
+    where: ActualExpenseWhereUniqueInput
+    /**
+     * In case the ActualExpense found by the `where` argument doesn't exist, create a new ActualExpense with this data.
+     */
+    create: XOR<ActualExpenseCreateInput, ActualExpenseUncheckedCreateInput>
+    /**
+     * In case the ActualExpense was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActualExpenseUpdateInput, ActualExpenseUncheckedUpdateInput>
+  }
+
+  /**
+   * ActualExpense delete
+   */
+  export type ActualExpenseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+    /**
+     * Filter which ActualExpense to delete.
+     */
+    where: ActualExpenseWhereUniqueInput
+  }
+
+  /**
+   * ActualExpense deleteMany
+   */
+  export type ActualExpenseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActualExpenses to delete
+     */
+    where?: ActualExpenseWhereInput
+    /**
+     * Limit how many ActualExpenses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActualExpense without action
+   */
+  export type ActualExpenseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActualExpense
+     */
+    select?: ActualExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActualExpense
+     */
+    omit?: ActualExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActualExpenseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5869,6 +9490,37 @@ export namespace Prisma {
   };
 
   export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
+  export const FinalizedBudgetScalarFieldEnum: {
+    id: 'id',
+    intakeId: 'intakeId',
+    totalBudget: 'totalBudget',
+    createdAt: 'createdAt'
+  };
+
+  export type FinalizedBudgetScalarFieldEnum = (typeof FinalizedBudgetScalarFieldEnum)[keyof typeof FinalizedBudgetScalarFieldEnum]
+
+
+  export const FinalizedBudgetItemScalarFieldEnum: {
+    id: 'id',
+    budgetId: 'budgetId',
+    vendorCategory: 'vendorCategory',
+    vendorId: 'vendorId',
+    vendorName: 'vendorName',
+    finalBudget: 'finalBudget'
+  };
+
+  export type FinalizedBudgetItemScalarFieldEnum = (typeof FinalizedBudgetItemScalarFieldEnum)[keyof typeof FinalizedBudgetItemScalarFieldEnum]
+
+
+  export const ActualExpenseScalarFieldEnum: {
+    id: 'id',
+    budgetId: 'budgetId',
+    items: 'items'
+  };
+
+  export type ActualExpenseScalarFieldEnum = (typeof ActualExpenseScalarFieldEnum)[keyof typeof ActualExpenseScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6005,6 +9657,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"WeddingIntake"> | Date | string
     recommendations?: RecommendationListRelationFilter
     payments?: PaymentListRelationFilter
+    finalizedBudgets?: FinalizedBudgetListRelationFilter
   }
 
   export type WeddingIntakeOrderByWithRelationInput = {
@@ -6020,6 +9673,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     recommendations?: RecommendationOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
+    finalizedBudgets?: FinalizedBudgetOrderByRelationAggregateInput
   }
 
   export type WeddingIntakeWhereUniqueInput = Prisma.AtLeast<{
@@ -6038,6 +9692,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"WeddingIntake"> | Date | string
     recommendations?: RecommendationListRelationFilter
     payments?: PaymentListRelationFilter
+    finalizedBudgets?: FinalizedBudgetListRelationFilter
   }, "id">
 
   export type WeddingIntakeOrderByWithAggregationInput = {
@@ -6312,6 +9967,171 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
   }
 
+  export type FinalizedBudgetWhereInput = {
+    AND?: FinalizedBudgetWhereInput | FinalizedBudgetWhereInput[]
+    OR?: FinalizedBudgetWhereInput[]
+    NOT?: FinalizedBudgetWhereInput | FinalizedBudgetWhereInput[]
+    id?: UuidFilter<"FinalizedBudget"> | string
+    intakeId?: UuidFilter<"FinalizedBudget"> | string
+    totalBudget?: IntFilter<"FinalizedBudget"> | number
+    createdAt?: DateTimeFilter<"FinalizedBudget"> | Date | string
+    intake?: XOR<WeddingIntakeScalarRelationFilter, WeddingIntakeWhereInput>
+    items?: FinalizedBudgetItemListRelationFilter
+    actualExpense?: XOR<ActualExpenseNullableScalarRelationFilter, ActualExpenseWhereInput> | null
+  }
+
+  export type FinalizedBudgetOrderByWithRelationInput = {
+    id?: SortOrder
+    intakeId?: SortOrder
+    totalBudget?: SortOrder
+    createdAt?: SortOrder
+    intake?: WeddingIntakeOrderByWithRelationInput
+    items?: FinalizedBudgetItemOrderByRelationAggregateInput
+    actualExpense?: ActualExpenseOrderByWithRelationInput
+  }
+
+  export type FinalizedBudgetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FinalizedBudgetWhereInput | FinalizedBudgetWhereInput[]
+    OR?: FinalizedBudgetWhereInput[]
+    NOT?: FinalizedBudgetWhereInput | FinalizedBudgetWhereInput[]
+    intakeId?: UuidFilter<"FinalizedBudget"> | string
+    totalBudget?: IntFilter<"FinalizedBudget"> | number
+    createdAt?: DateTimeFilter<"FinalizedBudget"> | Date | string
+    intake?: XOR<WeddingIntakeScalarRelationFilter, WeddingIntakeWhereInput>
+    items?: FinalizedBudgetItemListRelationFilter
+    actualExpense?: XOR<ActualExpenseNullableScalarRelationFilter, ActualExpenseWhereInput> | null
+  }, "id">
+
+  export type FinalizedBudgetOrderByWithAggregationInput = {
+    id?: SortOrder
+    intakeId?: SortOrder
+    totalBudget?: SortOrder
+    createdAt?: SortOrder
+    _count?: FinalizedBudgetCountOrderByAggregateInput
+    _avg?: FinalizedBudgetAvgOrderByAggregateInput
+    _max?: FinalizedBudgetMaxOrderByAggregateInput
+    _min?: FinalizedBudgetMinOrderByAggregateInput
+    _sum?: FinalizedBudgetSumOrderByAggregateInput
+  }
+
+  export type FinalizedBudgetScalarWhereWithAggregatesInput = {
+    AND?: FinalizedBudgetScalarWhereWithAggregatesInput | FinalizedBudgetScalarWhereWithAggregatesInput[]
+    OR?: FinalizedBudgetScalarWhereWithAggregatesInput[]
+    NOT?: FinalizedBudgetScalarWhereWithAggregatesInput | FinalizedBudgetScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"FinalizedBudget"> | string
+    intakeId?: UuidWithAggregatesFilter<"FinalizedBudget"> | string
+    totalBudget?: IntWithAggregatesFilter<"FinalizedBudget"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"FinalizedBudget"> | Date | string
+  }
+
+  export type FinalizedBudgetItemWhereInput = {
+    AND?: FinalizedBudgetItemWhereInput | FinalizedBudgetItemWhereInput[]
+    OR?: FinalizedBudgetItemWhereInput[]
+    NOT?: FinalizedBudgetItemWhereInput | FinalizedBudgetItemWhereInput[]
+    id?: UuidFilter<"FinalizedBudgetItem"> | string
+    budgetId?: UuidFilter<"FinalizedBudgetItem"> | string
+    vendorCategory?: StringFilter<"FinalizedBudgetItem"> | string
+    vendorId?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    vendorName?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    finalBudget?: IntFilter<"FinalizedBudgetItem"> | number
+    budget?: XOR<FinalizedBudgetScalarRelationFilter, FinalizedBudgetWhereInput>
+  }
+
+  export type FinalizedBudgetItemOrderByWithRelationInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    vendorCategory?: SortOrder
+    vendorId?: SortOrderInput | SortOrder
+    vendorName?: SortOrderInput | SortOrder
+    finalBudget?: SortOrder
+    budget?: FinalizedBudgetOrderByWithRelationInput
+  }
+
+  export type FinalizedBudgetItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FinalizedBudgetItemWhereInput | FinalizedBudgetItemWhereInput[]
+    OR?: FinalizedBudgetItemWhereInput[]
+    NOT?: FinalizedBudgetItemWhereInput | FinalizedBudgetItemWhereInput[]
+    budgetId?: UuidFilter<"FinalizedBudgetItem"> | string
+    vendorCategory?: StringFilter<"FinalizedBudgetItem"> | string
+    vendorId?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    vendorName?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    finalBudget?: IntFilter<"FinalizedBudgetItem"> | number
+    budget?: XOR<FinalizedBudgetScalarRelationFilter, FinalizedBudgetWhereInput>
+  }, "id">
+
+  export type FinalizedBudgetItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    vendorCategory?: SortOrder
+    vendorId?: SortOrderInput | SortOrder
+    vendorName?: SortOrderInput | SortOrder
+    finalBudget?: SortOrder
+    _count?: FinalizedBudgetItemCountOrderByAggregateInput
+    _avg?: FinalizedBudgetItemAvgOrderByAggregateInput
+    _max?: FinalizedBudgetItemMaxOrderByAggregateInput
+    _min?: FinalizedBudgetItemMinOrderByAggregateInput
+    _sum?: FinalizedBudgetItemSumOrderByAggregateInput
+  }
+
+  export type FinalizedBudgetItemScalarWhereWithAggregatesInput = {
+    AND?: FinalizedBudgetItemScalarWhereWithAggregatesInput | FinalizedBudgetItemScalarWhereWithAggregatesInput[]
+    OR?: FinalizedBudgetItemScalarWhereWithAggregatesInput[]
+    NOT?: FinalizedBudgetItemScalarWhereWithAggregatesInput | FinalizedBudgetItemScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"FinalizedBudgetItem"> | string
+    budgetId?: UuidWithAggregatesFilter<"FinalizedBudgetItem"> | string
+    vendorCategory?: StringWithAggregatesFilter<"FinalizedBudgetItem"> | string
+    vendorId?: StringNullableWithAggregatesFilter<"FinalizedBudgetItem"> | string | null
+    vendorName?: StringNullableWithAggregatesFilter<"FinalizedBudgetItem"> | string | null
+    finalBudget?: IntWithAggregatesFilter<"FinalizedBudgetItem"> | number
+  }
+
+  export type ActualExpenseWhereInput = {
+    AND?: ActualExpenseWhereInput | ActualExpenseWhereInput[]
+    OR?: ActualExpenseWhereInput[]
+    NOT?: ActualExpenseWhereInput | ActualExpenseWhereInput[]
+    id?: UuidFilter<"ActualExpense"> | string
+    budgetId?: UuidFilter<"ActualExpense"> | string
+    items?: JsonFilter<"ActualExpense">
+    budget?: XOR<FinalizedBudgetScalarRelationFilter, FinalizedBudgetWhereInput>
+  }
+
+  export type ActualExpenseOrderByWithRelationInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    items?: SortOrder
+    budget?: FinalizedBudgetOrderByWithRelationInput
+  }
+
+  export type ActualExpenseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    budgetId?: string
+    AND?: ActualExpenseWhereInput | ActualExpenseWhereInput[]
+    OR?: ActualExpenseWhereInput[]
+    NOT?: ActualExpenseWhereInput | ActualExpenseWhereInput[]
+    items?: JsonFilter<"ActualExpense">
+    budget?: XOR<FinalizedBudgetScalarRelationFilter, FinalizedBudgetWhereInput>
+  }, "id" | "budgetId">
+
+  export type ActualExpenseOrderByWithAggregationInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    items?: SortOrder
+    _count?: ActualExpenseCountOrderByAggregateInput
+    _max?: ActualExpenseMaxOrderByAggregateInput
+    _min?: ActualExpenseMinOrderByAggregateInput
+  }
+
+  export type ActualExpenseScalarWhereWithAggregatesInput = {
+    AND?: ActualExpenseScalarWhereWithAggregatesInput | ActualExpenseScalarWhereWithAggregatesInput[]
+    OR?: ActualExpenseScalarWhereWithAggregatesInput[]
+    NOT?: ActualExpenseScalarWhereWithAggregatesInput | ActualExpenseScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ActualExpense"> | string
+    budgetId?: UuidWithAggregatesFilter<"ActualExpense"> | string
+    items?: JsonWithAggregatesFilter<"ActualExpense">
+  }
+
   export type WeddingIntakeCreateInput = {
     id?: string
     weddingDate: Date | string
@@ -6325,6 +10145,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recommendations?: RecommendationCreateNestedManyWithoutIntakeInput
     payments?: PaymentCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeUncheckedCreateInput = {
@@ -6340,6 +10161,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutIntakeInput
     payments?: PaymentUncheckedCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetUncheckedCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeUpdateInput = {
@@ -6355,6 +10177,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUpdateManyWithoutIntakeNestedInput
     payments?: PaymentUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUpdateManyWithoutIntakeNestedInput
   }
 
   export type WeddingIntakeUncheckedUpdateInput = {
@@ -6370,6 +10193,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUncheckedUpdateManyWithoutIntakeNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUncheckedUpdateManyWithoutIntakeNestedInput
   }
 
   export type WeddingIntakeCreateManyInput = {
@@ -6675,6 +10499,165 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FinalizedBudgetCreateInput = {
+    id?: string
+    totalBudget: number
+    createdAt?: Date | string
+    intake: WeddingIntakeCreateNestedOneWithoutFinalizedBudgetsInput
+    items?: FinalizedBudgetItemCreateNestedManyWithoutBudgetInput
+    actualExpense?: ActualExpenseCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetUncheckedCreateInput = {
+    id?: string
+    intakeId: string
+    totalBudget: number
+    createdAt?: Date | string
+    items?: FinalizedBudgetItemUncheckedCreateNestedManyWithoutBudgetInput
+    actualExpense?: ActualExpenseUncheckedCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: WeddingIntakeUpdateOneRequiredWithoutFinalizedBudgetsNestedInput
+    items?: FinalizedBudgetItemUpdateManyWithoutBudgetNestedInput
+    actualExpense?: ActualExpenseUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetNestedInput
+    actualExpense?: ActualExpenseUncheckedUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetCreateManyInput = {
+    id?: string
+    intakeId: string
+    totalBudget: number
+    createdAt?: Date | string
+  }
+
+  export type FinalizedBudgetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinalizedBudgetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinalizedBudgetItemCreateInput = {
+    id?: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+    budget: FinalizedBudgetCreateNestedOneWithoutItemsInput
+  }
+
+  export type FinalizedBudgetItemUncheckedCreateInput = {
+    id?: string
+    budgetId: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+  }
+
+  export type FinalizedBudgetItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+    budget?: FinalizedBudgetUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type FinalizedBudgetItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    budgetId?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FinalizedBudgetItemCreateManyInput = {
+    id?: string
+    budgetId: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+  }
+
+  export type FinalizedBudgetItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FinalizedBudgetItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    budgetId?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActualExpenseCreateInput = {
+    id?: string
+    items?: JsonNullValueInput | InputJsonValue
+    budget: FinalizedBudgetCreateNestedOneWithoutActualExpenseInput
+  }
+
+  export type ActualExpenseUncheckedCreateInput = {
+    id?: string
+    budgetId: string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+    budget?: FinalizedBudgetUpdateOneRequiredWithoutActualExpenseNestedInput
+  }
+
+  export type ActualExpenseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    budgetId?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseCreateManyInput = {
+    id?: string
+    budgetId: string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    budgetId?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6767,11 +10750,21 @@ export namespace Prisma {
     none?: PaymentWhereInput
   }
 
+  export type FinalizedBudgetListRelationFilter = {
+    every?: FinalizedBudgetWhereInput
+    some?: FinalizedBudgetWhereInput
+    none?: FinalizedBudgetWhereInput
+  }
+
   export type RecommendationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type PaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FinalizedBudgetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7121,6 +11114,106 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type FinalizedBudgetItemListRelationFilter = {
+    every?: FinalizedBudgetItemWhereInput
+    some?: FinalizedBudgetItemWhereInput
+    none?: FinalizedBudgetItemWhereInput
+  }
+
+  export type ActualExpenseNullableScalarRelationFilter = {
+    is?: ActualExpenseWhereInput | null
+    isNot?: ActualExpenseWhereInput | null
+  }
+
+  export type FinalizedBudgetItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FinalizedBudgetCountOrderByAggregateInput = {
+    id?: SortOrder
+    intakeId?: SortOrder
+    totalBudget?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinalizedBudgetAvgOrderByAggregateInput = {
+    totalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    intakeId?: SortOrder
+    totalBudget?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinalizedBudgetMinOrderByAggregateInput = {
+    id?: SortOrder
+    intakeId?: SortOrder
+    totalBudget?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FinalizedBudgetSumOrderByAggregateInput = {
+    totalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetScalarRelationFilter = {
+    is?: FinalizedBudgetWhereInput
+    isNot?: FinalizedBudgetWhereInput
+  }
+
+  export type FinalizedBudgetItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    vendorCategory?: SortOrder
+    vendorId?: SortOrder
+    vendorName?: SortOrder
+    finalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetItemAvgOrderByAggregateInput = {
+    finalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    vendorCategory?: SortOrder
+    vendorId?: SortOrder
+    vendorName?: SortOrder
+    finalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    vendorCategory?: SortOrder
+    vendorId?: SortOrder
+    vendorName?: SortOrder
+    finalBudget?: SortOrder
+  }
+
+  export type FinalizedBudgetItemSumOrderByAggregateInput = {
+    finalBudget?: SortOrder
+  }
+
+  export type ActualExpenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+    items?: SortOrder
+  }
+
+  export type ActualExpenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+  }
+
+  export type ActualExpenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    budgetId?: SortOrder
+  }
+
   export type WeddingIntakeCreateprioritiesInput = {
     set: string[]
   }
@@ -7139,6 +11232,13 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
+  export type FinalizedBudgetCreateNestedManyWithoutIntakeInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput> | FinalizedBudgetCreateWithoutIntakeInput[] | FinalizedBudgetUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutIntakeInput | FinalizedBudgetCreateOrConnectWithoutIntakeInput[]
+    createMany?: FinalizedBudgetCreateManyIntakeInputEnvelope
+    connect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+  }
+
   export type RecommendationUncheckedCreateNestedManyWithoutIntakeInput = {
     create?: XOR<RecommendationCreateWithoutIntakeInput, RecommendationUncheckedCreateWithoutIntakeInput> | RecommendationCreateWithoutIntakeInput[] | RecommendationUncheckedCreateWithoutIntakeInput[]
     connectOrCreate?: RecommendationCreateOrConnectWithoutIntakeInput | RecommendationCreateOrConnectWithoutIntakeInput[]
@@ -7151,6 +11251,13 @@ export namespace Prisma {
     connectOrCreate?: PaymentCreateOrConnectWithoutIntakeInput | PaymentCreateOrConnectWithoutIntakeInput[]
     createMany?: PaymentCreateManyIntakeInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type FinalizedBudgetUncheckedCreateNestedManyWithoutIntakeInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput> | FinalizedBudgetCreateWithoutIntakeInput[] | FinalizedBudgetUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutIntakeInput | FinalizedBudgetCreateOrConnectWithoutIntakeInput[]
+    createMany?: FinalizedBudgetCreateManyIntakeInputEnvelope
+    connect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7202,6 +11309,20 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type FinalizedBudgetUpdateManyWithoutIntakeNestedInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput> | FinalizedBudgetCreateWithoutIntakeInput[] | FinalizedBudgetUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutIntakeInput | FinalizedBudgetCreateOrConnectWithoutIntakeInput[]
+    upsert?: FinalizedBudgetUpsertWithWhereUniqueWithoutIntakeInput | FinalizedBudgetUpsertWithWhereUniqueWithoutIntakeInput[]
+    createMany?: FinalizedBudgetCreateManyIntakeInputEnvelope
+    set?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    disconnect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    delete?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    connect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    update?: FinalizedBudgetUpdateWithWhereUniqueWithoutIntakeInput | FinalizedBudgetUpdateWithWhereUniqueWithoutIntakeInput[]
+    updateMany?: FinalizedBudgetUpdateManyWithWhereWithoutIntakeInput | FinalizedBudgetUpdateManyWithWhereWithoutIntakeInput[]
+    deleteMany?: FinalizedBudgetScalarWhereInput | FinalizedBudgetScalarWhereInput[]
+  }
+
   export type RecommendationUncheckedUpdateManyWithoutIntakeNestedInput = {
     create?: XOR<RecommendationCreateWithoutIntakeInput, RecommendationUncheckedCreateWithoutIntakeInput> | RecommendationCreateWithoutIntakeInput[] | RecommendationUncheckedCreateWithoutIntakeInput[]
     connectOrCreate?: RecommendationCreateOrConnectWithoutIntakeInput | RecommendationCreateOrConnectWithoutIntakeInput[]
@@ -7228,6 +11349,20 @@ export namespace Prisma {
     update?: PaymentUpdateWithWhereUniqueWithoutIntakeInput | PaymentUpdateWithWhereUniqueWithoutIntakeInput[]
     updateMany?: PaymentUpdateManyWithWhereWithoutIntakeInput | PaymentUpdateManyWithWhereWithoutIntakeInput[]
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type FinalizedBudgetUncheckedUpdateManyWithoutIntakeNestedInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput> | FinalizedBudgetCreateWithoutIntakeInput[] | FinalizedBudgetUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutIntakeInput | FinalizedBudgetCreateOrConnectWithoutIntakeInput[]
+    upsert?: FinalizedBudgetUpsertWithWhereUniqueWithoutIntakeInput | FinalizedBudgetUpsertWithWhereUniqueWithoutIntakeInput[]
+    createMany?: FinalizedBudgetCreateManyIntakeInputEnvelope
+    set?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    disconnect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    delete?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    connect?: FinalizedBudgetWhereUniqueInput | FinalizedBudgetWhereUniqueInput[]
+    update?: FinalizedBudgetUpdateWithWhereUniqueWithoutIntakeInput | FinalizedBudgetUpdateWithWhereUniqueWithoutIntakeInput[]
+    updateMany?: FinalizedBudgetUpdateManyWithWhereWithoutIntakeInput | FinalizedBudgetUpdateManyWithWhereWithoutIntakeInput[]
+    deleteMany?: FinalizedBudgetScalarWhereInput | FinalizedBudgetScalarWhereInput[]
   }
 
   export type WeddingIntakeCreateNestedOneWithoutRecommendationsInput = {
@@ -7277,6 +11412,122 @@ export namespace Prisma {
   export type VendorUpdatetagsInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type WeddingIntakeCreateNestedOneWithoutFinalizedBudgetsInput = {
+    create?: XOR<WeddingIntakeCreateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedCreateWithoutFinalizedBudgetsInput>
+    connectOrCreate?: WeddingIntakeCreateOrConnectWithoutFinalizedBudgetsInput
+    connect?: WeddingIntakeWhereUniqueInput
+  }
+
+  export type FinalizedBudgetItemCreateNestedManyWithoutBudgetInput = {
+    create?: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput> | FinalizedBudgetItemCreateWithoutBudgetInput[] | FinalizedBudgetItemUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FinalizedBudgetItemCreateOrConnectWithoutBudgetInput | FinalizedBudgetItemCreateOrConnectWithoutBudgetInput[]
+    createMany?: FinalizedBudgetItemCreateManyBudgetInputEnvelope
+    connect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+  }
+
+  export type ActualExpenseCreateNestedOneWithoutBudgetInput = {
+    create?: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+    connectOrCreate?: ActualExpenseCreateOrConnectWithoutBudgetInput
+    connect?: ActualExpenseWhereUniqueInput
+  }
+
+  export type FinalizedBudgetItemUncheckedCreateNestedManyWithoutBudgetInput = {
+    create?: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput> | FinalizedBudgetItemCreateWithoutBudgetInput[] | FinalizedBudgetItemUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FinalizedBudgetItemCreateOrConnectWithoutBudgetInput | FinalizedBudgetItemCreateOrConnectWithoutBudgetInput[]
+    createMany?: FinalizedBudgetItemCreateManyBudgetInputEnvelope
+    connect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+  }
+
+  export type ActualExpenseUncheckedCreateNestedOneWithoutBudgetInput = {
+    create?: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+    connectOrCreate?: ActualExpenseCreateOrConnectWithoutBudgetInput
+    connect?: ActualExpenseWhereUniqueInput
+  }
+
+  export type WeddingIntakeUpdateOneRequiredWithoutFinalizedBudgetsNestedInput = {
+    create?: XOR<WeddingIntakeCreateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedCreateWithoutFinalizedBudgetsInput>
+    connectOrCreate?: WeddingIntakeCreateOrConnectWithoutFinalizedBudgetsInput
+    upsert?: WeddingIntakeUpsertWithoutFinalizedBudgetsInput
+    connect?: WeddingIntakeWhereUniqueInput
+    update?: XOR<XOR<WeddingIntakeUpdateToOneWithWhereWithoutFinalizedBudgetsInput, WeddingIntakeUpdateWithoutFinalizedBudgetsInput>, WeddingIntakeUncheckedUpdateWithoutFinalizedBudgetsInput>
+  }
+
+  export type FinalizedBudgetItemUpdateManyWithoutBudgetNestedInput = {
+    create?: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput> | FinalizedBudgetItemCreateWithoutBudgetInput[] | FinalizedBudgetItemUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FinalizedBudgetItemCreateOrConnectWithoutBudgetInput | FinalizedBudgetItemCreateOrConnectWithoutBudgetInput[]
+    upsert?: FinalizedBudgetItemUpsertWithWhereUniqueWithoutBudgetInput | FinalizedBudgetItemUpsertWithWhereUniqueWithoutBudgetInput[]
+    createMany?: FinalizedBudgetItemCreateManyBudgetInputEnvelope
+    set?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    disconnect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    delete?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    connect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    update?: FinalizedBudgetItemUpdateWithWhereUniqueWithoutBudgetInput | FinalizedBudgetItemUpdateWithWhereUniqueWithoutBudgetInput[]
+    updateMany?: FinalizedBudgetItemUpdateManyWithWhereWithoutBudgetInput | FinalizedBudgetItemUpdateManyWithWhereWithoutBudgetInput[]
+    deleteMany?: FinalizedBudgetItemScalarWhereInput | FinalizedBudgetItemScalarWhereInput[]
+  }
+
+  export type ActualExpenseUpdateOneWithoutBudgetNestedInput = {
+    create?: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+    connectOrCreate?: ActualExpenseCreateOrConnectWithoutBudgetInput
+    upsert?: ActualExpenseUpsertWithoutBudgetInput
+    disconnect?: ActualExpenseWhereInput | boolean
+    delete?: ActualExpenseWhereInput | boolean
+    connect?: ActualExpenseWhereUniqueInput
+    update?: XOR<XOR<ActualExpenseUpdateToOneWithWhereWithoutBudgetInput, ActualExpenseUpdateWithoutBudgetInput>, ActualExpenseUncheckedUpdateWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetNestedInput = {
+    create?: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput> | FinalizedBudgetItemCreateWithoutBudgetInput[] | FinalizedBudgetItemUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FinalizedBudgetItemCreateOrConnectWithoutBudgetInput | FinalizedBudgetItemCreateOrConnectWithoutBudgetInput[]
+    upsert?: FinalizedBudgetItemUpsertWithWhereUniqueWithoutBudgetInput | FinalizedBudgetItemUpsertWithWhereUniqueWithoutBudgetInput[]
+    createMany?: FinalizedBudgetItemCreateManyBudgetInputEnvelope
+    set?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    disconnect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    delete?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    connect?: FinalizedBudgetItemWhereUniqueInput | FinalizedBudgetItemWhereUniqueInput[]
+    update?: FinalizedBudgetItemUpdateWithWhereUniqueWithoutBudgetInput | FinalizedBudgetItemUpdateWithWhereUniqueWithoutBudgetInput[]
+    updateMany?: FinalizedBudgetItemUpdateManyWithWhereWithoutBudgetInput | FinalizedBudgetItemUpdateManyWithWhereWithoutBudgetInput[]
+    deleteMany?: FinalizedBudgetItemScalarWhereInput | FinalizedBudgetItemScalarWhereInput[]
+  }
+
+  export type ActualExpenseUncheckedUpdateOneWithoutBudgetNestedInput = {
+    create?: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+    connectOrCreate?: ActualExpenseCreateOrConnectWithoutBudgetInput
+    upsert?: ActualExpenseUpsertWithoutBudgetInput
+    disconnect?: ActualExpenseWhereInput | boolean
+    delete?: ActualExpenseWhereInput | boolean
+    connect?: ActualExpenseWhereUniqueInput
+    update?: XOR<XOR<ActualExpenseUpdateToOneWithWhereWithoutBudgetInput, ActualExpenseUpdateWithoutBudgetInput>, ActualExpenseUncheckedUpdateWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetCreateNestedOneWithoutItemsInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutItemsInput, FinalizedBudgetUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutItemsInput
+    connect?: FinalizedBudgetWhereUniqueInput
+  }
+
+  export type FinalizedBudgetUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutItemsInput, FinalizedBudgetUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutItemsInput
+    upsert?: FinalizedBudgetUpsertWithoutItemsInput
+    connect?: FinalizedBudgetWhereUniqueInput
+    update?: XOR<XOR<FinalizedBudgetUpdateToOneWithWhereWithoutItemsInput, FinalizedBudgetUpdateWithoutItemsInput>, FinalizedBudgetUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type FinalizedBudgetCreateNestedOneWithoutActualExpenseInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutActualExpenseInput, FinalizedBudgetUncheckedCreateWithoutActualExpenseInput>
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutActualExpenseInput
+    connect?: FinalizedBudgetWhereUniqueInput
+  }
+
+  export type FinalizedBudgetUpdateOneRequiredWithoutActualExpenseNestedInput = {
+    create?: XOR<FinalizedBudgetCreateWithoutActualExpenseInput, FinalizedBudgetUncheckedCreateWithoutActualExpenseInput>
+    connectOrCreate?: FinalizedBudgetCreateOrConnectWithoutActualExpenseInput
+    upsert?: FinalizedBudgetUpsertWithoutActualExpenseInput
+    connect?: FinalizedBudgetWhereUniqueInput
+    update?: XOR<XOR<FinalizedBudgetUpdateToOneWithWhereWithoutActualExpenseInput, FinalizedBudgetUpdateWithoutActualExpenseInput>, FinalizedBudgetUncheckedUpdateWithoutActualExpenseInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -7535,6 +11786,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FinalizedBudgetCreateWithoutIntakeInput = {
+    id?: string
+    totalBudget: number
+    createdAt?: Date | string
+    items?: FinalizedBudgetItemCreateNestedManyWithoutBudgetInput
+    actualExpense?: ActualExpenseCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetUncheckedCreateWithoutIntakeInput = {
+    id?: string
+    totalBudget: number
+    createdAt?: Date | string
+    items?: FinalizedBudgetItemUncheckedCreateNestedManyWithoutBudgetInput
+    actualExpense?: ActualExpenseUncheckedCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetCreateOrConnectWithoutIntakeInput = {
+    where: FinalizedBudgetWhereUniqueInput
+    create: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput>
+  }
+
+  export type FinalizedBudgetCreateManyIntakeInputEnvelope = {
+    data: FinalizedBudgetCreateManyIntakeInput | FinalizedBudgetCreateManyIntakeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RecommendationUpsertWithWhereUniqueWithoutIntakeInput = {
     where: RecommendationWhereUniqueInput
     update: XOR<RecommendationUpdateWithoutIntakeInput, RecommendationUncheckedUpdateWithoutIntakeInput>
@@ -7593,6 +11870,32 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
+  export type FinalizedBudgetUpsertWithWhereUniqueWithoutIntakeInput = {
+    where: FinalizedBudgetWhereUniqueInput
+    update: XOR<FinalizedBudgetUpdateWithoutIntakeInput, FinalizedBudgetUncheckedUpdateWithoutIntakeInput>
+    create: XOR<FinalizedBudgetCreateWithoutIntakeInput, FinalizedBudgetUncheckedCreateWithoutIntakeInput>
+  }
+
+  export type FinalizedBudgetUpdateWithWhereUniqueWithoutIntakeInput = {
+    where: FinalizedBudgetWhereUniqueInput
+    data: XOR<FinalizedBudgetUpdateWithoutIntakeInput, FinalizedBudgetUncheckedUpdateWithoutIntakeInput>
+  }
+
+  export type FinalizedBudgetUpdateManyWithWhereWithoutIntakeInput = {
+    where: FinalizedBudgetScalarWhereInput
+    data: XOR<FinalizedBudgetUpdateManyMutationInput, FinalizedBudgetUncheckedUpdateManyWithoutIntakeInput>
+  }
+
+  export type FinalizedBudgetScalarWhereInput = {
+    AND?: FinalizedBudgetScalarWhereInput | FinalizedBudgetScalarWhereInput[]
+    OR?: FinalizedBudgetScalarWhereInput[]
+    NOT?: FinalizedBudgetScalarWhereInput | FinalizedBudgetScalarWhereInput[]
+    id?: UuidFilter<"FinalizedBudget"> | string
+    intakeId?: UuidFilter<"FinalizedBudget"> | string
+    totalBudget?: IntFilter<"FinalizedBudget"> | number
+    createdAt?: DateTimeFilter<"FinalizedBudget"> | Date | string
+  }
+
   export type WeddingIntakeCreateWithoutRecommendationsInput = {
     id?: string
     weddingDate: Date | string
@@ -7605,6 +11908,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     payments?: PaymentCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeUncheckedCreateWithoutRecommendationsInput = {
@@ -7619,6 +11923,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     payments?: PaymentUncheckedCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetUncheckedCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeCreateOrConnectWithoutRecommendationsInput = {
@@ -7649,6 +11954,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payments?: PaymentUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUpdateManyWithoutIntakeNestedInput
   }
 
   export type WeddingIntakeUncheckedUpdateWithoutRecommendationsInput = {
@@ -7663,6 +11969,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payments?: PaymentUncheckedUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUncheckedUpdateManyWithoutIntakeNestedInput
   }
 
   export type WeddingIntakeCreateWithoutPaymentsInput = {
@@ -7677,6 +11984,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeUncheckedCreateWithoutPaymentsInput = {
@@ -7691,6 +11999,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutIntakeInput
+    finalizedBudgets?: FinalizedBudgetUncheckedCreateNestedManyWithoutIntakeInput
   }
 
   export type WeddingIntakeCreateOrConnectWithoutPaymentsInput = {
@@ -7721,6 +12030,7 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUpdateManyWithoutIntakeNestedInput
   }
 
   export type WeddingIntakeUncheckedUpdateWithoutPaymentsInput = {
@@ -7735,6 +12045,269 @@ export namespace Prisma {
     chatHistory?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendations?: RecommendationUncheckedUpdateManyWithoutIntakeNestedInput
+    finalizedBudgets?: FinalizedBudgetUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type WeddingIntakeCreateWithoutFinalizedBudgetsInput = {
+    id?: string
+    weddingDate: Date | string
+    guestCount: number
+    city: string
+    venueType: string
+    budgetBracket: string
+    budgetMidpoint: number
+    priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    recommendations?: RecommendationCreateNestedManyWithoutIntakeInput
+    payments?: PaymentCreateNestedManyWithoutIntakeInput
+  }
+
+  export type WeddingIntakeUncheckedCreateWithoutFinalizedBudgetsInput = {
+    id?: string
+    weddingDate: Date | string
+    guestCount: number
+    city: string
+    venueType: string
+    budgetBracket: string
+    budgetMidpoint: number
+    priorities?: WeddingIntakeCreateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutIntakeInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type WeddingIntakeCreateOrConnectWithoutFinalizedBudgetsInput = {
+    where: WeddingIntakeWhereUniqueInput
+    create: XOR<WeddingIntakeCreateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedCreateWithoutFinalizedBudgetsInput>
+  }
+
+  export type FinalizedBudgetItemCreateWithoutBudgetInput = {
+    id?: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+  }
+
+  export type FinalizedBudgetItemUncheckedCreateWithoutBudgetInput = {
+    id?: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+  }
+
+  export type FinalizedBudgetItemCreateOrConnectWithoutBudgetInput = {
+    where: FinalizedBudgetItemWhereUniqueInput
+    create: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetItemCreateManyBudgetInputEnvelope = {
+    data: FinalizedBudgetItemCreateManyBudgetInput | FinalizedBudgetItemCreateManyBudgetInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActualExpenseCreateWithoutBudgetInput = {
+    id?: string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseUncheckedCreateWithoutBudgetInput = {
+    id?: string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseCreateOrConnectWithoutBudgetInput = {
+    where: ActualExpenseWhereUniqueInput
+    create: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+  }
+
+  export type WeddingIntakeUpsertWithoutFinalizedBudgetsInput = {
+    update: XOR<WeddingIntakeUpdateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedUpdateWithoutFinalizedBudgetsInput>
+    create: XOR<WeddingIntakeCreateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedCreateWithoutFinalizedBudgetsInput>
+    where?: WeddingIntakeWhereInput
+  }
+
+  export type WeddingIntakeUpdateToOneWithWhereWithoutFinalizedBudgetsInput = {
+    where?: WeddingIntakeWhereInput
+    data: XOR<WeddingIntakeUpdateWithoutFinalizedBudgetsInput, WeddingIntakeUncheckedUpdateWithoutFinalizedBudgetsInput>
+  }
+
+  export type WeddingIntakeUpdateWithoutFinalizedBudgetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    guestCount?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    venueType?: StringFieldUpdateOperationsInput | string
+    budgetBracket?: StringFieldUpdateOperationsInput | string
+    budgetMidpoint?: IntFieldUpdateOperationsInput | number
+    priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recommendations?: RecommendationUpdateManyWithoutIntakeNestedInput
+    payments?: PaymentUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type WeddingIntakeUncheckedUpdateWithoutFinalizedBudgetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    guestCount?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    venueType?: StringFieldUpdateOperationsInput | string
+    budgetBracket?: StringFieldUpdateOperationsInput | string
+    budgetMidpoint?: IntFieldUpdateOperationsInput | number
+    priorities?: WeddingIntakeUpdateprioritiesInput | string[]
+    chatHistory?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recommendations?: RecommendationUncheckedUpdateManyWithoutIntakeNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type FinalizedBudgetItemUpsertWithWhereUniqueWithoutBudgetInput = {
+    where: FinalizedBudgetItemWhereUniqueInput
+    update: XOR<FinalizedBudgetItemUpdateWithoutBudgetInput, FinalizedBudgetItemUncheckedUpdateWithoutBudgetInput>
+    create: XOR<FinalizedBudgetItemCreateWithoutBudgetInput, FinalizedBudgetItemUncheckedCreateWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetItemUpdateWithWhereUniqueWithoutBudgetInput = {
+    where: FinalizedBudgetItemWhereUniqueInput
+    data: XOR<FinalizedBudgetItemUpdateWithoutBudgetInput, FinalizedBudgetItemUncheckedUpdateWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetItemUpdateManyWithWhereWithoutBudgetInput = {
+    where: FinalizedBudgetItemScalarWhereInput
+    data: XOR<FinalizedBudgetItemUpdateManyMutationInput, FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetInput>
+  }
+
+  export type FinalizedBudgetItemScalarWhereInput = {
+    AND?: FinalizedBudgetItemScalarWhereInput | FinalizedBudgetItemScalarWhereInput[]
+    OR?: FinalizedBudgetItemScalarWhereInput[]
+    NOT?: FinalizedBudgetItemScalarWhereInput | FinalizedBudgetItemScalarWhereInput[]
+    id?: UuidFilter<"FinalizedBudgetItem"> | string
+    budgetId?: UuidFilter<"FinalizedBudgetItem"> | string
+    vendorCategory?: StringFilter<"FinalizedBudgetItem"> | string
+    vendorId?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    vendorName?: StringNullableFilter<"FinalizedBudgetItem"> | string | null
+    finalBudget?: IntFilter<"FinalizedBudgetItem"> | number
+  }
+
+  export type ActualExpenseUpsertWithoutBudgetInput = {
+    update: XOR<ActualExpenseUpdateWithoutBudgetInput, ActualExpenseUncheckedUpdateWithoutBudgetInput>
+    create: XOR<ActualExpenseCreateWithoutBudgetInput, ActualExpenseUncheckedCreateWithoutBudgetInput>
+    where?: ActualExpenseWhereInput
+  }
+
+  export type ActualExpenseUpdateToOneWithWhereWithoutBudgetInput = {
+    where?: ActualExpenseWhereInput
+    data: XOR<ActualExpenseUpdateWithoutBudgetInput, ActualExpenseUncheckedUpdateWithoutBudgetInput>
+  }
+
+  export type ActualExpenseUpdateWithoutBudgetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ActualExpenseUncheckedUpdateWithoutBudgetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    items?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type FinalizedBudgetCreateWithoutItemsInput = {
+    id?: string
+    totalBudget: number
+    createdAt?: Date | string
+    intake: WeddingIntakeCreateNestedOneWithoutFinalizedBudgetsInput
+    actualExpense?: ActualExpenseCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetUncheckedCreateWithoutItemsInput = {
+    id?: string
+    intakeId: string
+    totalBudget: number
+    createdAt?: Date | string
+    actualExpense?: ActualExpenseUncheckedCreateNestedOneWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetCreateOrConnectWithoutItemsInput = {
+    where: FinalizedBudgetWhereUniqueInput
+    create: XOR<FinalizedBudgetCreateWithoutItemsInput, FinalizedBudgetUncheckedCreateWithoutItemsInput>
+  }
+
+  export type FinalizedBudgetUpsertWithoutItemsInput = {
+    update: XOR<FinalizedBudgetUpdateWithoutItemsInput, FinalizedBudgetUncheckedUpdateWithoutItemsInput>
+    create: XOR<FinalizedBudgetCreateWithoutItemsInput, FinalizedBudgetUncheckedCreateWithoutItemsInput>
+    where?: FinalizedBudgetWhereInput
+  }
+
+  export type FinalizedBudgetUpdateToOneWithWhereWithoutItemsInput = {
+    where?: FinalizedBudgetWhereInput
+    data: XOR<FinalizedBudgetUpdateWithoutItemsInput, FinalizedBudgetUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type FinalizedBudgetUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: WeddingIntakeUpdateOneRequiredWithoutFinalizedBudgetsNestedInput
+    actualExpense?: ActualExpenseUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actualExpense?: ActualExpenseUncheckedUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetCreateWithoutActualExpenseInput = {
+    id?: string
+    totalBudget: number
+    createdAt?: Date | string
+    intake: WeddingIntakeCreateNestedOneWithoutFinalizedBudgetsInput
+    items?: FinalizedBudgetItemCreateNestedManyWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetUncheckedCreateWithoutActualExpenseInput = {
+    id?: string
+    intakeId: string
+    totalBudget: number
+    createdAt?: Date | string
+    items?: FinalizedBudgetItemUncheckedCreateNestedManyWithoutBudgetInput
+  }
+
+  export type FinalizedBudgetCreateOrConnectWithoutActualExpenseInput = {
+    where: FinalizedBudgetWhereUniqueInput
+    create: XOR<FinalizedBudgetCreateWithoutActualExpenseInput, FinalizedBudgetUncheckedCreateWithoutActualExpenseInput>
+  }
+
+  export type FinalizedBudgetUpsertWithoutActualExpenseInput = {
+    update: XOR<FinalizedBudgetUpdateWithoutActualExpenseInput, FinalizedBudgetUncheckedUpdateWithoutActualExpenseInput>
+    create: XOR<FinalizedBudgetCreateWithoutActualExpenseInput, FinalizedBudgetUncheckedCreateWithoutActualExpenseInput>
+    where?: FinalizedBudgetWhereInput
+  }
+
+  export type FinalizedBudgetUpdateToOneWithWhereWithoutActualExpenseInput = {
+    where?: FinalizedBudgetWhereInput
+    data: XOR<FinalizedBudgetUpdateWithoutActualExpenseInput, FinalizedBudgetUncheckedUpdateWithoutActualExpenseInput>
+  }
+
+  export type FinalizedBudgetUpdateWithoutActualExpenseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: WeddingIntakeUpdateOneRequiredWithoutFinalizedBudgetsNestedInput
+    items?: FinalizedBudgetItemUpdateManyWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetUncheckedUpdateWithoutActualExpenseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type RecommendationCreateManyIntakeInput = {
@@ -7752,6 +12325,12 @@ export namespace Prisma {
     vendorName: string
     amountPaid: number
     paymentDate: Date | string
+    createdAt?: Date | string
+  }
+
+  export type FinalizedBudgetCreateManyIntakeInput = {
+    id?: string
+    totalBudget: number
     createdAt?: Date | string
   }
 
@@ -7807,6 +12386,60 @@ export namespace Prisma {
     amountPaid?: IntFieldUpdateOperationsInput | number
     paymentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinalizedBudgetUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: FinalizedBudgetItemUpdateManyWithoutBudgetNestedInput
+    actualExpense?: ActualExpenseUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetUncheckedUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetNestedInput
+    actualExpense?: ActualExpenseUncheckedUpdateOneWithoutBudgetNestedInput
+  }
+
+  export type FinalizedBudgetUncheckedUpdateManyWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalBudget?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinalizedBudgetItemCreateManyBudgetInput = {
+    id?: string
+    vendorCategory: string
+    vendorId?: string | null
+    vendorName?: string | null
+    finalBudget: number
+  }
+
+  export type FinalizedBudgetItemUpdateWithoutBudgetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FinalizedBudgetItemUncheckedUpdateWithoutBudgetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FinalizedBudgetItemUncheckedUpdateManyWithoutBudgetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vendorCategory?: StringFieldUpdateOperationsInput | string
+    vendorId?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorName?: NullableStringFieldUpdateOperationsInput | string | null
+    finalBudget?: IntFieldUpdateOperationsInput | number
   }
 
 

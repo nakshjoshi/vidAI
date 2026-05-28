@@ -171,6 +171,28 @@ exports.Prisma.VendorScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.FinalizedBudgetScalarFieldEnum = {
+  id: 'id',
+  intakeId: 'intakeId',
+  totalBudget: 'totalBudget',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FinalizedBudgetItemScalarFieldEnum = {
+  id: 'id',
+  budgetId: 'budgetId',
+  vendorCategory: 'vendorCategory',
+  vendorId: 'vendorId',
+  vendorName: 'vendorName',
+  finalBudget: 'finalBudget'
+};
+
+exports.Prisma.ActualExpenseScalarFieldEnum = {
+  id: 'id',
+  budgetId: 'budgetId',
+  items: 'items'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -201,7 +223,10 @@ exports.Prisma.ModelName = {
   WeddingIntake: 'WeddingIntake',
   Recommendation: 'Recommendation',
   Payment: 'Payment',
-  Vendor: 'Vendor'
+  Vendor: 'Vendor',
+  FinalizedBudget: 'FinalizedBudget',
+  FinalizedBudgetItem: 'FinalizedBudgetItem',
+  ActualExpense: 'ActualExpense'
 };
 
 /**

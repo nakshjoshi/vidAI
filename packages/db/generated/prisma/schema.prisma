@@ -1,7 +1,8 @@
 // Prisma schema for VidAI — Wedding Planner
 // Scaffolded via: pnpm --filter @wedding/db exec prisma init --datasource-provider postgresql
 // Prisma v7: url/directUrl moved to prisma.config.ts
-// Models map to 4 tables: wedding_intakes, recommendations, payments, vendors
+// Models: wedding_intakes, recommendations, payments, finalized_budgets,
+//         finalized_budget_items, actual_expenses, vendors
 
 generator client {
   provider = "prisma-client-js"
@@ -24,8 +25,9 @@ model WeddingIntake {
   chatHistory    Json     @default("[]") @map("chat_history")
   createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  recommendations Recommendation[]
-  payments        Payment[]
+  recommendations  Recommendation[]
+  payments         Payment[]
+  finalizedBudgets FinalizedBudget[]
 
   @@map("wedding_intakes")
 }
@@ -79,4 +81,44 @@ model Vendor {
 
   @@index([city, category], name: "idx_vendors_city_category")
   @@map("vendors")
+}
+
+// ─── Budget Finalization ─────────────────────────────────────────────────────
+
+model FinalizedBudget {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  intakeId    String   @map("intake_id") @db.Uuid
+  totalBudget Int      @map("total_budget")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  intake        WeddingIntake         @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+  items         FinalizedBudgetItem[]
+  actualExpense ActualExpense?
+
+  @@index([intakeId], name: "idx_finalized_budgets_intake_id")
+  @@map("finalized_budgets")
+}
+
+model FinalizedBudgetItem {
+  id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  budgetId       String  @map("budget_id") @db.Uuid
+  vendorCategory String  @map("vendor_category")
+  vendorId       String? @map("vendor_id") // null if category was dropped or AI default used
+  vendorName     String? @map("vendor_name")
+  finalBudget    Int     @map("final_budget") // 0 if dropped; vendor priceMin or AI allocatedBudget
+
+  budget FinalizedBudget @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+
+  @@index([budgetId], name: "idx_budget_items_budget_id")
+  @@map("finalized_budget_items")
+}
+
+model ActualExpense {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  budgetId String @unique @map("budget_id") @db.Uuid
+  items    Json   @default("[]") // [{vendorCategory: string, actualAmount: number}]
+
+  budget FinalizedBudget @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+
+  @@map("actual_expenses")
 }
