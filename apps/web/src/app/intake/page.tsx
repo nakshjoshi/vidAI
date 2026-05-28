@@ -297,13 +297,14 @@ export default function IntakePage() {
                     <label htmlFor="city" className="label block mb-2">City</label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
+                      <select
                         id="city"
-                        type="text"
-                        className="input pl-10"
-                        placeholder="e.g. Mumbai, Delhi, Jaipur"
+                        className="input pl-10 appearance-none bg-white"
                         {...methods.register('city')}
-                      />
+                      >
+                        <option value="" disabled>Select your city</option>
+                        <option value="Rishikesh">Rishikesh</option>
+                      </select>
                     </div>
                     {errors.city && (
                       <p className="error-msg">{errors.city.message}</p>
